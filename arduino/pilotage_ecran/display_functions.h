@@ -1,0 +1,19 @@
+#ifndef DISPLAY_FUNCTIONS_H
+#define DISPLAY_FUNCTIONS_H
+
+#include "SPI.h"
+#include "Adafruit_GFX.h"
+#include "Adafruit_ILI9341.h"
+
+// For the Adafruit shield, these are the default.
+#define TFT_DC 9
+#define TFT_CS 10
+
+
+
+unsigned long testText();
+void setup_serial();
+
+
+
+#endif
