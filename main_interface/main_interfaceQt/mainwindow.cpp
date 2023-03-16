@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     stat = viOpen(rscmng, viFound, VI_NULL, VI_NULL, &osc);
     if (stat < VI_SUCCESS) qDebug() << "failed";
     ui->setupUi(this);
-}
+}//5
 
 MainWindow::~MainWindow()
 {
