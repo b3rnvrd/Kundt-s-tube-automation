@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/corbeille.png</file>
+        <file>images/modifier.jpg</file>
+        <file>images/rafraichir.png</file>
+        <file>images/bdd.png</file>
+        <file>images/ajouter_table.png</file>
+        <file>images/retirer_ligne.png</file>
+        <file>images/retirer_table.png</file>
+        <file>images/ajouter_ligne.png</file>
+    </qresource>
+</RCC>
