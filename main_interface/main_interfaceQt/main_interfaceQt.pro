@@ -37,3 +37,6 @@ win32: LIBS += -L$$PWD/../../WinNT/lib/msc/ -lvisa32
 
 INCLUDEPATH += $$PWD/../../WinNT/include
 DEPENDPATH += $$PWD/../../WinNT/include
+
+RESOURCES += \
+    ressources.qrc

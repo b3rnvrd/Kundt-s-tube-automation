@@ -192,8 +192,8 @@
   </widget>
   <action name="actionBase_de_donnees">
    <property name="icon">
-    <iconset>
-     <normaloff>../images/bdd.png</normaloff>../images/bdd.png</iconset>
+    <iconset resource="ressources.qrc">
+     <normaloff>:/images/bdd.png</normaloff>:/images/bdd.png</iconset>
    </property>
    <property name="text">
     <string>Base de donnees</string>
@@ -201,6 +201,8 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="ressources.qrc"/>
+ </resources>
  <connections/>
 </ui>
