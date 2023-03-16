@@ -33,7 +33,7 @@ HEADERS += \
 FORMS += \
         mainwindow.ui
 
-win32: LIBS += -L$$PWD/'../../../../../../Program Files (x86)/IVI Foundation/VISA/WinNT/lib/msc/' -lvisa32
+win32: LIBS += -L$$PWD/../../WinNT/lib/msc/ -lvisa32
 
-INCLUDEPATH += $$PWD/'../../../../../../Program Files (x86)/IVI Foundation/VISA/WinNT/include'
-DEPENDPATH += $$PWD/'../../../../../../Program Files (x86)/IVI Foundation/VISA/WinNT/include'
+INCLUDEPATH += $$PWD/../../WinNT/include
+DEPENDPATH += $$PWD/../../WinNT/include

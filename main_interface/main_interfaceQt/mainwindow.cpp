@@ -19,8 +19,13 @@ MainWindow::MainWindow(QWidget *parent) :
     stat = viFindRsrc(rscmng, (ViString)"USB?*", &listOfFound, &nFound, viFound);
 
     stat = viOpen(rscmng, viFound, VI_NULL, VI_NULL, &osc);
-    if (stat < VI_SUCCESS) qDebug() << "failed";
-    ui->setupUi(this);
+    if (stat < VI_SUCCESS)
+    {
+        QMessageBox::critical(this,"Attention","oscilloscope non connecté",QMessageBox::Ok);
+        exit(0);
+        qDebug() << "failed";
+
+    }ui->setupUi(this);
 }
 
 MainWindow::~MainWindow()
