@@ -25,7 +25,8 @@ MainWindow::MainWindow(QWidget *parent) :
         exit(0);
         qDebug() << "failed";
 
-    }ui->setupUi(this);
+    }
+    ui->setupUi(this);
 }
 
 MainWindow::~MainWindow()
@@ -51,4 +52,20 @@ void MainWindow::on_BtnStart_clicked()
     qDebug()<<freq;//verif valeur freq
     qDebug()<<ampli; //verif valeur ampli
     viPrintf(osc,":APPLY:SIN ,%f,%f\n",freq,ampli); //on applique un signal sinusoidal de fréquence et amplitude choisis
+    double pmax,pmin,n;
+    /*
+     *
+     *
+     *
+     *
+     * mesure pmax& pmin
+     *
+     *
+     *
+     *
+     * */
+    n=pmax/pmin;
+    coef=1-pow((n-1)/(n+1),2);
+    QString retour = QString(coef).number();
+    ui->Editcoef->setText(retour);
 }
