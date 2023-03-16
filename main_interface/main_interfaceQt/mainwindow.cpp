@@ -52,7 +52,7 @@ void MainWindow::on_BtnStart_clicked()
     qDebug()<<freq;//verif valeur freq
     qDebug()<<ampli; //verif valeur ampli
     viPrintf(osc,":APPLY:SIN ,%f,%f\n",freq,ampli); //on applique un signal sinusoidal de fréquence et amplitude choisis
-    double pmax,pmin,n;
+    double pmax,pmin,n;//
     /*
      *
      *
