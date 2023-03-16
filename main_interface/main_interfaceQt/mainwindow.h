@@ -15,7 +15,7 @@ public:
      ViSession osc;
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-double freq,ampli;
+double freq,ampli,coef;
 private slots:
 
     void on_actionBase_de_donnees_triggered();

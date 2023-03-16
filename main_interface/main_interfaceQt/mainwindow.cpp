@@ -21,9 +21,9 @@ MainWindow::MainWindow(QWidget *parent) :
     stat = viOpen(rscmng, viFound, VI_NULL, VI_NULL, &osc);
     if (stat < VI_SUCCESS)
     {
-        QMessageBox::critical(this,"Attention","oscilloscope non connecté",QMessageBox::Ok);
-        exit(0);
-        qDebug() << "failed";
+        QMessageBox::critical(this,"Attention","Echec connexion oscilloscope",QMessageBox::Ok);
+        exit(0);//fermeture de la fenetre mainwindow
+        qDebug() << "Echec connexion oscilloscope";
 
     }
     ui->setupUi(this);
@@ -65,7 +65,8 @@ void MainWindow::on_BtnStart_clicked()
      *
      * */
     n=pmax/pmin;
-    coef=1-pow((n-1)/(n+1),2);
-    QString retour = QString(coef).number();
+    coef=1-pow((n-1)/(n+1),2);// formule calcul coef absobtion
+    QString retour = QString::number(coef);
+    retour+="V";
     ui->Editcoef->setText(retour);
 }
