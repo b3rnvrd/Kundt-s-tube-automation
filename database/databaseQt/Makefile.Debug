@@ -108,7 +108,11 @@ debug/qrc_icones.cpp: icones.qrc \
 		images/corbeille.png \
 		images/rafraichir.png \
 		images/bdd.png \
-		images/modifier.jpg
+		images/retirer_ligne.png \
+		images/ajouter_ligne.png \
+		images/modifier.jpg \
+		images/retirer_table.png \
+		images/ajouter_table.png
 	C:\Qt\Qt5.11.1\5.11.1\mingw53_32\bin\rcc.exe -name icones icones.qrc -o debug\qrc_icones.cpp
 
 compiler_moc_predefs_make_all: debug/moc_predefs.h
