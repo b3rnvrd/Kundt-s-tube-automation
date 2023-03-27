@@ -59,11 +59,11 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(758, 544);
+        MainWindow->resize(993, 542);
         actionBase_de_donnees = new QAction(MainWindow);
         actionBase_de_donnees->setObjectName(QStringLiteral("actionBase_de_donnees"));
         QIcon icon;
-        icon.addFile(QStringLiteral("../images/bdd.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QStringLiteral(":/images/bdd.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionBase_de_donnees->setIcon(icon);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
@@ -176,7 +176,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 758, 21));
+        menuBar->setGeometry(QRect(0, 0, 993, 21));
         MainWindow->setMenuBar(menuBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));

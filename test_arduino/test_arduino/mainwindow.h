@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <visa.h>
 #include "seriallink.h"
 
 namespace Ui {
@@ -14,17 +13,16 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-     ViSession osc;
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-double freq,ampli,coef;
+
+public slots:
+    void updateGUI(QByteArray data);
+
 private slots:
+    void on_p_ledOn_clicked();
 
-    void on_actionBase_de_donnees_triggered();
-
-    void on_BtnStart_clicked();
-
-    void on_BtnStop_clicked();
+    void on_p_ledOff_clicked();
 
 private:
     Ui::MainWindow *ui;

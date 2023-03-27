@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2023-01-11T13:51:52
+# Project created by QtCreator 2023-03-22T12:26:05
 #
 #-------------------------------------------------
 
@@ -8,7 +8,7 @@ QT       += core gui serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = Tube_Kundt
+TARGET = test_arduino
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -34,11 +34,3 @@ HEADERS += \
 
 FORMS += \
         mainwindow.ui
-
-win32: LIBS += -L$$PWD/../../WinNT/lib/msc/ -lvisa32
-
-INCLUDEPATH += $$PWD/../../WinNT/include
-DEPENDPATH += $$PWD/../../WinNT/include
-
-RESOURCES += \
-    ressources.qrc

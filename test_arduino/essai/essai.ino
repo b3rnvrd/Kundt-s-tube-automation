@@ -61,9 +61,14 @@ void setup() {
 }
 
 void loop() {
+    while(Serial.available()){
+    data = Serial.read();
+
+    switch(data){
+      case 't':
         int i = 0;
       
-        digitalWrite( DIR_A4988   , LOW); // Direction droite
+        digitalWrite( DIR_A4988   , HIGH); // Direction droite
         digitalWrite( STEP_A4988  , LOW);  // Initialisation de la broche step
         digitalWrite( EN_A4988, LOW );
         digitalWrite( RST_A4988, HIGH );
@@ -82,8 +87,16 @@ void loop() {
         digitalWrite( EN_A4988, LOW );
         digitalWrite( RST_A4988, HIGH );
         digitalWrite( SLP_A4988, LOW );
+        break;
+      case 'p':
+        Serial.println("Deblocage axe");
+        digitalWrite( EN_A4988, LOW );
+        digitalWrite( RST_A4988, HIGH );
+        digitalWrite( SLP_A4988, LOW );
+        break;
+    }
+  }
 
- 
   // Fin et blocage du programme
   // Presser reset pour recommander
   Serial.println("Fin de programme");

@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../mainwindow.h"
+#include "../../test_arduino/mainwindow.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[5];
-    char stringdata0[86];
+    QByteArrayData data[6];
+    char stringdata0[66];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,14 +32,15 @@ struct qt_meta_stringdata_MainWindow_t {
 static const qt_meta_stringdata_MainWindow_t qt_meta_stringdata_MainWindow = {
     {
 QT_MOC_LITERAL(0, 0, 10), // "MainWindow"
-QT_MOC_LITERAL(1, 11, 34), // "on_actionBase_de_donnees_trig..."
-QT_MOC_LITERAL(2, 46, 0), // ""
-QT_MOC_LITERAL(3, 47, 19), // "on_BtnStart_clicked"
-QT_MOC_LITERAL(4, 67, 18) // "on_BtnStop_clicked"
+QT_MOC_LITERAL(1, 11, 9), // "updateGUI"
+QT_MOC_LITERAL(2, 21, 0), // ""
+QT_MOC_LITERAL(3, 22, 4), // "data"
+QT_MOC_LITERAL(4, 27, 18), // "on_p_ledOn_clicked"
+QT_MOC_LITERAL(5, 46, 19) // "on_p_ledOff_clicked"
 
     },
-    "MainWindow\0on_actionBase_de_donnees_triggered\0"
-    "\0on_BtnStart_clicked\0on_BtnStop_clicked"
+    "MainWindow\0updateGUI\0\0data\0"
+    "on_p_ledOn_clicked\0on_p_ledOff_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -57,12 +58,12 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   29,    2, 0x08 /* Private */,
-       3,    0,   30,    2, 0x08 /* Private */,
-       4,    0,   31,    2, 0x08 /* Private */,
+       1,    1,   29,    2, 0x0a /* Public */,
+       4,    0,   32,    2, 0x08 /* Private */,
+       5,    0,   33,    2, 0x08 /* Private */,
 
  // slots: parameters
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::QByteArray,    3,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -75,13 +76,12 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         MainWindow *_t = static_cast<MainWindow *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->on_actionBase_de_donnees_triggered(); break;
-        case 1: _t->on_BtnStart_clicked(); break;
-        case 2: _t->on_BtnStop_clicked(); break;
+        case 0: _t->updateGUI((*reinterpret_cast< QByteArray(*)>(_a[1]))); break;
+        case 1: _t->on_p_ledOn_clicked(); break;
+        case 2: _t->on_p_ledOff_clicked(); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 QT_INIT_METAOBJECT const QMetaObject MainWindow::staticMetaObject = {

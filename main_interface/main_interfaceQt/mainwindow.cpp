@@ -22,15 +22,21 @@ MainWindow::MainWindow(QWidget *parent) :
     if (stat < VI_SUCCESS)
     {
         QMessageBox::critical(this,"Attention","Echec connexion oscilloscope",QMessageBox::Ok);
-        exit(0);//fermeture de la fenetre mainwindow
+      //  exit(0);//fermeture de la fenetre mainwindow
         qDebug() << "Echec connexion oscilloscope";
 
     }
     ui->setupUi(this);
+
+    arduino = new seriallink;
+
+    arduino->openConnection();
+    //connect(arduino, &seriallink::gotNewData, this, &MainWindow::updateGUI);
 }
 
 MainWindow::~MainWindow()
 {
+
     delete ui;
 }
 
@@ -44,7 +50,7 @@ void MainWindow::on_BtnStart_clicked()
 {
     freq=ui->comboBoxFreq->currentText().toDouble();
     ampli=ui->EditAmpli->text().toDouble();
-    if(ampli>5 ||ampli<0)
+    if(ampli > 5 || ampli < 0)
     {
         QMessageBox::critical(this,"Attention","amplitude superieure à 5V ou inférieure a 0V",QMessageBox::Ok);
         return;
@@ -52,21 +58,35 @@ void MainWindow::on_BtnStart_clicked()
     qDebug()<<freq;//verif valeur freq
     qDebug()<<ampli; //verif valeur ampli
     viPrintf(osc,":APPLY:SIN ,%f,%f\n",freq,ampli); //on applique un signal sinusoidal de fréquence et amplitude choisis
-    double pmax,pmin,n;//
-    /*
-     *
-     *
-     *
-     *
-     * mesure pmax& pmin
-     *
-     *
-     *
-     *
-     * */
-    n=pmax/pmin;
+    double pmax,pmin,n;
+
+    if(arduino->isWritable())
+        arduino->write("t");
+
+    else
+    {
+        QMessageBox::critical(this,"Attention","L'écriture a échoué",QMessageBox::Ok);
+        qDebug() << "Couldn't write to serial!";
+        arduino->openConnection();
+    }
+
+
+    n = pmax/pmin;
     coef=1-pow((n-1)/(n+1),2);// formule calcul coef absobtion
     QString retour = QString::number(coef);
     retour+="V";
     ui->Editcoef->setText(retour);
+}
+
+void MainWindow::on_BtnStop_clicked()
+{
+    if(arduino->isWritable())
+        arduino->write("p");
+
+    else
+    {
+        QMessageBox::critical(this,"Attention","L'écriture a échoué",QMessageBox::Ok);
+        qDebug() << "Couldn't write to serial!";
+        arduino->openConnection();
+    }
 }
