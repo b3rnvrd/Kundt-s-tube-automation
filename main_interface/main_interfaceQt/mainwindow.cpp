@@ -59,7 +59,9 @@ void MainWindow::on_BtnStart_clicked()
     qDebug()<<ampli; //verif valeur ampli
     viPrintf(osc,":APPLY:SIN ,%f,%f\n",freq,ampli); //on applique un signal sinusoidal de fréquence et amplitude choisis
     double pmax,pmin,n;
-
+    viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN3\n"); //tension mesurée sur le channel 3
+    viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
+        double tensionPos= QString(buf).toDouble();
     if(arduino->isWritable())
         arduino->write("t");
 
@@ -69,7 +71,10 @@ void MainWindow::on_BtnStart_clicked()
         qDebug() << "Couldn't write to serial!";
         arduino->openConnection();
     }
+while(tensionPos>-5||tensionPos<5)
+{
 
+}
 
     n = pmax/pmin;
     coef=1-pow((n-1)/(n+1),2);// formule calcul coef absobtion
