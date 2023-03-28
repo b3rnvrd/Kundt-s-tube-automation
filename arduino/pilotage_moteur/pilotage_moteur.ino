@@ -63,13 +63,13 @@ void setup() {
 void loop() {
         int i = 0;
       
-        digitalWrite( DIR_A4988   , LOW); // Direction droite
+        digitalWrite( DIR_A4988   , HIGH); // Direction droite
         digitalWrite( STEP_A4988  , LOW);  // Initialisation de la broche step
         digitalWrite( EN_A4988, LOW );
         digitalWrite( RST_A4988, HIGH );
       
         // Avance de 200 pas
-        for ( i = 0; i < 1000; i++) {
+        for ( i = 0; i < 50; i++) {
           Serial.println( i );
           digitalWrite( STEP_A4988, HIGH );
           delay( 10 );
@@ -79,9 +79,9 @@ void loop() {
       
         // déblocage de l'axe moteur
         Serial.println("Deblocage axe");
-        digitalWrite( EN_A4988, LOW );
-        digitalWrite( RST_A4988, HIGH );
-        digitalWrite( SLP_A4988, LOW );
+        digitalWrite( EN_A4988, HIGH );
+        digitalWrite( RST_A4988, LOW );
+        digitalWrite( SLP_A4988, HIGH );
 
  
   // Fin et blocage du programme
