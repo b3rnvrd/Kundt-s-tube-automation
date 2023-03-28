@@ -19,10 +19,12 @@ void loop() {
         break;
       case 'p':
         arretMoteur();
+        affichageTexte(true);
+        delay(5000);
         break;
     }
-
     affichageTexte();
+    
   }
 
 }

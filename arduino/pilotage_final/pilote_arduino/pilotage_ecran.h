@@ -12,7 +12,7 @@
 
 
 
-unsigned long affichageTexte();
+unsigned long affichageTexte(bool texte_stop = true);
 void setupSerialEcran();
 
 #endif
