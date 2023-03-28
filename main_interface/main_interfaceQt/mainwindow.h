@@ -30,6 +30,9 @@ private slots:
 private:
     Ui::MainWindow *ui;
     seriallink *arduino;
+    double checkPosition(bool droite = true);
+    double mesure(bool max = true);
+    void movePosition(bool droite = true, double tensionPos);
 };
 
 #endif // MAINWINDOW_H

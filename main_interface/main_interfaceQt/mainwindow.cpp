@@ -81,12 +81,12 @@ void MainWindow::on_BtnStart_clicked()
                 if(arduino->isWritable())
                     arduino->write("d"); //mouvement micro vers le HP
                 ui->Editcoef->setText("vers la droite");
-                //                else
-                //                {
-                //                    QMessageBox::critical(this,"Attention","L'écriture a échoué",QMessageBox::Ok);
-                //                    qDebug() << "Couldn't write to serial!";
-                //                    arduino->openConnection();
-                //                }
+                else
+                {
+                    QMessageBox::critical(this,"Attention","L'écriture a échoué",QMessageBox::Ok);
+                    qDebug() << "Couldn't write to serial!";
+                    arduino->openConnection();
+                }
                 sleep(1);
                 viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
                 viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
@@ -104,12 +104,12 @@ void MainWindow::on_BtnStart_clicked()
                 if(arduino->isWritable())
                     arduino->write("g"); //mouvement micro vers le HP
                 ui->Editcoef->setText("vers la gauche");
-                //                else
-                //                {
-                //                    QMessageBox::critical(this,"Attention","L'écriture a échoué",QMessageBox::Ok);
-                //                    qDebug() << "Couldn't write to serial!";
-                //                    arduino->openConnection();
-                //                }
+                else
+                {
+                    QMessageBox::critical(this,"Attention","L'écriture a échoué",QMessageBox::Ok);
+                    qDebug() << "Couldn't write to serial!";
+                    arduino->openConnection();
+                }
 
                 sleep(1);
                 viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
@@ -130,12 +130,12 @@ void MainWindow::on_BtnStart_clicked()
                 if(arduino->isWritable())
                     arduino->write("g"); //mouvement micro vers le HP
                 ui->Editcoef->setText("vers la gauche");
-                //                else
-                //                {
-                //                    QMessageBox::critical(this,"Attention","L'écriture a échoué",QMessageBox::Ok);
-                //                    qDebug() << "Couldn't write to serial!";
-                //                    arduino->openConnection();
-                //                }
+                else
+                {
+                    QMessageBox::critical(this,"Attention","L'écriture a échoué",QMessageBox::Ok);
+                    qDebug() << "Couldn't write to serial!";
+                    arduino->openConnection();
+                }
 
                 sleep(1);
                 viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
@@ -153,12 +153,12 @@ void MainWindow::on_BtnStart_clicked()
                 if(arduino->isWritable())
                     arduino->write("d"); //mouvement micro vers le HP
                 ui->Editcoef->setText("vers la droite");
-                //                else
-                //                {
-                //                    QMessageBox::critical(this,"Attention","L'écriture a échoué",QMessageBox::Ok);
-                //                    qDebug() << "Couldn't write to serial!";
-                //                    arduino->openConnection();
-                //                }
+                else
+                {
+                    QMessageBox::critical(this,"Attention","L'écriture a échoué",QMessageBox::Ok);
+                    qDebug() << "Couldn't write to serial!";
+                    arduino->openConnection();
+                }
 
                 sleep(1);
                 viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
@@ -175,9 +175,9 @@ void MainWindow::on_BtnStart_clicked()
     }
 
     n = pmax/pmin;
-    coef=1-pow((n-1)/(n+1),2);// formule calcul coef absobtion
+    coef = 1 - pow((n-1)/(n+1),2);// formule calcul coef absobtion
     QString retour = QString::number(coef);
-    retour+="V";
+    retour += "V";
     ui->Editcoef->setText(retour);
 }
 
@@ -193,3 +193,60 @@ void MainWindow::on_BtnStop_clicked()
         arduino->openConnection();
     }
 }
+
+double MainWindow::checkPosition(bool droite = true)
+{
+    double tensionPos = QString(buf).toDouble();
+    double valeur = mesure(false);                  //cote gauche
+    short limite = 5;                               //cote gauche
+    if(droite)                  //cote droit
+    {
+        limite = -5;
+        movePosition(tensionPos);
+        valeur = mesure();
+    }
+    else
+        movePosition(false,tensionPos);        //cote gauche
+    tensionPos = QString(buf).toDouble();
+    return tensionPos;
+}
+
+double MainWindow::mesure(bool max = true)
+{
+    double valeur, pmesure;
+    viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
+    viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
+    pmesure = QString(buf).toDouble();
+    if(max)
+    {
+        if(valeur < pmesure)
+            valeur = pmesure;
+    }
+    else
+        if(valeur > pmesure)
+            valeur = pmesure;
+    viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN3\n"); //tension mesurée sur le channel 3
+    viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
+
+    return valeur;
+}
+
+void MainWindow::movePosition(bool droite = true, double tensionPos)
+{
+    char caractere = "d";
+    if(!droite)
+        caractere = "g";
+    for(double pos=tensionPos; pos>limite; pos=tensionPos)
+    {
+        if(arduino->isWritable())
+            arduino->write(caractere); //mouvement micro vers le HP
+        ui->Editcoef->setText("vers la droite");
+        else
+        {
+            QMessageBox::critical(this,"Attention","L'écriture a échoué",QMessageBox::Ok);
+            qDebug() << "Couldn't write to serial!";
+            arduino->openConnection();
+        }
+        sleep(1);
+}
+
