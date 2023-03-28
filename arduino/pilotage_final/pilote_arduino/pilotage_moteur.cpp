@@ -1,0 +1,73 @@
+#include "pilotage_moteur.h"
+
+void setupSerialMoteur() {
+  Serial.begin(9600);
+
+  digitalWrite( EN_A4988, HIGH );   // Initialisation de la broche ENABLE
+  digitalWrite( RST_A4988, LOW );   // Initialisation de la broche RESET
+  digitalWrite( SLP_A4988, HIGH );  // Initialisation de la broche SLEEP
+
+  pinMode( EN_A4988, OUTPUT );
+  pinMode( DIR_A4988   , OUTPUT );
+  pinMode( STEP_A4988  , OUTPUT );
+  pinMode( MS1_A4988, OUTPUT );
+  pinMode( MS2_A4988   , OUTPUT );
+  pinMode( MS3_A4988  , OUTPUT );
+  pinMode( RST_A4988, OUTPUT );
+  pinMode( SLP_A4988   , OUTPUT );
+
+
+  digitalWrite( MS1_A4988, LOW );
+  digitalWrite( MS2_A4988, LOW );
+  digitalWrite( MS3_A4988, LOW );
+}
+
+void avanceGauche() {
+  int i = 0;
+
+  digitalWrite( DIR_A4988   , LOW); // Direction GAUCHE
+  digitalWrite( STEP_A4988  , LOW); // Initialisation de la broche STEP
+  digitalWrite( EN_A4988, LOW );    // Broche ENABLE activee
+  digitalWrite( RST_A4988, HIGH );
+
+  // Avance de 1 pas
+  for ( i = 0; i < 1; i++) {
+    digitalWrite( STEP_A4988, HIGH );
+    delay( 10 );
+    digitalWrite( STEP_A4988, LOW );
+    delay( 10 );
+  }
+
+  // blocage de l'axe moteur
+  digitalWrite( EN_A4988, HIGH );   // Broche ENABLE desactivee
+  digitalWrite( RST_A4988, LOW );
+  digitalWrite( SLP_A4988, HIGH );
+}
+
+void avanceDroite() {
+  int i = 0;
+
+  digitalWrite( DIR_A4988   , HIGH); // Direction DROITE
+  digitalWrite( STEP_A4988  , LOW);  // Initialisation de la broche STEP
+  digitalWrite( EN_A4988, LOW );     // Broche ENABLE activee
+  digitalWrite( RST_A4988, HIGH );
+
+  // Avance de 1 pas
+  for ( i = 0; i < 1; i++) {
+    digitalWrite( STEP_A4988, HIGH );
+    delay( 10 );
+    digitalWrite( STEP_A4988, LOW );
+    delay( 10 );
+  }
+
+  // blocage de l'axe moteur
+  digitalWrite( EN_A4988, HIGH );   // Broche ENABLE desactivee
+  digitalWrite( RST_A4988, LOW );
+  digitalWrite( SLP_A4988, HIGH );
+}
+
+void arretMoteur() {
+  digitalWrite( EN_A4988, HIGH );   // Broche ENABLE desactivee
+  digitalWrite( RST_A4988, LOW );
+  digitalWrite( SLP_A4988, HIGH );
+}
