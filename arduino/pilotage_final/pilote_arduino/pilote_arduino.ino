@@ -1,6 +1,6 @@
 #include "pilotage_ecran.h"
 #include "pilotage_moteur.h"
-
+char data;
 void setup() {
   setupSerialMoteur();
   setupSerialEcran();
@@ -16,11 +16,13 @@ void loop() {
         break;
       case 'g':
         avanceGauche();
-        break;  
+        break;
       case 'p':
         arretMoteur();
         break;
     }
+
+    affichageTexte();
   }
 
 }

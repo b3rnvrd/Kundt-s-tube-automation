@@ -1,5 +1,10 @@
 #include "pilotage_ecran.h"
 
+// Use hardware SPI (on Uno, #13, #12, #11) and the above for CS/DC
+Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC);
+
+#define SD_CS 4
+
 unsigned long affichageTexte() {
   unsigned long start = micros();
   tft.setCursor(0, 0);
@@ -43,7 +48,7 @@ void setupSerialEcran() {
   delay(10);
 
   Serial.print(F("Text                     "));
-  Serial.println(testText());
+  Serial.println(affichageTexte());
   delay(3000);
 
   Serial.println(F("Done!"));
