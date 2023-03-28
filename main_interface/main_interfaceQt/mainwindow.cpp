@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     if (stat < VI_SUCCESS)
     {
         QMessageBox::critical(this,"Attention","Echec connexion oscilloscope",QMessageBox::Ok);
-      //  exit(0);//fermeture de la fenetre mainwindow
+        //  exit(0);//fermeture de la fenetre mainwindow
         qDebug() << "Echec connexion oscilloscope";
 
     }
@@ -58,10 +58,10 @@ void MainWindow::on_BtnStart_clicked()
     qDebug()<<freq;//verif valeur freq
     qDebug()<<ampli; //verif valeur ampli
     viPrintf(osc,":APPLY:SIN ,%f,%f\n",freq,ampli); //on applique un signal sinusoidal de fréquence et amplitude choisis
-    double pmax,pmin,n;
+    double pmax,pmin,n,pmesure;
     viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN3\n"); //tension mesurée sur le channel 3
     viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
-        double tensionPos= QString(buf).toDouble();
+    double tensionPos= QString(buf).toDouble();
     if(arduino->isWritable())
         arduino->write("t");
 
@@ -71,10 +71,27 @@ void MainWindow::on_BtnStart_clicked()
         qDebug() << "Couldn't write to serial!";
         arduino->openConnection();
     }
-while(tensionPos>-5||tensionPos<5)
-{
-
-}
+    while(tensionPos>-5||tensionPos<5)  // -5 et 5 sont les tension max et min pour la position du micro
+    {
+        while(tensionPos>-5)
+        {
+            //mouvement moteur vers la droite
+            viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
+            viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
+            pmesure= QString(buf).toDouble();
+            if(pmax<pmesure)
+                pmax=pmesure;
+        }
+        while(tensionPos>-5)
+        {
+            //mouvement moteur vers la gauche
+            viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
+            viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
+            pmesure= QString(buf).toDouble();
+            if(pmin>pmesure)
+                pmin=pmesure;
+        }
+    }
 
     n = pmax/pmin;
     coef=1-pow((n-1)/(n+1),2);// formule calcul coef absobtion

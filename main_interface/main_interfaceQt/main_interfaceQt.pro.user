@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.6.2, 2023-03-27T10:02:30. -->
+<!-- Written by QtCreator 4.6.2, 2023-03-27T11:54:49. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -177,8 +177,8 @@
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">main_interfaceQt</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/etudiant/Desktop/tube_de_kundt/main_interface/main_interfaceQt/main_interfaceQt.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">main_interfaceQt2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/etudiant/Documents/GitHub/tube_de_kundt/main_interface/main_interfaceQt/main_interfaceQt.pro</value>
     <value type="bool" key="QmakeProjectManager.QmakeRunConfiguration.UseLibrarySearchPath">true</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments"></value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">main_interfaceQt.pro</value>

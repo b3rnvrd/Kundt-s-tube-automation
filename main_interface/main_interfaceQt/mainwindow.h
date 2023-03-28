@@ -17,6 +17,7 @@ public:
      ViSession osc;
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+       char buf[256] = {0};
 double freq,ampli,coef;
 private slots:
 
