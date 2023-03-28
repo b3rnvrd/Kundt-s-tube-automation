@@ -3,6 +3,7 @@
 #include <QProcess>
 #include <QDebug>
 #include <QMessageBox>
+#include <unistd.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -73,24 +74,55 @@ void MainWindow::on_BtnStart_clicked()
     }
     while(tensionPos>-5||tensionPos<5)  // -5 et 5 sont les tension max et min pour la position du micro
     {
-        while(tensionPos>-5)
-        {
-            //mouvement moteur vers la droite
-            viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
-            viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
-            pmesure= QString(buf).toDouble();
-            if(pmax<pmesure)
-                pmax=pmesure;
+        if(tensionPos<0){
+            ui->Editcoef->setText("tensio pos micro <0");
+            for(double pos=tensionPos ;pos>-5;pos=tensionPos)
+            {
+                //mouvement micro vers le HP
+                sleep(1);
+                viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
+                viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
+                pmesure= QString(buf).toDouble();
+                if(pmax<pmesure)
+                    pmax=pmesure;
+
+            }
+            for(double pos=tensionPos ;pos<5;pos=tensionPos)
+            {
+                //mouvement micro eloignement du HP
+                sleep(1);
+                viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
+                viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
+                pmesure= QString(buf).toDouble();
+                if(pmin>pmesure)
+                    pmin=pmesure;
+            }
         }
-        while(tensionPos>-5)
+        else
         {
-            //mouvement moteur vers la gauche
-            viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
-            viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
-            pmesure= QString(buf).toDouble();
-            if(pmin>pmesure)
-                pmin=pmesure;
+            for(double pos=tensionPos ;pos<5;pos=tensionPos)
+            {
+                //mouvement micro eloignement du HP
+                sleep(1);
+                viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
+                viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
+                pmesure= QString(buf).toDouble();
+                if(pmin>pmesure)
+                    pmin=pmesure;
+            }
+            for(double pos=tensionPos ;pos>-5;pos=tensionPos)
+            {
+                //mouvement micro vers le HP
+                sleep(1);
+                viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
+                viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
+                pmesure= QString(buf).toDouble();
+                if(pmax<pmesure)
+                    pmax=pmesure;
+
+            }
         }
+        break;
     }
 
     n = pmax/pmin;
