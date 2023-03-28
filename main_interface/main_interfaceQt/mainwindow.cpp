@@ -75,10 +75,12 @@ void MainWindow::on_BtnStart_clicked()
     while(tensionPos>-5||tensionPos<5)  // -5 et 5 sont les tension max et min pour la position du micro
     {
         if(tensionPos<0){
-            ui->Editcoef->setText("tensio pos micro <0");
+            ui->Editcoef->setText("tension pos micro <0");
             for(double pos=tensionPos ;pos>-5;pos=tensionPos)
             {
-                //mouvement micro vers le HP
+
+                arduino->write("d"); //mouvement micro vers le HP
+                ui->Editcoef->setText("mouvement vers HP");
                 sleep(1);
                 viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
                 viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
@@ -89,7 +91,9 @@ void MainWindow::on_BtnStart_clicked()
             }
             for(double pos=tensionPos ;pos<5;pos=tensionPos)
             {
-                //mouvement micro eloignement du HP
+
+                arduino->write("g");//mouvement micro eloignement du HP
+                ui->Editcoef->setText("eloignement HP");
                 sleep(1);
                 viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
                 viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
@@ -102,7 +106,9 @@ void MainWindow::on_BtnStart_clicked()
         {
             for(double pos=tensionPos ;pos<5;pos=tensionPos)
             {
-                //mouvement micro eloignement du HP
+
+                arduino->write("g");//mouvement micro eloignement du HP
+                ui->Editcoef->setText("eloignement HP");
                 sleep(1);
                 viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
                 viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
@@ -112,7 +118,9 @@ void MainWindow::on_BtnStart_clicked()
             }
             for(double pos=tensionPos ;pos>-5;pos=tensionPos)
             {
-                //mouvement micro vers le HP
+
+                arduino->write("d"); //mouvement micro vers le HP
+                ui->Editcoef->setText("mouvement vers HP");
                 sleep(1);
                 viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
                 viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
