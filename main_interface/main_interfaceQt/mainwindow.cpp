@@ -64,110 +64,17 @@ void MainWindow::on_BtnStart_clicked()
     double tensionPos = checkPosition();
     if(tensionPos > -5||tensionPos < 5)  // -5 et 5 sont les tension max et min pour la position du micro
     {
-        if(tensionPos < 0){
+        if(tensionPos < 0)
+        {
             ui->Editcoef->setText("micro eloigné du HP");
             checkToMovePosition(vers_la_droite);
             checkToMovePosition(vers_la_gauche);
-            //            for(double pos=tensionPos ;pos>-5;pos=tensionPos)
-            //            {
-            //                if(arduino->isWritable())
-            //                    arduino->write("d"); //mouvement micro vers le HP
-            //                ui->Editcoef->setText("vers la droite");
-            //                else
-            //                {
-            //                    QMessageBox::critical(this,"Attention","L'écriture a échoué",QMessageBox::Ok);
-            //                    qDebug() << "Couldn't write to serial!";
-            //                    arduino->openConnection();
-            //                }
-            //                sleep(1);
-            //                viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
-            //                viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
-            //                pmesure= QString(buf).toDouble();
-            //                if(pmax<pmesure)
-            //                    pmax=pmesure;
-            //                viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN3\n"); //tension mesurée sur le channel 3
-            //                viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
-            //                tensionPos= QString(buf).toDouble();
-
-            //            }
-            //            for(double pos=tensionPos ;pos<5;pos=tensionPos)
-            //            {
-
-            //                if(arduino->isWritable())
-            //                    arduino->write("g"); //mouvement micro vers le HP
-            //                ui->Editcoef->setText("vers la gauche");
-            //                else
-            //                {
-            //                    QMessageBox::critical(this,"Attention","L'écriture a échoué",QMessageBox::Ok);
-            //                    qDebug() << "Couldn't write to serial!";
-            //                    arduino->openConnection();
-            //                }
-
-            //                sleep(1);
-            //                viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
-            //                viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
-            //                pmesure= QString(buf).toDouble();
-            //                if(pmin>pmesure)
-            //                    pmin=pmesure;
-            //                viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN3\n"); //tension mesurée sur le channel 3
-            //                viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
-            //                tensionPos= QString(buf).toDouble();
-            //            }
         }
         else
         {
             checkToMovePosition(vers_la_gauche);
             checkToMovePosition(vers_la_droite);
         }
-
-        //        {
-        //            for(double pos=tensionPos ;pos<5;pos=tensionPos)
-        //            {
-
-        //                if(arduino->isWritable())
-        //                    arduino->write("g"); //mouvement micro vers le HP
-        //                ui->Editcoef->setText("vers la gauche");
-        //                else
-        //                {
-        //                    QMessageBox::critical(this,"Attention","L'écriture a échoué",QMessageBox::Ok);
-        //                    qDebug() << "Couldn't write to serial!";
-        //                    arduino->openConnection();
-        //                }
-
-        //                sleep(1);
-        //                viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
-        //                viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
-        //                pmesure= QString(buf).toDouble();
-        //                if(pmin>pmesure)
-        //                    pmin=pmesure;
-        //                viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN3\n"); //tension mesurée sur le channel 3
-        //                viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
-        //                tensionPos= QString(buf).toDouble();
-        //            }
-        //            for(double pos=tensionPos ;pos>-5;pos=tensionPos)
-        //            {
-
-        //                if(arduino->isWritable())
-        //                    arduino->write("d"); //mouvement micro vers le HP
-        //                ui->Editcoef->setText("vers la droite");
-        //                else
-        //                {
-        //                    QMessageBox::critical(this,"Attention","L'écriture a échoué",QMessageBox::Ok);
-        //                    qDebug() << "Couldn't write to serial!";
-        //                    arduino->openConnection();
-        //                }
-
-        //                sleep(1);
-        //                viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
-        //                viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
-        //                pmesure= QString(buf).toDouble();
-        //                if(pmax<pmesure)
-        //                    pmax=pmesure;
-        //                viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN3\n"); //tension mesurée sur le channel 3
-        //                viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
-        //                tensionPos= QString(buf).toDouble();
-        //            }
-
     }
     else
     QMessageBox::critical(this,"Attention","Verifiez la position du micro",QMessageBox::Ok);
