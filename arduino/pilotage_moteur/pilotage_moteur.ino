@@ -63,13 +63,13 @@ void setup() {
 void loop() {
         int i = 0;
       
-        digitalWrite( DIR_A4988   , HIGH); // Direction droite
+        digitalWrite( DIR_A4988   , HIGH); // Direction gauche
         digitalWrite( STEP_A4988  , LOW);  // Initialisation de la broche step
         digitalWrite( EN_A4988, LOW );
         digitalWrite( RST_A4988, HIGH );
       
         // Avance de 200 pas
-        for ( i = 0; i < 50; i++) {
+        for ( i = 0; i < 100; i++) {
           Serial.println( i );
           digitalWrite( STEP_A4988, HIGH );
           delay( 10 );

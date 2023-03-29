@@ -56,39 +56,50 @@ void MainWindow::on_BtnStart_clicked()
         QMessageBox::critical(this,"Attention","amplitude supérieure à 5V ou inférieure a 0V",QMessageBox::Ok);
         return;
     }
-    qDebug()<<freq;//verif valeur freq
-    qDebug()<<ampli; //verif valeur ampli
     viPrintf(osc,":APPLY:SIN ,%f,%f\n",freq,ampli); //on applique un signal sinusoidal de fréquence et amplitude choisies
     viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN3\n"); //tension mesurée sur le channel 3
     viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
     double tensionPos = checkPosition();
-    if(tensionPos > -5||tensionPos < 5)  // -5 et 5 sont les tension max et min pour la position du micro
-    {
-        if(tensionPos < 0)
-        {
-            ui->Editcoef->setText("micro eloigné du HP");
-            checkToMovePosition(vers_la_droite);
-            checkToMovePosition(vers_la_gauche);
-        }
-        else
-        {
-            checkToMovePosition(vers_la_gauche);
-            checkToMovePosition(vers_la_droite);
-        }
-    }
+//    if(tensionPos > -5||tensionPos < 5)  // -5 et 5 sont les tension max et min pour la position du micro
+//    {
+//        if(tensionPos < 0)
+//        {
+//            ui->Editcoef->setText("micro eloigné du HP");
+//            checkToMovePosition(vers_la_droite);
+//            checkToMovePosition(vers_la_gauche);
+//        }
+//        else
+//        {
+//            checkToMovePosition(vers_la_gauche);
+//            checkToMovePosition(vers_la_droite);
+//        }
+//    }
+//    else
+//    QMessageBox::critical(this,"Attention","Verifiez la position du micro",QMessageBox::Ok);
+
+
+//    bool max = true, min = false;
+//    double n, tension_max_mesuree = mesureTension(max), tension_min_mesuree = mesureTension(min);
+
+//    n = tension_max_mesuree/tension_min_mesuree;
+//    coef = 1 - pow((n-1)/(n+1),2);// formule calcul coef absobtion
+//    QString retour = QString::number(coef);
+//    retour += "V";
+//    ui->Editcoef->setText(retour);
+
+    checkPosition();
+    if(arduino->isWritable())
+        arduino->write("d");
+
     else
-    QMessageBox::critical(this,"Attention","Verifiez la position du micro",QMessageBox::Ok);
-
-
-    bool max = true, min = false;
-    double n, tension_max_mesuree = mesureTension(max), tension_min_mesuree = mesureTension(min);
-
-    n = tension_max_mesuree/tension_min_mesuree;
-    coef = 1 - pow((n-1)/(n+1),2);// formule calcul coef absobtion
-    QString retour = QString::number(coef);
-    retour += "V";
-    ui->Editcoef->setText(retour);
-
+    {
+        QMessageBox::critical(this,"Attention","L'écriture a échoué",QMessageBox::Ok);
+        qDebug() << "Couldn't write to serial!";
+        arduino->openConnection();
+    }
+    sleep(5);
+    ui->Editcoef->setText(QString::number(mesureTension(vers_la_droite)));
+    viPrintf(osc, (ViString)":OUTP1:0\n");
 }
 
 void MainWindow::on_BtnStop_clicked()
@@ -102,6 +113,8 @@ void MainWindow::on_BtnStop_clicked()
         qDebug() << "Couldn't write to serial!";
         arduino->openConnection();
     }
+    viPrintf(osc, (ViString)":OUTP1:0\n");
+
 }
 
 double MainWindow::checkPosition()

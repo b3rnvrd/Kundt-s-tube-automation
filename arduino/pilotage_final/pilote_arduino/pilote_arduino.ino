@@ -13,17 +13,19 @@ void loop() {
     switch (data) {
       case 'd':
         avanceDroite();
+        affichageTexte(true);
         break;
       case 'g':
         avanceGauche();
+        affichageTexte(true);
         break;
       case 'p':
         arretMoteur();
-        affichageTexte(true);
+        affichageTexte();
         delay(5000);
         break;
     }
-    affichageTexte();
+    //affichageTexte();
     
   }
 

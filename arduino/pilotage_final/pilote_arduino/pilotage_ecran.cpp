@@ -5,10 +5,10 @@ Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC);
 
 #define SD_CS 4
 
-unsigned long affichageTexte(bool texte_stop = true) {
+unsigned long affichageTexte(bool texte_stop) {
   unsigned long start = micros();
   tft.setCursor(0, 0);
-  if(!texte_stop) {
+  if(texte_stop) {
     tft.setTextColor(ILI9341_WHITE);
     tft.setTextSize(1);
     tft.println("Bonjour, j'arrive a piloter cet ecran");
