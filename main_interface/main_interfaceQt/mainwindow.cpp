@@ -59,61 +59,66 @@ void MainWindow::on_BtnStart_clicked()
     viPrintf(osc,":APPLY:SIN ,%f,%f\n",freq,ampli); //on applique un signal sinusoidal de fréquence et amplitude choisies
     viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN3\n"); //tension mesurée sur le channel 3
     viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
-    double tensionPos = checkPosition();
-//    if(tensionPos > -5||tensionPos < 5)  // -5 et 5 sont les tension max et min pour la position du micro
-//    {
-//        if(tensionPos < 0)
-//        {
-//            ui->Editcoef->setText("micro eloigné du HP");
-//            checkToMovePosition(vers_la_droite);
-//            checkToMovePosition(vers_la_gauche);
-//        }
-//        else
-//        {
-//            checkToMovePosition(vers_la_gauche);
-//            checkToMovePosition(vers_la_droite);
-//        }
-//    }
-//    else
-//    QMessageBox::critical(this,"Attention","Verifiez la position du micro",QMessageBox::Ok);
+    double tensionPos = 0;
+    tensionPos = checkPosition();
 
-
-//    bool max = true, min = false;
-//    double n, tension_max_mesuree = mesureTension(max), tension_min_mesuree = mesureTension(min);
-
-//    n = tension_max_mesuree/tension_min_mesuree;
-//    coef = 1 - pow((n-1)/(n+1),2);// formule calcul coef absobtion
-//    QString retour = QString::number(coef);
-//    retour += "V";
-//    ui->Editcoef->setText(retour);
-
-    checkPosition();
-    if(arduino->isWritable())
-        arduino->write("d");
-
-    else
+    if(tensionPos > -5||tensionPos < 5)  // -5 et 5 sont les tension max et min pour la position du micro
     {
-        QMessageBox::critical(this,"Attention","L'écriture a échoué",QMessageBox::Ok);
-        qDebug() << "Couldn't write to serial!";
-        arduino->openConnection();
+        if(tensionPos < 0)
+        {
+            ui->Editcoef->setText("micro eloigné du HP");
+            checkToMovePosition(vers_la_droite);
+            checkToMovePosition(vers_la_gauche);
+
+        }
+        else
+        {
+            checkToMovePosition(vers_la_gauche);
+            checkToMovePosition(vers_la_droite);
+
+        }
+        bool max = true, min = false;
+        double n, tension_max_mesuree , tension_min_mesuree;
+        tension_max_mesuree = mesureTension(max);
+        sleep(2);
+        tension_min_mesuree = mesureTension(min);
+        sleep(2);
+        n = tension_max_mesuree/tension_min_mesuree;
+        coef = 1 - pow((n-1)/(n+1),2);// formule calcul coef absobtion
+//        QString retour = QString::number(coef);
+//        retour += "V";
+
+        ui->Editcoef->setText(QString::number(coef));
     }
-    sleep(5);
-    ui->Editcoef->setText(QString::number(mesureTension(vers_la_droite)));
-    viPrintf(osc, (ViString)":OUTP1:0\n");
+    else
+        QMessageBox::critical(this,"Attention","Verifiez la position du micro",QMessageBox::Ok);
+
+
+
+    //    for(int i = 0; i < 1; i++)
+    //    {
+    //        checkPosition();
+    //        while(!(arduino->isWritable()));
+    //            arduino->write("d");
+
+
+    //            QMessageBox::critical(this,"Attention","L'écriture a échoué",QMessageBox::Ok);
+    //            qDebug() << "Couldn't write to serial!";
+    //            arduino->openConnection();
+
+
+    //        ui->Editcoef->setText(QString::number(mesureTension(vers_la_droite)));
+
+    //    }
+    //    viPrintf(osc, (ViString)":OUTP1 :0\n");
 }
 
 void MainWindow::on_BtnStop_clicked()
 {
-    if(arduino->isWritable())
-        arduino->write("p");
+    while(!(arduino->isWritable()));
+    arduino->write("p");
 
-    else
-    {
-        QMessageBox::critical(this,"Attention","L'écriture a échoué",QMessageBox::Ok);
-        qDebug() << "Couldn't write to serial!";
-        arduino->openConnection();
-    }
-    viPrintf(osc, (ViString)":OUTP1:0\n");
+    viPrintf(osc, (ViString)":OUTP1 :0\n");     //COUPER LE GBF DE L'OSCILLO
 
 }
 
@@ -121,13 +126,14 @@ double MainWindow::checkPosition()
 {
     viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN3\n"); //tension mesurée sur le channel 3
     viScanf(osc,(ViString)"%t",&buf);
-    double tensionPos = QString(buf).toDouble();
+    double tensionPos = 0;
+    tensionPos = QString(buf).toDouble();
     return tensionPos;
 }
 
 double MainWindow::mesureTension(bool mesure_max = true)
 {
-    double tension, tension_mesuree;
+    double tension = 0, tension_mesuree;
     viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
     viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
     tension_mesuree = QString(buf).toDouble();
@@ -141,8 +147,7 @@ double MainWindow::mesureTension(bool mesure_max = true)
         if(tension > tension_mesuree)
             tension = tension_mesuree;
     }
-    viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN3\n"); //tension mesurée sur le channel 3
-    viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
+    viPrintf(osc, (ViString)":OUTP1 :0\n");
 
     return tension;
 }
@@ -152,36 +157,30 @@ void MainWindow::movePosition(bool vers_la_droite, double tensionPos, short limi
     const char* caractere;
 
     vers_la_droite ? caractere = "d" : caractere = "g";
-    for(double pos = tensionPos; vers_la_droite ? pos > limite_tension : pos < limite_tension; pos = tensionPos)
+    double pos = 0;
+    for(pos = tensionPos; vers_la_droite ? pos < limite_tension : pos > limite_tension; pos = checkPosition())
     {
-        if(arduino->isWritable())
-            arduino->write(caractere); //mouvement micro vers le HP
+        while(!(arduino->isWritable()));
+        arduino->write(caractere); //mouvement micro vers le HP
         //ui->Editcoef->setText("vers la droite");
-        else
-        {
-            QMessageBox::critical(this,"Attention","L'écriture a échoué",QMessageBox::Ok);
-            qDebug() << "Couldn't write to serial!";
-            arduino->openConnection();
-        }
-        sleep(1);
     }
 }
 
-double MainWindow::checkToMovePosition(bool vers_la_droite)
+void MainWindow::checkToMovePosition(bool vers_la_droite)
 {
-    double tensionPos = checkPosition();
+    double tensionPos = 0;
+    tensionPos = checkPosition();
+
     short limite_tension;
 
     if(vers_la_droite)  //côté droit
     {
         limite_tension = -5;
         movePosition(vers_la_droite,tensionPos,limite_tension);
-        return mesureTension(vers_la_droite);
     }
     else    //côté gauche
     {
         limite_tension = 5;
         movePosition(!vers_la_droite,tensionPos,limite_tension);
-        return mesureTension(!vers_la_droite);
     }
 }

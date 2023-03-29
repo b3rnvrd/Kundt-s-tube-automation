@@ -34,7 +34,7 @@ private:
     double checkPosition();
     double mesureTension(bool mesure_max);
     void movePosition(bool vers_la_droite, double tensionPos, short limite_tension);
-    double checkToMovePosition(bool vers_la_droite);
+    void checkToMovePosition(bool vers_la_droite);
 };
 
 #endif // MAINWINDOW_H

@@ -13,6 +13,6 @@
 
 
 unsigned long affichageTexte(bool texte_stop = true);
-void setupSerialEcran();
+void setupEcran();
 
 #endif

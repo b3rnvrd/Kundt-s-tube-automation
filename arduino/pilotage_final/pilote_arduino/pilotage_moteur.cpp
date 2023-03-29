@@ -11,7 +11,7 @@
 #define DIR_A4988  36
 
 void setupSerialMoteur() {
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   digitalWrite( EN_A4988, HIGH );   // Initialisation de la broche ENABLE
   digitalWrite( RST_A4988, LOW );   // Initialisation de la broche RESET
@@ -30,6 +30,10 @@ void setupSerialMoteur() {
   digitalWrite( MS1_A4988, LOW );
   digitalWrite( MS2_A4988, LOW );
   digitalWrite( MS3_A4988, LOW );
+
+  pinMode(LED_BUILTIN, OUTPUT);
+
+
 }
 
 void avanceGauche() {
@@ -41,7 +45,7 @@ void avanceGauche() {
   digitalWrite( RST_A4988, HIGH );
 
   // Avance de 1 pas
-  for ( i = 0; i < 100; i++) {
+  for ( i = 0; i < 1; i++) {
     digitalWrite( STEP_A4988, HIGH );
     delay( 10 );
     digitalWrite( STEP_A4988, LOW );
@@ -52,6 +56,9 @@ void avanceGauche() {
   digitalWrite( EN_A4988, HIGH );   // Broche ENABLE desactivee
   digitalWrite( RST_A4988, LOW );
   digitalWrite( SLP_A4988, HIGH );
+
+  digitalWrite(LED_BUILTIN, digitalRead(LED_BUILTIN)^1);
+
 }
 
 void avanceDroite() {
@@ -63,7 +70,7 @@ void avanceDroite() {
   digitalWrite( RST_A4988, HIGH );
 
   // Avance de 1 pas
-  for ( i = 0; i < 100; i++) {
+  for ( i = 0; i < 1; i++) {
     digitalWrite( STEP_A4988, HIGH );
     delay( 10 );
     digitalWrite( STEP_A4988, LOW );

@@ -3,7 +3,7 @@
 char data;
 void setup() {
   setupSerialMoteur();
-  setupSerialEcran();
+  setupEcran();
 }
 
 void loop() {
@@ -22,7 +22,7 @@ void loop() {
       case 'p':
         arretMoteur();
         affichageTexte();
-        delay(5000);
+        delay(5);
         break;
     }
     //affichageTexte();
