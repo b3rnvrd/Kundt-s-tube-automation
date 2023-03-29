@@ -225,6 +225,11 @@ debug/moc_mainwindow.cpp: C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/QMa
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qicon.h \
 		../../WinNT/include/visa.h \
 		../../WinNT/include/visatype.h \
+		seriallink.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/QObject \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtSerialPort/QSerialPort \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtSerialPort/qserialport.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtSerialPort/qserialportglobal.h \
 		mainwindow.h \
 		debug/moc_predefs.h \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/bin/moc.exe
@@ -421,6 +426,11 @@ debug/main.o: main.cpp mainwindow.h \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qicon.h \
 		../../WinNT/include/visa.h \
 		../../WinNT/include/visatype.h \
+		seriallink.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/QObject \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtSerialPort/QSerialPort \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtSerialPort/qserialport.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtSerialPort/qserialportglobal.h \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/QApplication \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qapplication.h \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/qcoreapplication.h \
@@ -539,6 +549,11 @@ debug/mainwindow.o: mainwindow.cpp mainwindow.h \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qicon.h \
 		../../WinNT/include/visa.h \
 		../../WinNT/include/visatype.h \
+		seriallink.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/QObject \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtSerialPort/QSerialPort \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtSerialPort/qserialport.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtSerialPort/qserialportglobal.h \
 		ui_mainwindow.h \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/QVariant \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/QAction \
@@ -669,7 +684,49 @@ debug/seriallink.o: seriallink.cpp seriallink.h \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/qset.h \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/qcontiguouscache.h \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/qsharedpointer.h \
-		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/qsharedpointer_impl.h
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/qsharedpointer_impl.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/QMessageBox \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qmessagebox.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qtwidgetsglobal.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qtguiglobal.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qtgui-config.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qtwidgets-config.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qdialog.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qwidget.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qwindowdefs.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qwindowdefs_win.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/qmargins.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qpaintdevice.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/qrect.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/qsize.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qpalette.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qcolor.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qrgb.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qrgba64.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qbrush.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qmatrix.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qpolygon.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qregion.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/qdatastream.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/qline.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qtransform.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qpainterpath.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qimage.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qpixelformat.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qpixmap.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qfont.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qfontmetrics.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qfontinfo.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qsizepolicy.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qcursor.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qkeysequence.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qevent.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/qurl.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/qurlquery.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/qfile.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/qfiledevice.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qvector2d.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qtouchdevice.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\seriallink.o seriallink.cpp
 
 debug/qrc_ressources.o: debug/qrc_ressources.cpp 

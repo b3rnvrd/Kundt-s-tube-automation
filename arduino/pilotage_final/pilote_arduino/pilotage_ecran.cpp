@@ -22,7 +22,7 @@ unsigned long affichageTexte(bool texte_stop = true) {
   }
   else {
     tft.setTextColor(ILI9341_RED);
-    tft.setTextSize(10);
+    tft.setTextSize(9);
     tft.println("ARRET DU MOTEUR");
   }
     
