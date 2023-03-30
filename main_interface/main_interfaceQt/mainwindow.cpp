@@ -57,8 +57,8 @@ void MainWindow::on_BtnStart_clicked()
         return;
     }
     viPrintf(osc,":APPLY:SIN ,%f,%f\n",freq,ampli); //on applique un signal sinusoidal de fréquence et amplitude choisies
-    viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN3\n"); //tension mesurée sur le channel 3
-    viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
+//    viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN3\n"); //tension mesurée sur le channel 3
+//    viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
     double tensionPos = 0;
     tensionPos = checkPosition();
 
@@ -113,7 +113,7 @@ void MainWindow::on_BtnStart_clicked()
     //    viPrintf(osc, (ViString)":OUTP1 :0\n");
 }
 
-void MainWindow::on_BtnStop_clicked()
+void MainWindow::on_BtnStop_clicked()//Arret d'urgence
 {
     while(!(arduino->isWritable()));
     arduino->write("p");
@@ -122,7 +122,7 @@ void MainWindow::on_BtnStop_clicked()
 
 }
 
-double MainWindow::checkPosition()
+double MainWindow::checkPosition()//retourne la tension qui donne la position du micro
 {
     viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN3\n"); //tension mesurée sur le channel 3
     viScanf(osc,(ViString)"%t",&buf);
@@ -131,7 +131,7 @@ double MainWindow::checkPosition()
     return tensionPos;
 }
 
-double MainWindow::mesureTension(bool mesure_max = true)
+double MainWindow::mesureTension(bool mesure_max = true)// mesure de la tension
 {
     double tension = 0, tension_mesuree;
     viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
@@ -152,7 +152,7 @@ double MainWindow::mesureTension(bool mesure_max = true)
     return tension;
 }
 
-void MainWindow::movePosition(bool vers_la_droite, double tensionPos, short limite_tension)
+void MainWindow::movePosition(bool vers_la_droite, double tensionPos, short limite_tension)//mouvement du micro
 {
     const char* caractere;
 
@@ -166,7 +166,7 @@ void MainWindow::movePosition(bool vers_la_droite, double tensionPos, short limi
     }
 }
 
-void MainWindow::checkToMovePosition(bool vers_la_droite)
+void MainWindow::checkToMovePosition(bool vers_la_droite) //verif cote mouvement voulu
 {
     double tensionPos = 0;
     tensionPos = checkPosition();
@@ -177,6 +177,7 @@ void MainWindow::checkToMovePosition(bool vers_la_droite)
     {
         limite_tension = -5;
         movePosition(vers_la_droite,tensionPos,limite_tension);
+
     }
     else    //côté gauche
     {
