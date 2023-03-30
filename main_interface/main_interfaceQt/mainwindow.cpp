@@ -56,45 +56,82 @@ void MainWindow::on_BtnStart_clicked()
         return;
     }
     viPrintf(osc,":APPLY:SIN ,%f,%f\n", freq, ampli); //on applique un signal sinusoidal de fréquence et amplitude choisies
-    //    viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN3\n"); //tension mesurée sur le channel 3
-    //    viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
-    double tensionPos = 0;
+    viPrintf(osc,":SYST:AUT\n");
+
     tensionPos = checkPosition();
-    double n, tension_max_mesuree , tension_min_mesuree;
+    double n, tension_max_mesuree = 1, tension_min_mesuree = 1;
     if(tensionPos > -5 || tensionPos < 5)  // -5 et 5 sont les tension max et min pour la position du micro
     {
         if(tensionPos < 0)
         {
-            do
-            {
-                tension_max_mesuree = checkToMovePosition(vers_la_droite);
-                tensionPos = checkPosition();
-            }
-            while(tensionPos < 4.5);
-            do
-            {
-                tension_min_mesuree = checkToMovePosition(vers_la_gauche);
-                tensionPos = checkPosition();
-            }
-            while(tensionPos > -4.5);
-
+            movePosition(vers_la_droite,5);
         }
         else
         {
-            do
-            {
-                tension_max_mesuree = checkToMovePosition(vers_la_gauche);
-                tensionPos = checkPosition();
-            }
-            while(tensionPos > -4.5);
-            do
-            {
-                tension_min_mesuree = checkToMovePosition(vers_la_droite);
-                tensionPos = checkPosition();
-            }
-            while(tensionPos < 4.5);
-
+            movePosition(vers_la_gauche,-5);
         }
+
+        //            do
+        //            {
+        //                tension_max_mesuree = checkToMovePosition(vers_la_droite);
+        //                //               tensionPos = checkPosition();
+        //            }
+        //            while(tensionPos < 4.5);
+
+        //            do
+        //            {
+        //                tension_min_mesuree = checkToMovePosition(vers_la_gauche);
+        //                //                tensionPos = checkPosition();
+        //            }
+        //            while(tensionPos > -4.5);
+
+        //        }
+        //        else
+        //        {
+        //            do
+        //            {
+        //                tension_max_mesuree = checkToMovePosition(vers_la_gauche);
+        //                //                tensionPos = checkPosition();
+        //            }
+        //            while(tensionPos > -4.5);
+        //            do
+        //            {
+        //                tension_min_mesuree = checkToMovePosition(vers_la_droite);
+        //                //                tensionPos = checkPosition();
+        //            }
+        //            while(tensionPos < 4.5);
+        //        }
+        //      tension_max_mesuree = checkToMovePosition(vers_la_gauche);
+        //      tension_min_mesuree = checkToMovePosition(vers_la_droite);
+
+
+        //        const char* caractere;
+        //        double tension_mesuree, tension = 0;
+        //        vers_la_droite ? caractere = "d" : caractere = "g";
+        //        double pos = 0;
+        //        for(pos = tensionPos; vers_la_droite ? pos < 5 : pos > -5; pos+=1)
+        //        {
+        //            while(!(arduino->isWritable()))
+        //            {
+        //                QMessageBox::critical(this,"Attention","L'écriture a échoué, tentative de reconnexion avec la carte Arduino",QMessageBox::Ok);
+        //                qDebug() << "Couldn't write to serial!";
+        //                arduino->openConnection();
+        //                sleep(10);
+        //            }
+        //            arduino->write(caractere); //mouvement micro vers le HP
+
+        //            tension_mesuree = 0;
+        //            tension_mesuree = mesureTension(vers_la_droite);
+
+        //            if(tension < tension_mesuree)
+        //                tension = tension_mesuree;
+        //            else
+        //                tension = tension_mesuree;
+        //        }
+
+
+
+        viPrintf(osc, (ViString)":OUTP1 :0\n");
 
         n = tension_max_mesuree/tension_min_mesuree;
 
@@ -104,23 +141,6 @@ void MainWindow::on_BtnStart_clicked()
     }
     else
         QMessageBox::critical(this,"Attention","Verifiez la position du micro",QMessageBox::Ok);
-
-
-
-    //    for(int i = 0; i < 1; i++)
-    //    {
-    //        checkPosition();
-    //        while(!(arduino->isWritable()));
-    //            arduino->write("d");
-
-
-
-
-
-    //        ui->Editcoef->setText(QString::number(mesureTension(vers_la_droite)));
-
-    //    }
-    //    viPrintf(osc, (ViString)":OUTP1 :0\n");
 }
 
 void MainWindow::on_BtnStop_clicked()//Arret d'urgence
@@ -134,9 +154,11 @@ void MainWindow::on_BtnStop_clicked()//Arret d'urgence
 
 double MainWindow::checkPosition()//retourne la tension qui donne la position du micro
 {
+    for(int i =0; i<256; i++)
+        buf[i] = 0;
     viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN3\n"); //tension mesurée sur le channel 3
     viScanf(osc,(ViString)"%t",&buf);
-    double tensionPos = QString(buf).toDouble();
+    tensionPos = QString(buf).toDouble();
     return tensionPos;
 }
 
@@ -156,44 +178,43 @@ double MainWindow::mesureTension(bool mesure_max = true)// mesure de la tension
         if(tension > tension_mesuree)
             tension = tension_mesuree;
     }
-    viPrintf(osc, (ViString)":OUTP1 :0\n");
+    //    viPrintf(osc, (ViString)":OUTP1 :0\n");
 
     return tension;
 }
 
-double MainWindow::movePosition(bool vers_la_droite, double tensionPos, short limite_tension)//mouvement du micro
+double MainWindow::movePosition(bool vers_la_droite, short limite_tension) //mouvement du micro
 {
     const char* caractere;
-    double tension_mesuree;
+    double tension_mesuree, tension = 0;
     vers_la_droite ? caractere = "d" : caractere = "g";
     double pos = 0;
-    for(pos = tensionPos; vers_la_droite ? pos < limite_tension : pos > limite_tension; pos = checkPosition())
+    for(pos = tensionPos; vers_la_droite ? pos < limite_tension : pos > limite_tension; pos += 1)
     {
         while(!(arduino->isWritable()))
         {
-            QMessageBox::critical(this,"Attention","L'écriture a échoué",QMessageBox::Ok);
+            QMessageBox::critical(this,"Attention","L'écriture a échoué, tentative de reconnexion avec la carte Arduino",QMessageBox::Ok);
             qDebug() << "Couldn't write to serial!";
             arduino->openConnection();
             sleep(10);
         }
         arduino->write(caractere); //mouvement micro vers le HP
+
         tension_mesuree = 0;
+        tension_mesuree = mesureTension(vers_la_droite);
 
-        if(tension_mesuree < mesureTension(vers_la_droite))
-            tension_mesuree = mesureTension(vers_la_droite);
+        if(tension < tension_mesuree)
+            tension = tension_mesuree;
         else
-            tension_mesuree = mesureTension(vers_la_droite);
-
-
-        return tension_mesuree;
-
+            tension = tension_mesuree;
     }
+    return tension;
 
 }
 
 double MainWindow::checkToMovePosition(bool vers_la_droite) //verif cote mouvement voulu
 {
-    double tensionPos = 0, tension_mesuree;
+    double tension_mesuree;
     tensionPos = checkPosition();
 
     short limite_tension = 0;
@@ -203,13 +224,13 @@ double MainWindow::checkToMovePosition(bool vers_la_droite) //verif cote mouveme
     if(vers_la_droite)  //côté droit
     {
         limite_tension = 5;
-        tension_mesuree = movePosition(vers_la_droite,tensionPos,limite_tension);
+        tension_mesuree = movePosition(vers_la_droite,limite_tension);
 
     }
     else    //côté gauche
     {
         limite_tension = -5;
-        tension_mesuree = movePosition(vers_la_droite,tensionPos,limite_tension);
+        tension_mesuree = movePosition(vers_la_droite,limite_tension);
     }
     return tension_mesuree;
 }

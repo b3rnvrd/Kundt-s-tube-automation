@@ -18,7 +18,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     char buf[256] = {0};
-    double freq,ampli,coef;
+    double freq, ampli, coef, tensionPos;
 private slots:
 
     void on_actionBase_de_donnees_triggered();
@@ -33,7 +33,7 @@ private:
     seriallink *arduino;
     double checkPosition();
     double mesureTension(bool mesure_max);
-    double movePosition(bool vers_la_droite, double tensionPos, short limite_tension);
+    double movePosition(bool vers_la_droite, short limite_tension);
     double checkToMovePosition(bool vers_la_droite);
 };
 

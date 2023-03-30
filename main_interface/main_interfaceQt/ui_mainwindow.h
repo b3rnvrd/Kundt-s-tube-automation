@@ -59,7 +59,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(993, 542);
+        MainWindow->resize(1030, 300);
         actionBase_de_donnees = new QAction(MainWindow);
         actionBase_de_donnees->setObjectName(QStringLiteral("actionBase_de_donnees"));
         QIcon icon;
@@ -176,7 +176,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 993, 21));
+        menuBar->setGeometry(QRect(0, 0, 1030, 21));
         MainWindow->setMenuBar(menuBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));

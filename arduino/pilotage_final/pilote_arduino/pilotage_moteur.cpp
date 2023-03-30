@@ -47,9 +47,9 @@ void avanceGauche() {
   // Avance de 1 pas
   for ( i = 0; i < 10; i++) {
     digitalWrite( STEP_A4988, HIGH );
-    delay( 10 );
+    delay( 20 );
     digitalWrite( STEP_A4988, LOW );
-    delay( 10 );
+    delay( 20 );
   }
 
   // blocage de l'axe moteur
@@ -72,15 +72,17 @@ void avanceDroite() {
   // Avance de 1 pas
   for ( i = 0; i < 10; i++) {
     digitalWrite( STEP_A4988, HIGH );
-    delay( 10 );
+    delay( 20 );
     digitalWrite( STEP_A4988, LOW );
-    delay( 10 );
+    delay( 20 );
   }
 
   // blocage de l'axe moteur
   digitalWrite( EN_A4988, HIGH );   // Broche ENABLE desactivee
   digitalWrite( RST_A4988, LOW );
   digitalWrite( SLP_A4988, HIGH );
+
+  digitalWrite(LED_BUILTIN, digitalRead(LED_BUILTIN)^1);
 }
 
 void arretMoteur() {
