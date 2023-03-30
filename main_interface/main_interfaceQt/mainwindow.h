@@ -33,7 +33,7 @@ private:
     seriallink *arduino;
     double checkPosition();
     double mesureTension(bool mesure_max);
-    void movePosition(bool vers_la_droite, double tensionPos, short limite_tension);
+    double movePosition(bool vers_la_droite, double tensionPos, short limite_tension);
     void checkToMovePosition(bool vers_la_droite);
 };
 

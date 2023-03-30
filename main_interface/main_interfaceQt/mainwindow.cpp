@@ -152,10 +152,10 @@ double MainWindow::mesureTension(bool mesure_max = true)// mesure de la tension
     return tension;
 }
 
-void MainWindow::movePosition(bool vers_la_droite, double tensionPos, short limite_tension)//mouvement du micro
+double MainWindow::movePosition(bool vers_la_droite, double tensionPos, short limite_tension)//mouvement du micro
 {
     const char* caractere;
-
+    double tension;
     vers_la_droite ? caractere = "d" : caractere = "g";
     double pos = 0;
     for(pos = tensionPos; vers_la_droite ? pos < limite_tension : pos > limite_tension; pos = checkPosition())
@@ -163,7 +163,12 @@ void MainWindow::movePosition(bool vers_la_droite, double tensionPos, short limi
         while(!(arduino->isWritable()));
         arduino->write(caractere); //mouvement micro vers le HP
         //ui->Editcoef->setText("vers la droite");
+        if(tension < mesureTension(vers_la_droite))
+            tension = mesureTension(vers_la_droite);
+        else
+            tension = mesureTension(!vers_la_droite);
     }
+    return tension;
 }
 
 void MainWindow::checkToMovePosition(bool vers_la_droite) //verif cote mouvement voulu
