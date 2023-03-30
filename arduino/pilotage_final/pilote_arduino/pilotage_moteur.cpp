@@ -45,7 +45,7 @@ void avanceGauche() {
   digitalWrite( RST_A4988, HIGH );
 
   // Avance de 1 pas
-  for ( i = 0; i < 1; i++) {
+  for ( i = 0; i < 10; i++) {
     digitalWrite( STEP_A4988, HIGH );
     delay( 10 );
     digitalWrite( STEP_A4988, LOW );
@@ -70,7 +70,7 @@ void avanceDroite() {
   digitalWrite( RST_A4988, HIGH );
 
   // Avance de 1 pas
-  for ( i = 0; i < 1; i++) {
+  for ( i = 0; i < 10; i++) {
     digitalWrite( STEP_A4988, HIGH );
     delay( 10 );
     digitalWrite( STEP_A4988, LOW );

@@ -28,13 +28,13 @@ private slots:
     void on_BtnStop_clicked();
 
 private:
-    bool vers_la_droite = true,vers_la_gauche;
+    bool vers_la_droite = true,vers_la_gauche = false;
     Ui::MainWindow *ui;
     seriallink *arduino;
     double checkPosition();
     double mesureTension(bool mesure_max);
     double movePosition(bool vers_la_droite, double tensionPos, short limite_tension);
-    void checkToMovePosition(bool vers_la_droite);
+    double checkToMovePosition(bool vers_la_droite);
 };
 
 #endif // MAINWINDOW_H
