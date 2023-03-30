@@ -37,7 +37,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-
     delete ui;
 }
 
@@ -49,14 +48,14 @@ void MainWindow::on_actionBase_de_donnees_triggered()
 
 void MainWindow::on_BtnStart_clicked()
 {
-    freq=ui->comboBoxFreq->currentText().toDouble();
-    ampli=ui->EditAmpli->text().toDouble();
+    freq = ui->comboBoxFreq->currentText().toDouble();
+    ampli = ui->EditAmpli->text().toDouble();
     if(ampli > 5 || ampli < 0)
     {
         QMessageBox::critical(this,"Attention","amplitude supérieure à 5V ou inférieure a 0V",QMessageBox::Ok);
         return;
     }
-    viPrintf(osc,":APPLY:SIN ,%f,%f\n",freq,ampli); //on applique un signal sinusoidal de fréquence et amplitude choisies
+    viPrintf(osc,":APPLY:SIN ,%f,%f\n", freq, ampli); //on applique un signal sinusoidal de fréquence et amplitude choisies
     //    viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN3\n"); //tension mesurée sur le channel 3
     //    viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
     double tensionPos = 0;
@@ -141,8 +140,7 @@ double MainWindow::checkPosition()//retourne la tension qui donne la position du
 {
     viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN3\n"); //tension mesurée sur le channel 3
     viScanf(osc,(ViString)"%t",&buf);
-    double tensionPos = 0;
-    tensionPos = QString(buf).toDouble();
+    double tensionPos = QString(buf).toDouble();
     return tensionPos;
 }
 
