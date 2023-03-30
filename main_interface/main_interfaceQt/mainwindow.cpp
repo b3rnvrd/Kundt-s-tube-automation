@@ -68,14 +68,12 @@ void MainWindow::on_BtnStart_clicked()
             do
             {
                 tension_max_mesuree = checkToMovePosition(vers_la_droite);
-                sleep(1);
                 tensionPos = checkPosition();
             }
             while(tensionPos < 4.5);
             do
             {
                 tension_min_mesuree = checkToMovePosition(vers_la_gauche);
-                sleep(1);
                 tensionPos = checkPosition();
             }
             while(tensionPos > -4.5);
@@ -86,14 +84,12 @@ void MainWindow::on_BtnStart_clicked()
             do
             {
                 tension_max_mesuree = checkToMovePosition(vers_la_gauche);
-                sleep(1);
                 tensionPos = checkPosition();
             }
             while(tensionPos > -4.5);
             do
             {
                 tension_min_mesuree = checkToMovePosition(vers_la_droite);
-                sleep(1);
                 tensionPos = checkPosition();
             }
             while(tensionPos < 4.5);
@@ -152,12 +148,12 @@ double MainWindow::mesureTension(bool mesure_max = true)// mesure de la tension
     tension_mesuree = QString(buf).toDouble();
     if(mesure_max)
     {
-        if(tension > tension_mesuree)
+        if(tension < tension_mesuree)
             tension = tension_mesuree;
     }
     else
     {
-        if(tension < tension_mesuree)
+        if(tension > tension_mesuree)
             tension = tension_mesuree;
     }
     viPrintf(osc, (ViString)":OUTP1 :0\n");
