@@ -56,7 +56,7 @@ void MainWindow::on_BtnStart_clicked()
         return;
     }
     viPrintf(osc,":APPLY:SIN ,%f,%f\n", freq, ampli); //on applique un signal sinusoidal de fréquence et amplitude choisies
-    viPrintf(osc,":SYST:AUT\n");
+    viPrintf(osc,":SYST:AUT\n");// autoset oscillo
 
     tensionPos = checkPosition();
     double n, tension_max_mesuree = 1, tension_min_mesuree = 1;
@@ -70,65 +70,6 @@ void MainWindow::on_BtnStart_clicked()
         {
             movePosition(vers_la_gauche,-5);
         }
-
-        //            do
-        //            {
-        //                tension_max_mesuree = checkToMovePosition(vers_la_droite);
-        //                //               tensionPos = checkPosition();
-        //            }
-        //            while(tensionPos < 4.5);
-
-        //            do
-        //            {
-        //                tension_min_mesuree = checkToMovePosition(vers_la_gauche);
-        //                //                tensionPos = checkPosition();
-        //            }
-        //            while(tensionPos > -4.5);
-
-        //        }
-        //        else
-        //        {
-        //            do
-        //            {
-        //                tension_max_mesuree = checkToMovePosition(vers_la_gauche);
-        //                //                tensionPos = checkPosition();
-        //            }
-        //            while(tensionPos > -4.5);
-        //            do
-        //            {
-        //                tension_min_mesuree = checkToMovePosition(vers_la_droite);
-        //                //                tensionPos = checkPosition();
-        //            }
-        //            while(tensionPos < 4.5);
-        //        }
-        //      tension_max_mesuree = checkToMovePosition(vers_la_gauche);
-        //      tension_min_mesuree = checkToMovePosition(vers_la_droite);
-
-
-        //        const char* caractere;
-        //        double tension_mesuree, tension = 0;
-        //        vers_la_droite ? caractere = "d" : caractere = "g";
-        //        double pos = 0;
-        //        for(pos = tensionPos; vers_la_droite ? pos < 5 : pos > -5; pos+=1)
-        //        {
-        //            while(!(arduino->isWritable()))
-        //            {
-        //                QMessageBox::critical(this,"Attention","L'écriture a échoué, tentative de reconnexion avec la carte Arduino",QMessageBox::Ok);
-        //                qDebug() << "Couldn't write to serial!";
-        //                arduino->openConnection();
-        //                sleep(10);
-        //            }
-        //            arduino->write(caractere); //mouvement micro vers le HP
-
-        //            tension_mesuree = 0;
-        //            tension_mesuree = mesureTension(vers_la_droite);
-
-        //            if(tension < tension_mesuree)
-        //                tension = tension_mesuree;
-        //            else
-        //                tension = tension_mesuree;
-        //        }
-
 
 
         viPrintf(osc, (ViString)":OUTP1 :0\n");
@@ -166,8 +107,8 @@ double MainWindow::mesureTension(bool mesure_max = true)// mesure de la tension
 {
     double tension = 0, tension_mesuree = 0;
     viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
-    viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
-    tension_mesuree = QString(buf).toDouble();
+    viScanf(osc,(ViString)"%t",&buf2);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
+    tension_mesuree = QString(buf2).toDouble();
     if(mesure_max)
     {
         if(tension < tension_mesuree)
