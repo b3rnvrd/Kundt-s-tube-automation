@@ -50,6 +50,8 @@ void avanceGauche() {
     delay( 20 );
     digitalWrite( STEP_A4988, LOW );
     delay( 20 );
+
+    Serial.write("g_ACK");
   }
 
   // blocage de l'axe moteur
@@ -75,6 +77,8 @@ void avanceDroite() {
     delay( 20 );
     digitalWrite( STEP_A4988, LOW );
     delay( 20 );
+
+  Serial.write("d_ACK");
   }
 
   // blocage de l'axe moteur
