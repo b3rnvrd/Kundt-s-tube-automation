@@ -41,8 +41,8 @@ void avanceGauche() {
 
   digitalWrite( DIR_A4988   , LOW); // Direction GAUCHE
   digitalWrite( STEP_A4988  , LOW); // Initialisation de la broche STEP
-  digitalWrite( EN_A4988, LOW );    // Broche ENABLE activee
   digitalWrite( RST_A4988, HIGH );
+  digitalWrite( EN_A4988, LOW );    // Broche ENABLE activee
 
   // Avance de 1 pas
   for ( i = 0; i < 10; i++) {
@@ -66,8 +66,8 @@ void avanceDroite() {
 
   digitalWrite( DIR_A4988   , HIGH); // Direction DROITE
   digitalWrite( STEP_A4988  , LOW);  // Initialisation de la broche STEP
-  digitalWrite( EN_A4988, LOW );     // Broche ENABLE activee
   digitalWrite( RST_A4988, HIGH );
+  digitalWrite( EN_A4988, LOW );     // Broche ENABLE activee
 
   // Avance de 1 pas
   for ( i = 0; i < 10; i++) {
