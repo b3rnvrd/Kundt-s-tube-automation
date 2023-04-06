@@ -15,7 +15,7 @@ unsigned long testText() {
   tft.setTextSize(2);
   tft.println("La j'ecris plus gros");
   tft.setTextSize(3);
-  tft.setTextColor(ILI9341_RED);
+  tft.setTextColor(ILI9341_BLUE);
   tft.println("Et la en rouge");
   tft.setTextColor(ILI9341_RED);
   tft.println("");
