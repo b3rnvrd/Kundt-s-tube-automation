@@ -9,6 +9,10 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    timer = new QTimer(this);
+    timer->interval();
+    QObject::connect(timer,&QTimer::timeout, [this](){ etatMachine(); });
+    timer->start(1);
     // ouverture de la session ressource manager
     ViSession rscmng;
     ViStatus stat = viOpenDefaultRM(&rscmng);
@@ -60,9 +64,15 @@ void MainWindow::on_BtnStart_clicked()
     
     tensionPos = checkPosition();
     double n, tension_max_mesuree = 1, tension_min_mesuree = 1;
-    if(tensionPos > -5 || tensionPos < 5)  // -5 et 5 sont les tension max et min pour la position du micro
+
+
+
+    if(tensionPos > -5 && tensionPos < 5)  // -5 et 5 sont les tension max et min pour la position du micro
     {
-        //        if(tensionPos < 0)
+        etat=1;
+        //        while(tensionPos<4.5)
+        //        {}
+        //        //        if(tensionPos < 0)
         //        {
         //            movePosition(vers_la_droite,5);
         //        }
@@ -71,10 +81,8 @@ void MainWindow::on_BtnStart_clicked()
         //            movePosition(vers_la_gauche,-5);
         //        }
 
-        arduino->write("d");
-
         
-        viPrintf(osc, (ViString)":OUTP1 :0\n");
+
         
         n = tension_max_mesuree/tension_min_mesuree;
         
@@ -176,4 +184,32 @@ double MainWindow::checkToMovePosition(bool vers_la_droite) //verif cote mouveme
         tension_mesuree = movePosition(vers_la_droite,limite_tension);
     }
     return tension_mesuree;
+}
+
+void MainWindow::etatMachine()
+{
+    tensionPos = checkPosition();
+    switch (etat)
+    {
+    case 0:
+        break;
+    case 1:
+        qDebug()<<"demande deplacement droite";
+        arduino->write("d");
+        break;
+    case 2:
+        qDebug()<<"ordre deplacement droite recu";
+        if(tensionPos >= 4.5)
+            etat = 3;
+    case 3:
+        qDebug()<<"demande deplacement gauche";
+        arduino->write("g");
+        break;
+    case 4:
+        qDebug()<<"ordre deplacement gauche recu";
+        if(tensionPos <= -4.5)
+            etat = 0;
+        viPrintf(osc, (ViString)":OUTP1 :0\n");
+        break;
+    }
 }

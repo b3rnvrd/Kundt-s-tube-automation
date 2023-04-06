@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <visa.h>
 #include "seriallink.h"
-
+#include <QTimer>
 namespace Ui {
 class MainWindow;
 }
@@ -19,6 +19,8 @@ public:
     ~MainWindow();
     char buf[256] = {0};
     double freq, ampli, coef, tensionPos;
+    int etat = 0;
+    QTimer *timer;
 private slots:
 
     void on_actionBase_de_donnees_triggered();
@@ -35,6 +37,7 @@ private:
     double mesureTension(bool mesure_max);
     double movePosition(bool vers_la_droite, short limite_tension);
     double checkToMovePosition(bool vers_la_droite);
+    void etatMachine();
 };
 
 #endif // MAINWINDOW_H

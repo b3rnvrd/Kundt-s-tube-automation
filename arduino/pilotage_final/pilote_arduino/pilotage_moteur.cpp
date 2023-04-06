@@ -45,7 +45,7 @@ void avanceGauche() {
   digitalWrite( EN_A4988, LOW );    // Broche ENABLE activee
 
   // Avance de 1 pas
-  for ( i = 0; i < 10; i++) {
+  for ( i = 0; i < 100; i++) {
     digitalWrite( STEP_A4988, HIGH );
     delay( 20 );
     digitalWrite( STEP_A4988, LOW );
@@ -72,7 +72,7 @@ void avanceDroite() {
   digitalWrite( EN_A4988, LOW );     // Broche ENABLE activee
 
   // Avance de 1 pas
-  for ( i = 0; i < 10; i++) {
+  for ( i = 0; i < 100; i++) {
     digitalWrite( STEP_A4988, HIGH );
     delay( 20 );
     digitalWrite( STEP_A4988, LOW );

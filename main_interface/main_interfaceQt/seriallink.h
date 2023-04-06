@@ -16,6 +16,7 @@ public:
     void write(const char* messageToWrite);
     bool isOpen();
     bool isWritable();
+    QByteArray read();
 
 private slots:
     void newData();
