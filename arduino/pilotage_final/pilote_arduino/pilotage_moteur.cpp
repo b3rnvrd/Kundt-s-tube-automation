@@ -13,9 +13,7 @@
 void setupSerialMoteur() {
   Serial.begin(115200);
 
-  digitalWrite( EN_A4988, HIGH );   // Initialisation de la broche ENABLE
-  digitalWrite( RST_A4988, LOW );   // Initialisation de la broche RESET
-  digitalWrite( SLP_A4988, HIGH );  // Initialisation de la broche SLEEP
+
 
   pinMode( EN_A4988, OUTPUT );
   pinMode( DIR_A4988   , OUTPUT );
@@ -30,7 +28,9 @@ void setupSerialMoteur() {
   digitalWrite( MS1_A4988, LOW );
   digitalWrite( MS2_A4988, LOW );
   digitalWrite( MS3_A4988, LOW );
-
+  digitalWrite( EN_A4988, HIGH );   // Initialisation de la broche ENABLE
+  digitalWrite( RST_A4988, LOW );   // Initialisation de la broche RESET
+  digitalWrite( SLP_A4988, HIGH );  // Initialisation de la broche SLEEP
   pinMode(LED_BUILTIN, OUTPUT);
 
 

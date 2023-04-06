@@ -19,7 +19,7 @@ void loop() {
         avanceGauche();
         affichageTexte(true);
         break;
-      case 'p':
+      case 's':
         arretMoteur();
         affichageTexte();
         delay(5);
