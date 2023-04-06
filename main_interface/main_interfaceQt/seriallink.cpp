@@ -43,6 +43,11 @@ bool seriallink::isWritable(){
     return _serial.isWritable();
 }
 
+QByteArray seriallink::read()
+{
+    return _serial.readAll();
+}
+
 void seriallink::newData(){
     emit gotNewData(_serial.readAll());
 }
