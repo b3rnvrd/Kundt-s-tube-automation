@@ -11,16 +11,15 @@ void setupEcran() {
   tft.fillScreen(ILI9341_BLACK);
 }
 
-unsigned long affichageTexte(bool texte_stop = false) {
-  unsigned long start = micros();
+void affichageTexte(bool texte_stop = false) {
   tft.setCursor(0, 0);
-  if (!texte_stop)
+  if (!texte_stop)  //Affichage bouton urgence
   {
     tft.setTextColor(ILI9341_RED);
     tft.setTextSize(9);
     tft.println("ARRET DU MOTEUR");
   }
-  else
+  else  //Affichage classique des mesures
   {
     tft.setTextColor(ILI9341_WHITE);
     tft.setTextSize(1);
@@ -33,5 +32,4 @@ unsigned long affichageTexte(bool texte_stop = false) {
     tft.setTextColor(ILI9341_RED);
     tft.println("");
   }
-  return micros() - start;
 }

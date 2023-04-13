@@ -11,8 +11,10 @@
 #define DIR_A4988  36
 
 void setupSerialMoteur() {
+  //Initialisation de la liaison série à 115200 bauds
   Serial.begin(115200);
 
+  //DEFINITION DE TOUTES LES BROCHES EN SORTIE
   pinMode( EN_A4988, OUTPUT );
   pinMode( DIR_A4988   , OUTPUT );
   pinMode( STEP_A4988  , OUTPUT );
@@ -21,74 +23,79 @@ void setupSerialMoteur() {
   pinMode( MS3_A4988  , OUTPUT );
   pinMode( RST_A4988, OUTPUT );
   pinMode( SLP_A4988   , OUTPUT );
+  pinMode(LED_BUILTIN, OUTPUT);
 
-
+  //Initialisation des broches MS1, MS2 et MS3 à LOW = 1 pas entier
   digitalWrite( MS1_A4988, LOW );
   digitalWrite( MS2_A4988, LOW );
   digitalWrite( MS3_A4988, LOW );
-  digitalWrite( EN_A4988, HIGH );   // Initialisation de la broche ENABLE
-  digitalWrite( RST_A4988, LOW );   // Initialisation de la broche RESET
-  digitalWrite( SLP_A4988, HIGH );  // Initialisation de la broche SLEEP
-  pinMode(LED_BUILTIN, OUTPUT);
 
-
+  //Initialisation des broches ENABLE, RESET et SLEEP
+  digitalWrite( EN_A4988, HIGH );
+  digitalWrite( RST_A4988, LOW );
+  digitalWrite( SLP_A4988, HIGH );
 }
 
 void avanceGauche() {
-  int i = 0;
 
   digitalWrite( DIR_A4988   , LOW); // Direction GAUCHE
-  digitalWrite( STEP_A4988  , LOW); // Initialisation de la broche STEP
+
+  // Initialisation des broches STEP et RESET
+  digitalWrite( STEP_A4988  , LOW);
   digitalWrite( RST_A4988, HIGH );
-  digitalWrite( EN_A4988, LOW );    // Broche ENABLE activee
+
+  //Enable actif
+  digitalWrite( EN_A4988, LOW );
 
   // Avance de 1 pas
-  for ( i = 0; i < 100; i++) {
+  for ( int i = 0; i < 1; i++) {
     digitalWrite( STEP_A4988, HIGH );
     delay( 20 );
     digitalWrite( STEP_A4988, LOW );
     delay( 20 );
 
+    //Renvoi "g_ACK" sur la liaison série pour informer l'IHM de la bonne réception de l'ordre
     Serial.write("g_ACK");
   }
 
-  // blocage de l'axe moteur
-  digitalWrite( EN_A4988, HIGH );   // Broche ENABLE desactivee
-  digitalWrite( RST_A4988, LOW );
-  digitalWrite( SLP_A4988, HIGH );
+  // Broche ENABLE inactive
+  digitalWrite( EN_A4988, HIGH );
 
-  digitalWrite(LED_BUILTIN, digitalRead(LED_BUILTIN)^1);
+  //Vérification visuelle de la bonne réception de l'ordre avec le clignotement de la DEL de la carte
+  digitalWrite(LED_BUILTIN, digitalRead(LED_BUILTIN) ^ 1);
 
 }
 
 void avanceDroite() {
-  int i = 0;
 
   digitalWrite( DIR_A4988   , HIGH); // Direction DROITE
-  digitalWrite( STEP_A4988  , LOW);  // Initialisation de la broche STEP
-  digitalWrite( RST_A4988, HIGH );
-  digitalWrite( EN_A4988, LOW );     // Broche ENABLE activee
 
+  // Initialisation des broches STEP et RESET
+  digitalWrite( STEP_A4988  , LOW);
+  digitalWrite( RST_A4988, HIGH );
+
+  //Enable actif
+  digitalWrite( EN_A4988, LOW );
+  
   // Avance de 1 pas
-  for ( i = 0; i < 100; i++) {
+  for ( int i = 0; i < 1; i++) {
     digitalWrite( STEP_A4988, HIGH );
     delay( 20 );
     digitalWrite( STEP_A4988, LOW );
     delay( 20 );
 
-  Serial.write("d_ACK");
+    //Renvoi "d_ACK" sur la liaison série pour informer l'IHM de la bonne réception de l'ordre
+    Serial.write("d_ACK");
   }
 
-  // blocage de l'axe moteur
-  digitalWrite( EN_A4988, HIGH );   // Broche ENABLE desactivee
-  digitalWrite( RST_A4988, LOW );
-  digitalWrite( SLP_A4988, HIGH );
+  // Broche ENABLE inactive
+  digitalWrite( EN_A4988, HIGH );
 
-  digitalWrite(LED_BUILTIN, digitalRead(LED_BUILTIN)^1);
+  //Vérification visuelle de la bonne réception de l'ordre avec le clignotement de la DEL de la carte
+  digitalWrite(LED_BUILTIN, digitalRead(LED_BUILTIN) ^ 1);
 }
 
 void arretMoteur() {
-  digitalWrite( EN_A4988, HIGH );   // Broche ENABLE desactivee
-  digitalWrite( RST_A4988, LOW );
-  digitalWrite( SLP_A4988, HIGH );
+  // Broche ENABLE inactive
+  digitalWrite( EN_A4988, HIGH );
 }
