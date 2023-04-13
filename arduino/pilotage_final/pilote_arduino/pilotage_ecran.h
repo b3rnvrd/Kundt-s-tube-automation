@@ -12,7 +12,7 @@
 
 
 
-unsigned long affichageTexte(bool texte_stop = true);
+unsigned long affichageTexte(bool texte_stop = false);
 void setupEcran();
 
 #endif
