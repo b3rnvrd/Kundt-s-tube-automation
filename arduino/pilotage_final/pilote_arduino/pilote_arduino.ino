@@ -1,6 +1,7 @@
 #include "pilotage_ecran.h"
 #include "pilotage_moteur.h"
 char data;
+
 void setup() {
   setupSerialMoteur();
   setupEcran();
@@ -25,8 +26,5 @@ void loop() {
         delay(5);
         break;
     }
-    //affichageTexte();
-    
   }
-
 }
