@@ -13,8 +13,6 @@
 void setupSerialMoteur() {
   Serial.begin(115200);
 
-
-
   pinMode( EN_A4988, OUTPUT );
   pinMode( DIR_A4988   , OUTPUT );
   pinMode( STEP_A4988  , OUTPUT );
