@@ -70,19 +70,14 @@ void MainWindow::on_BtnStart_clicked()
     if(tensionPos > -5 && tensionPos < 5)  // -5 et 5 sont les tension max et min pour la position du micro
     {
         etat=1;
-        //        while(tensionPos<4.5)
-        //        {}
-        //        //        if(tensionPos < 0)
-        //        {
-        //            movePosition(vers_la_droite,5);
-        //        }
-        //        else
-        //        {
-        //            movePosition(vers_la_gauche,-5);
-        //        }
 
-        
-
+        QByteArray recu = arduino->read();
+        qDebug() << recu << tensionPos;
+        if (recu == "d_ACK")
+            etat = 2;
+        else
+            if(recu == "g_ACK")
+                etat = 4;
         
         n = tension_max_mesuree/tension_min_mesuree;
         
