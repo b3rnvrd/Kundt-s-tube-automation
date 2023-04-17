@@ -57,7 +57,7 @@ void setup() {
 
   digitalWrite( MS1_A4988, LOW );
   digitalWrite( MS2_A4988, LOW );
-  digitalWrite( MS3_A4988, LOW );
+  digitalWrite( MS3_A4988, LOW );  pinMode(LED_BUILTIN, OUTPUT);
 }
 
 void loop() {
@@ -69,7 +69,7 @@ void loop() {
   digitalWrite( RST_A4988, HIGH );
 
   // Avance de 200 pas
-  for ( i = 0; i < 100; i++) {
+  for ( i = 0; i < 200; i++) {
     Serial.println( i );
     digitalWrite( STEP_A4988, HIGH );
     delay( 10 );
@@ -77,6 +77,10 @@ void loop() {
     delay( 10 );
   }
 
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(1);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(1);
   // déblocage de l'axe moteur
   Serial.println("Deblocage axe");
   digitalWrite( EN_A4988, HIGH );
