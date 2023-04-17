@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui serialport
+QT       += core gui serialport charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -26,11 +26,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    seriallink.cpp
+    seriallink.cpp \
+    graphique.cpp
 
 HEADERS += \
         mainwindow.h \
-    seriallink.h
+    seriallink.h \
+    graphique.h
 
 FORMS += \
         mainwindow.ui

@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     
     arduino = new seriallink;
+    graph = new graphique;
     
     arduino->openConnection();
     
@@ -88,6 +89,7 @@ void MainWindow::on_BtnStart_clicked()
     }
     else
         QMessageBox::critical(this,"Attention","Verifiez la position du micro",QMessageBox::Ok);
+    graph->show();
 }
 
 void MainWindow::on_BtnStop_clicked()//Arret d'urgence

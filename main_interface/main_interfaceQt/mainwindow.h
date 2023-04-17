@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <visa.h>
 #include "seriallink.h"
+#include "graphique.h"
 #include <QTimer>
 namespace Ui {
 class MainWindow;
@@ -33,6 +34,7 @@ private:
     bool vers_la_droite = true,vers_la_gauche = false;
     Ui::MainWindow *ui;
     seriallink *arduino;
+    graphique *graph;
     double checkPosition();
     double mesureTension(bool mesure_max);
     double movePosition(bool vers_la_droite, short limite_tension);
