@@ -60,7 +60,7 @@ void MainWindow::on_BtnStart_clicked()
         return;
     }
     viPrintf(osc,":APPLY:SIN ,%f,%f\n", freq, ampli); //on applique un signal sinusoidal de fréquence et amplitude choisies
-    viPrintf(osc,":SYST:AUT\n");// autoset oscillo
+    viPrintf(osc,":AUT\n");// autoset oscillo
     
     tensionPos = checkPosition();
     double n, tension_max_mesuree = 1, tension_min_mesuree = 1;
@@ -73,6 +73,7 @@ void MainWindow::on_BtnStart_clicked()
 
         QByteArray recu = arduino->read();
         qDebug() << recu << tensionPos;
+
         if (recu == "d_ACK")
             etat = 2;
         else
