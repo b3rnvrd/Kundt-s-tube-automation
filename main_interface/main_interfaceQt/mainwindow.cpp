@@ -4,7 +4,6 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <unistd.h>
-#include <QHash>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -34,9 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     ui->setupUi(this);
     
-    arduino = new seriallink;
-    graph = new IhmGraphique;
-    
+    arduino = new seriallink;    
     arduino->openConnection();
     
 }
@@ -87,11 +84,12 @@ void MainWindow::on_BtnStart_clicked()
         coef = 1 - pow((n-1)/(n+1),2);  // formule calcul coef absorption
         
         ui->Editcoef->setText(QString::number(coef));
-        map.insert(freq, coef);
+
+        coef_par_freq.insert(freq, QString::number(coef));
     }
     else
         QMessageBox::critical(this,"Attention","Verifiez la position du micro",QMessageBox::Ok);
-    graph->show();
+
 }
 
 void MainWindow::on_BtnStop_clicked()//Arret d'urgence
@@ -212,4 +210,9 @@ void MainWindow::etatMachine()
         viPrintf(osc, (ViString)":OUTP1 :0\n");
         break;
     }
+}
+void MainWindow::on_pushButton_clicked()
+{
+    graph = new IhmGraphique(0,coef_par_freq);
+    graph->show();
 }

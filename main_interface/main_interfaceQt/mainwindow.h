@@ -23,7 +23,7 @@ public:
     double freq, ampli, coef, tensionPos;
     int etat = 0;
     QTimer *timer;
-    QMap<int, QString> map;
+    QMap < double, QString> coef_par_freq;
 
 private slots:
 
@@ -32,6 +32,10 @@ private slots:
     void on_BtnStart_clicked();
 
     void on_BtnStop_clicked();
+
+    void on_actionAfficherGraphique_triggered();
+
+    void on_pushButton_clicked();
 
 private:
     bool vers_la_droite = true,vers_la_gauche = false;

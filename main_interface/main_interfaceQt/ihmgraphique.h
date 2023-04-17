@@ -10,13 +10,16 @@ class IhmGraphique : public QMainWindow
     Q_OBJECT
 
 public:
-    IhmGraphique(QWidget *parent = 0, double coef);
+    IhmGraphique(QWidget *parent = 0, const QMap<double, QString > &coef_par_freq = ( QMap<double, QString>() ));
     ~IhmGraphique();
 
 private:
     QChartView *graphique; // un widget pour afficher un graphe
     QChart *graphe; // la représentation d'un graphe
     QLineSeries *courbe; // les données
+    QMap<int, QString> map;
 };
 
 #endif // IHMGRAPHIQUE_H
+
+// = ( QMap<double, QString>() )
