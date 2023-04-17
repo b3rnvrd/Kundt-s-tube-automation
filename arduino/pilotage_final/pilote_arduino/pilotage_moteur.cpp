@@ -50,22 +50,16 @@ void avanceGauche() {
   digitalWrite( EN_A4988, LOW );
 
   // Avance de 1 pas
-<<<<<<< Updated upstream
-  for ( int i = 0; i < 1; i++) {
-=======
+
   for ( i = 0; i < 10; i++) {
->>>>>>> Stashed changes
     digitalWrite( STEP_A4988, HIGH );
     delay( 20 );
     digitalWrite( STEP_A4988, LOW );
     delay( 20 );
 
-<<<<<<< Updated upstream
+
     //Renvoi "g_ACK" sur la liaison série pour informer l'IHM de la bonne réception de l'ordre
     Serial.write("g_ACK");
-=======
-   // Serial.write("g_ACK");
->>>>>>> Stashed changes
   }
 
   // Broche ENABLE inactive
@@ -88,22 +82,14 @@ void avanceDroite() {
   digitalWrite( EN_A4988, LOW );
   
   // Avance de 1 pas
-<<<<<<< Updated upstream
-  for ( int i = 0; i < 1; i++) {
-=======
-  for ( i = 0; i < 10; i++) {
->>>>>>> Stashed changes
+  for ( i = 0; i < 1; i++) {
     digitalWrite( STEP_A4988, HIGH );
     delay( 20 );
     digitalWrite( STEP_A4988, LOW );
     delay( 20 );
 
-<<<<<<< Updated upstream
     //Renvoi "d_ACK" sur la liaison série pour informer l'IHM de la bonne réception de l'ordre
     Serial.write("d_ACK");
-=======
-  //Serial.write("d_ACK");
->>>>>>> Stashed changes
   }
 
   // Broche ENABLE inactive

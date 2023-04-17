@@ -1,19 +1,17 @@
-#ifndef GRAPHIQUE_H
-#define GRAPHIQUE_H
+#ifndef IHMGRAPHIQUE_H
+#define IHMGRAPHIQUE_H
 
-#include <QWidget>
+#include <QMainWindow>
 #include <QtWidgets>
 #include <QtCharts>
 
-class graphique : public QWidget
+class IhmGraphique : public QMainWindow
 {
     Q_OBJECT
+
 public:
-    explicit graphique(QWidget *parent = nullptr);
-
-signals:
-
-public slots:
+    IhmGraphique(QWidget *parent = 0, double coef);
+    ~IhmGraphique();
 
 private:
     QChartView *graphique; // un widget pour afficher un graphe
@@ -21,4 +19,4 @@ private:
     QLineSeries *courbe; // les données
 };
 
-#endif // GRAPHIQUE_H
+#endif // IHMGRAPHIQUE_H

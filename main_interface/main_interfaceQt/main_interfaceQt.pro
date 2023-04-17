@@ -27,12 +27,12 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     seriallink.cpp \
-    graphique.cpp
+    ihmgraphique.cpp
 
 HEADERS += \
         mainwindow.h \
     seriallink.h \
-    graphique.h
+    ihmgraphique.h
 
 FORMS += \
         mainwindow.ui

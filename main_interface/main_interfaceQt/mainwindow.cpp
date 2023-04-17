@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <unistd.h>
+#include <QHash>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -34,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     
     arduino = new seriallink;
-    graph = new graphique;
+    graph = new IhmGraphique;
     
     arduino->openConnection();
     
@@ -83,9 +84,10 @@ void MainWindow::on_BtnStart_clicked()
         
         n = tension_max_mesuree/tension_min_mesuree;
         
-        coef = 1 - pow((n-1)/(n+1),2);// formule calcul coef absobtion
+        coef = 1 - pow((n-1)/(n+1),2);  // formule calcul coef absorption
         
         ui->Editcoef->setText(QString::number(coef));
+        map.insert(freq, coef);
     }
     else
         QMessageBox::critical(this,"Attention","Verifiez la position du micro",QMessageBox::Ok);

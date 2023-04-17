@@ -4,8 +4,9 @@
 #include <QMainWindow>
 #include <visa.h>
 #include "seriallink.h"
-#include "graphique.h"
+#include "ihmgraphique.h"
 #include <QTimer>
+
 namespace Ui {
 class MainWindow;
 }
@@ -22,6 +23,8 @@ public:
     double freq, ampli, coef, tensionPos;
     int etat = 0;
     QTimer *timer;
+    QMap<int, QString> map;
+
 private slots:
 
     void on_actionBase_de_donnees_triggered();
@@ -34,7 +37,7 @@ private:
     bool vers_la_droite = true,vers_la_gauche = false;
     Ui::MainWindow *ui;
     seriallink *arduino;
-    graphique *graph;
+    IhmGraphique *graph;
     double checkPosition();
     double mesureTension(bool mesure_max);
     double movePosition(bool vers_la_droite, short limite_tension);
