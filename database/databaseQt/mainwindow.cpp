@@ -28,7 +28,6 @@ MainWindow::MainWindow(QWidget *parent) :
         qDebug()<<"MaBase ouverte";
 }
 
-
 MainWindow::~MainWindow()
 {
     delete ui;
