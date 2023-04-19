@@ -20,7 +20,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     char buf[256] = {0};
-    double freq, ampli, coef, tensionPos;
+    double freq, ampli, coef, tensionPos,pmax,pmin;
     int etat = 0;
     QTimer *timer;
     QMap < double, QString> coef_par_freq;

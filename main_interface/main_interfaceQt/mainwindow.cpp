@@ -47,7 +47,7 @@ void MainWindow::on_actionBase_de_donnees_triggered()
 {
     QProcess *process = new QProcess(this);
     QString program = "MySqlQt.exe";
-    QString folder = "C:\\Users\\etudiant\\Desktop\\tube_de_kundt\\database\\databaseQt\\debug";
+    QString folder = "C:\\Users\\etudiant\\Documents\\GitHub\\tube_de_kundt\\Apps";
     process->start(program, QStringList() << folder);
     qDebug() << process->errorString();
 }
@@ -63,7 +63,7 @@ void MainWindow::on_BtnStart_clicked()
     }
     viPrintf(osc,":APPLY:SIN ,%f,%f\n", freq, ampli); //on applique un signal sinusoidal de fréquence et amplitude choisies
     viPrintf(osc,":AUT\n");// autoset oscillo
-    
+    viPrintf(osc, (ViString)":CHAN3:SCAL 4\n");
     tensionPos = checkPosition();
     double n, tension_max_mesuree = 1, tension_min_mesuree = 1;
 
@@ -199,20 +199,24 @@ void MainWindow::etatMachine()
         if(tensionPos >= 4.5)
             etat = 2;
         arduino->write("d");
+        pmax=mesureTension(true);
+        qDebug()<<pmax;
 //        viPrintf(osc,":AUT\n");// autoset oscillo
         sleep(1);
         break;
 
     case 2:
         qDebug()<<"demande deplacement gauche";
-        if(tensionPos <= -4.5)
-            etat = 0;
+        if(tensionPos <= -4)
+            etat = 4;
         arduino->write("g");
+                pmin=mesureTension(false);
+                qDebug()<<pmin;
 //        viPrintf(osc,":AUT\n");// autoset oscillo
         sleep(1);
         break;
     case 4:
-
+coef=1-pow(((pmax/pmin)-1)/((pmax/pmin)-1),2);
         viPrintf(osc, (ViString)":OUTP1 :0\n");
         arduino->write("s");
         timer->stop();

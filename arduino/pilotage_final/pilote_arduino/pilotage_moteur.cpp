@@ -51,7 +51,7 @@ void avanceGauche() {
 
   // Avance de 1 pas
 
-  for (int i = 0; i < 10; i++) {
+  for (int i = 0; i < 20; i++) {
     digitalWrite( STEP_A4988, HIGH );
     delay( 20 );
     digitalWrite( STEP_A4988, LOW );
