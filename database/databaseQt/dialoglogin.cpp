@@ -47,7 +47,7 @@ void DialogLogin::on_buttonBox_accepted()
             db.close();
         }
         else
-            QMessageBox::critical(this,"Attention","Pb d'accès",QMessageBox::Ok);
+            QMessageBox::critical(this,"Attention","Pb d'accès 2",QMessageBox::Ok);
     }
     QSqlDatabase::removeDatabase("Login");
     done(accepted);

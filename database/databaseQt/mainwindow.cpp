@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
     db.setUserName("Kundt");
     db.setPassword("Tube");
     if(!db.open())
-        QMessageBox::critical(this,"Attention","Pb d'accès",QMessageBox::Ok);
+        QMessageBox::critical(this,"Attention","Pb d'accès 1",QMessageBox::Ok);
     else
         qDebug()<<"MaBase ouverte";
 }
