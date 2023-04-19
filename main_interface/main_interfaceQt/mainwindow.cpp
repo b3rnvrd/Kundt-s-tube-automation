@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <unistd.h>
-
+#include <QThread>
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     ui->setupUi(this);
     
-    arduino = new seriallink;    
+    arduino = new seriallink;
     arduino->openConnection();
     
 }
@@ -196,21 +196,26 @@ void MainWindow::etatMachine()
         break;
     case 1:
         qDebug()<<"demande deplacement droite";
-        arduino->write("d");
-        break;
-    case 2:
-        qDebug()<<"ordre deplacement droite recu";
         if(tensionPos >= 4.5)
-            etat = 3;
-    case 3:
-        qDebug()<<"demande deplacement gauche";
-        arduino->write("g");
+            etat = 2;
+        arduino->write("d");
+//        viPrintf(osc,":AUT\n");// autoset oscillo
+        sleep(1);
         break;
-    case 4:
-        qDebug()<<"ordre deplacement gauche recu";
+
+    case 2:
+        qDebug()<<"demande deplacement gauche";
         if(tensionPos <= -4.5)
             etat = 0;
+        arduino->write("g");
+//        viPrintf(osc,":AUT\n");// autoset oscillo
+        sleep(1);
+        break;
+    case 4:
+
         viPrintf(osc, (ViString)":OUTP1 :0\n");
+        arduino->write("s");
+        timer->stop();
         break;
     }
 }
