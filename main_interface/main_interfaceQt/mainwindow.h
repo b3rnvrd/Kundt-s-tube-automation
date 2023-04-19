@@ -20,7 +20,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     char buf[256] = {0};
-    double freq, ampli, coef, tensionPos,pmax,pmin;
+    double freq, ampli, coef, tensionPos,pmax=0,pmin=0,pmesure;
     int etat = 0;
     QTimer *timer;
     QMap < double, QString> coef_par_freq;
@@ -41,7 +41,7 @@ private:
     seriallink *arduino;
     IhmGraphique *graph;
     double checkPosition();
-    double mesureTension(bool mesure_max);
+    double mesureTension();
     double movePosition(bool vers_la_droite, short limite_tension);
     double checkToMovePosition(bool vers_la_droite);
     void etatMachine();

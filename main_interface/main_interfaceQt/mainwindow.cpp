@@ -47,7 +47,7 @@ void MainWindow::on_actionBase_de_donnees_triggered()
 {
     QProcess *process = new QProcess(this);
     QString program = "MySqlQt.exe";
-    QString folder = "C:\\Users\\etudiant\\Documents\\GitHub\\tube_de_kundt\\Apps";
+    QString folder = "C:\\Users\\etudiant\\Documents\\GitHub\\tube_de_kundt\\Apps\\BDD";
     process->start(program, QStringList() << folder);
     qDebug() << process->errorString();
 }
@@ -114,25 +114,25 @@ double MainWindow::checkPosition()//retourne la tension qui donne la position du
     return tensionPos;
 }
 
-double MainWindow::mesureTension(bool mesure_max = true)// mesure de la tension
+double MainWindow::mesureTension()// mesure de la tension
 {
     double tension = 0, tension_mesuree = 0;
     viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
     viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
     tension_mesuree = QString(buf).toDouble();
-    if(mesure_max)
-    {
-        if(tension < tension_mesuree)
-            tension = tension_mesuree;
-    }
-    else
-    {
-        if(tension > tension_mesuree)
-            tension = tension_mesuree;
-    }
-    //    viPrintf(osc, (ViString)":OUTP1 :0\n");
+//    if(mesure_max)
+//    {
+//        if(tension < tension_mesuree)
+//            tension = tension_mesuree;
+//    }
+//    else
+//    {
+//        if(tension > tension_mesuree)
+//            tension = tension_mesuree;
+//    }
+//    //    viPrintf(osc, (ViString)":OUTP1 :0\n");
     
-    return tension;
+    return tension_mesuree;
 }
 
 double MainWindow::movePosition(bool vers_la_droite, short limite_tension) //mouvement du micro
@@ -153,7 +153,7 @@ double MainWindow::movePosition(bool vers_la_droite, short limite_tension) //mou
         arduino->write(caractere); //mouvement micro vers le HP
         
         tension_mesuree = 0;
-        tension_mesuree = mesureTension(vers_la_droite);
+        //tension_mesuree = mesureTension(vers_la_droite);
         
         if(tension < tension_mesuree)
             tension = tension_mesuree;
@@ -199,7 +199,9 @@ void MainWindow::etatMachine()
         if(tensionPos >= 4.5)
             etat = 2;
         arduino->write("d");
-        pmax=mesureTension(true);
+        pmesure=mesureTension();
+        if(pmax<pmesure)
+            pmax=pmesure;
         qDebug()<<pmax;
 //        viPrintf(osc,":AUT\n");// autoset oscillo
         sleep(1);
@@ -209,8 +211,11 @@ void MainWindow::etatMachine()
         qDebug()<<"demande deplacement gauche";
         if(tensionPos <= -4)
             etat = 4;
+        pmesure=0;
         arduino->write("g");
-                pmin=mesureTension(false);
+        pmesure=mesureTension();
+        if(pmin>pmesure)
+            pmin=pmesure;
                 qDebug()<<pmin;
 //        viPrintf(osc,":AUT\n");// autoset oscillo
         sleep(1);
@@ -220,6 +225,7 @@ coef=1-pow(((pmax/pmin)-1)/((pmax/pmin)-1),2);
         viPrintf(osc, (ViString)":OUTP1 :0\n");
         arduino->write("s");
         timer->stop();
+        ui->Editcoef->setText(QString::number(coef));
         break;
     }
 }

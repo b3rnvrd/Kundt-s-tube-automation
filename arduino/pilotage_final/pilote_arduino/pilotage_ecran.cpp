@@ -13,6 +13,7 @@ void setupEcran() {
 
 void affichageTexte(bool texte_stop = false) {
   tft.setCursor(0, 0);
+
   if (texte_stop)  //Affichage bouton urgence
   {
     tft.fillScreen(ILI9341_BLACK);
@@ -32,5 +33,7 @@ void affichageTexte(bool texte_stop = false) {
     tft.println("Et la en rouge");
     tft.setTextColor(ILI9341_RED);
     tft.println("");
+    tft.fillScreen(ILI9341_BLACK);
+    delay(10);
   }
 }
