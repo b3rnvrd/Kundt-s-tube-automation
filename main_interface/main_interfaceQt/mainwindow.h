@@ -33,9 +33,7 @@ private slots:
 
     void on_BtnStop_clicked();
 
-    void on_actionAfficherGraphique_triggered();
-
-    void on_pushButton_clicked();
+    void on_pushButtonGraphique_clicked();
 
 private:
     bool vers_la_droite = true,vers_la_gauche = false;

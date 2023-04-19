@@ -4,7 +4,7 @@ IhmGraphique::IhmGraphique(QWidget *parent, const QMap<double, QString > &coef_p
     : QMainWindow(parent)
 {
     courbe = new QLineSeries();
-    *courbe << QPointF(200, 0.5) << QPointF(250, 0.5) << QPointF(315, 0.5) << QPointF(400, 0.5) << QPointF(500, 0.6) << QPointF(630, 0.7) << QPointF(800, 0.5) << QPointF(1000, 0.5)<< QPointF(1250, 0.5)<< QPointF(1600, 0.1)<< QPointF(2000, 0.1)<< QPointF(2500, 0.1)<< QPointF(3150, 0.1);
+    //*courbe << QPointF(200, 0.5) << QPointF(250, 0.5) << QPointF(315, 0.5) << QPointF(400, 0.5) << QPointF(500, 0.6) << QPointF(630, 0.7) << QPointF(800, 0.5) << QPointF(1000, 0.5)<< QPointF(1250, 0.5)<< QPointF(1600, 0.1)<< QPointF(2000, 0.1)<< QPointF(2500, 0.1)<< QPointF(3150, 0.1);
     for(int i = 0; i < 13; i++)
     {
         double frequence = coef_par_freq.key(QString::number(i));

@@ -50,7 +50,7 @@ public:
     QGridLayout *gridLayout_2;
     QVBoxLayout *verticalLayout;
     QLineEdit *Editcoef;
-    QPushButton *pushButton;
+    QPushButton *pushButtonGraphique;
     QMenuBar *menuBar;
     QStatusBar *statusBar;
     QToolBar *mainToolBar;
@@ -159,10 +159,10 @@ public:
 
         verticalLayout->addWidget(Editcoef);
 
-        pushButton = new QPushButton(groupBox_2);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButtonGraphique = new QPushButton(groupBox_2);
+        pushButtonGraphique->setObjectName(QStringLiteral("pushButtonGraphique"));
 
-        verticalLayout->addWidget(pushButton);
+        verticalLayout->addWidget(pushButtonGraphique);
 
 
         gridLayout_2->addLayout(verticalLayout, 0, 0, 1, 1);
@@ -217,7 +217,7 @@ public:
         BtnStart->setText(QApplication::translate("MainWindow", "Start", nullptr));
         BtnStop->setText(QApplication::translate("MainWindow", "Stop", nullptr));
         groupBox_2->setTitle(QApplication::translate("MainWindow", "Coeficient d'absorbtion", nullptr));
-        pushButton->setText(QApplication::translate("MainWindow", "Afficher Graphique", nullptr));
+        pushButtonGraphique->setText(QApplication::translate("MainWindow", "Afficher Graphique", nullptr));
     } // retranslateUi
 
 };

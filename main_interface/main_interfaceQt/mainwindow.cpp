@@ -45,8 +45,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionBase_de_donnees_triggered()
 {
-    //    QProcess::setProgram("..\..\database\databaseQt\debug\MySql.exe");
-    //    QProcess::startDetached();
+    QProcess *process = new QProcess(this);
+    QString program = "MySqlQt.exe";
+    QString folder = "C:\\Users\\etudiant\\Desktop\\tube_de_kundt\\database\\databaseQt\\debug";
+    process->start(program, QStringList() << folder);
+    qDebug() << process->errorString();
 }
 
 void MainWindow::on_BtnStart_clicked()
@@ -81,8 +84,8 @@ void MainWindow::on_BtnStart_clicked()
         
         n = tension_max_mesuree/tension_min_mesuree;
         
-        coef = 1 - pow((n-1)/(n+1),2);  // formule calcul coef absorption
-        
+        //coef = 1 - pow((n-1)/(n+1),2);  // formule calcul coef absorption
+        coef = 1;
         ui->Editcoef->setText(QString::number(coef));
 
         coef_par_freq.insert(freq, QString::number(coef));
@@ -211,7 +214,7 @@ void MainWindow::etatMachine()
         break;
     }
 }
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_pushButtonGraphique_clicked()
 {
     graph = new IhmGraphique(0,coef_par_freq);
     graph->show();
