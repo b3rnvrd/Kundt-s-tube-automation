@@ -13,6 +13,7 @@ void setupEcran() {
 
 void affichageTexte(bool texte_stop = false) {
   tft.setCursor(0, 0);
+  tft.clear();
   if (!texte_stop)  //Affichage bouton urgence
   {
     tft.setTextColor(ILI9341_RED);
