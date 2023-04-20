@@ -23,6 +23,7 @@ void affichageTexte(bool texte_stop = false) {
   }
   else  //Affichage classique des mesures
   {
+    tft.fillScreen(ILI9341_BLACK);
     tft.setTextColor(ILI9341_WHITE);
     tft.setTextSize(1);
     tft.println("Bonjour, j'arrive a piloter cet ecran");
@@ -33,7 +34,6 @@ void affichageTexte(bool texte_stop = false) {
     tft.println("Et la en rouge");
     tft.setTextColor(ILI9341_RED);
     tft.println("");
-    tft.fillScreen(ILI9341_BLACK);
     delay(10);
   }
 }
