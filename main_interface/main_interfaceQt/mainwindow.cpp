@@ -167,7 +167,7 @@ void MainWindow::etatMachine()
         break;
     case 1:
         qDebug() << "demande deplacement droite";
-        if(tensionPos >= 4.5)
+        if(tensionPos >= 3.5)
             etat = 2;
         arduino->write("d");
         pmesure=mesureTension();
@@ -180,7 +180,7 @@ void MainWindow::etatMachine()
 
     case 2:
         qDebug()<<"demande deplacement gauche";
-        if(tensionPos <= -4)
+        if(tensionPos <= -3.5)
             etat = 4;
         pmesure = 0;
         arduino->write("g");
@@ -206,9 +206,10 @@ void MainWindow::on_pushButtonGraphique_clicked()
 
 void MainWindow::on_pushButtonCoefficient_clicked()
 {
-    double n = pmax/pmin;
+    double n = pmax / pmin;
     coef = pow((n-1)/(n+1),2);
-    coef = 1-coef;
+    coef = 1 - coef;
+    qDebug() << coef;
     ui->Editcoef->setText(QString::number(coef,'f',3));
     QByteArray donnees_a_afficher = (QString::number(freq) + " : " + QString::number(coef)).toUtf8();
     arduino->write(donnees_a_afficher);
