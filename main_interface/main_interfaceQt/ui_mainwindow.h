@@ -223,8 +223,8 @@ public:
         BtnStart->setText(QApplication::translate("MainWindow", "Start", nullptr));
         BtnStop->setText(QApplication::translate("MainWindow", "Stop", nullptr));
         groupBox_2->setTitle(QApplication::translate("MainWindow", "Coeficient d'absorbtion", nullptr));
-        pushButtonCoefficient->setText(QApplication::translate("MainWindow", "Coef ?", nullptr));
-        pushButtonGraphique->setText(QApplication::translate("MainWindow", "Afficher Graphique", nullptr));
+        pushButtonCoefficient->setText(QApplication::translate("MainWindow", "Afficher le coefficient d'absorption", nullptr));
+        pushButtonGraphique->setText(QApplication::translate("MainWindow", "Afficher le graphique", nullptr));
     } // retranslateUi
 
 };

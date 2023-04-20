@@ -239,4 +239,6 @@ void MainWindow::on_pushButtonCoefficient_clicked()
     coef=pow((n-1)/(n+1),2);
     coef=1-coef;
     ui->Editcoef->setText(QString::number(coef,'f',3));
+  //  QByteArray donnees_a_afficher = [freq][coef];
+  //  arduino->write();
 }
