@@ -53,6 +53,7 @@ void MainWindow::on_actionBase_de_donnees_triggered()
 void MainWindow::on_BtnStart_clicked()
 {
     viPrintf(osc, (ViString)"*RST\n");
+    viPrintf(osc, (ViString)"*CLS\n");
     freq = ui->comboBoxFreq->currentText().toDouble();
     ampli = ui->EditAmpli->text().toDouble();
     if(ampli > 5 || ampli < 0)
@@ -188,7 +189,6 @@ void MainWindow::etatMachine()
         if(pmesure < pmin)
             pmin = pmesure;
                 qDebug() << pmin;
-//        viPrintf(osc,":AUT\n");// autoset oscillo
         sleep(1);
         break;
     case 4:
