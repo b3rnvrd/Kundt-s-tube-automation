@@ -46,9 +46,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionBase_de_donnees_triggered()
 {
     QProcess *process = new QProcess(this);
-    QString program = "MySqlQt.exe";
-    QString folder = "C:\\Users\\etudiant\\Documents\\GitHub\\tube_de_kundt\\Apps\\BDD";
-    process->start(program, QStringList() << folder);
+    process->start("\"C:\\Users\\etudiant\\Documents\\GitHub\\tube_de_kundt\\Apps\\BDD\\MySqlQt.exe\"");
     qDebug() << process->errorString();
 }
 
@@ -66,7 +64,7 @@ void MainWindow::on_BtnStart_clicked()
     viPrintf(osc,":AUT\n");// autoset oscillo
     viPrintf(osc, (ViString)":CHAN3:SCAL 4\n");
     tensionPos = checkPosition();
-    double n, tension_max_mesuree = 1, tension_min_mesuree = 1;
+//    double n, tension_max_mesuree = 1, tension_min_mesuree = 1;
 
 
 
@@ -83,11 +81,11 @@ void MainWindow::on_BtnStart_clicked()
             if(recu == "g_ACK")
                 etat = 4;
         
-        n = tension_max_mesuree/tension_min_mesuree;
+//        n = tension_max_mesuree/tension_min_mesuree;
         
         //coef = 1 - pow((n-1)/(n+1),2);  // formule calcul coef absorption
-        coef = 1;
-        ui->Editcoef->setText(QString::number(coef));
+//        coef = 1;
+//        ui->Editcoef->setText(QString::number(coef));
 
         coef_par_freq.insert(freq, QString::number(coef));
     }
