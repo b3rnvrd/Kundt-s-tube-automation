@@ -56,10 +56,6 @@ void avanceGauche() {
     delay( 20 );
     digitalWrite( STEP_A4988, LOW );
     delay( 20 );
-
-
-    //Renvoi "g_ACK" sur la liaison série pour informer l'IHM de la bonne réception de l'ordre
-    Serial.write("g_ACK");
   }
 
   // Broche ENABLE inactive
@@ -80,16 +76,13 @@ void avanceDroite() {
 
   //Enable actif
   digitalWrite( EN_A4988, LOW );
-  
+
   // Avance de 1 pas
   for ( int i = 0; i < 20; i++) {
     digitalWrite( STEP_A4988, HIGH );
     delay( 20 );
     digitalWrite( STEP_A4988, LOW );
     delay( 20 );
-
-    //Renvoi "d_ACK" sur la liaison série pour informer l'IHM de la bonne réception de l'ordre
-    Serial.write("d_ACK");
   }
 
   // Broche ENABLE inactive

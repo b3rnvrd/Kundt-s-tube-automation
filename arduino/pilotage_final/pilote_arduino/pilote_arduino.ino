@@ -2,6 +2,7 @@
 #include "pilotage_moteur.h"
 
 char data;
+String donnees_a_afficher;
 
 void setup() {
   setupSerialMoteur();
@@ -29,11 +30,14 @@ void loop() {
       //Demande d'arrêt d'urgence
       case 's':
         arretMoteur();
-        affichageTexte(true);
+        affichageStopManuel(true);
         break;
     }
-    
-    affichageMesures(data);
   }
+  while (Serial.available()) {
+    donnees_a_afficher = Serial.read();
+    affichageMesures(donnees_a_afficher);
+    affichageStopManuel(false);
 
+  }
 }

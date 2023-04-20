@@ -4,7 +4,7 @@
 
 seriallink::seriallink(QObject *parent) : QObject(parent)
 {
-    _serial.setPortName("COM5");// COM10 Eliott COM5 Patrick
+    _serial.setPortName("COM10");// COM10 Eliott COM5 Patrick
     _serial.setBaudRate(QSerialPort::Baud115200);
     _serial.setDataBits(QSerialPort::Data8);
     _serial.setParity(QSerialPort::NoParity);

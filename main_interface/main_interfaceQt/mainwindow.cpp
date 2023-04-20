@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     timer = new QTimer(this);
     timer->interval();
     QObject::connect(timer,&QTimer::timeout, [this](){ etatMachine(); });
-    timer->start(1);
+
     // ouverture de la session ressource manager
     ViSession rscmng;
     ViStatus stat = viOpenDefaultRM(&rscmng);
@@ -70,23 +70,8 @@ void MainWindow::on_BtnStart_clicked()
 
     if(tensionPos > -5 && tensionPos < 5)  // -5 et 5 sont les tension max et min pour la position du micro
     {
+        timer->start(1);
         etat=1;
-
-        QByteArray recu = arduino->read();
-        qDebug() << recu << tensionPos;
-
-        if (recu == "d_ACK")
-            etat = 2;
-        else
-            if(recu == "g_ACK")
-                etat = 4;
-        
-//        n = tension_max_mesuree/tension_min_mesuree;
-        
-        //coef = 1 - pow((n-1)/(n+1),2);  // formule calcul coef absorption
-//        coef = 1;
-
-
         coef_par_freq.insert(freq, QString::number(coef));
     }
     else
@@ -115,22 +100,10 @@ double MainWindow::checkPosition()//retourne la tension qui donne la position du
 
 double MainWindow::mesureTension()// mesure de la tension
 {
-    double tension = 0, tension_mesuree = 0;
+    double tension_mesuree = 0;
     viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
     viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
-    tension_mesuree = QString(buf).toDouble();
-//    if(mesure_max)
-//    {
-//        if(tension < tension_mesuree)
-//            tension = tension_mesuree;
-//    }
-//    else
-//    {
-//        if(tension > tension_mesuree)
-//            tension = tension_mesuree;
-//    }
-//    //    viPrintf(osc, (ViString)":OUTP1 :0\n");
-    
+    tension_mesuree = QString(buf).toDouble();    
     return tension_mesuree;
 }
 
@@ -152,7 +125,6 @@ double MainWindow::movePosition(bool vers_la_droite, short limite_tension) //mou
         arduino->write(caractere); //mouvement micro vers le HP
         
         tension_mesuree = 0;
-        //tension_mesuree = mesureTension(vers_la_droite);
         
         if(tension < tension_mesuree)
             tension = tension_mesuree;
@@ -194,35 +166,34 @@ void MainWindow::etatMachine()
     case 0:
         break;
     case 1:
-        qDebug()<<"demande deplacement droite";
-        if(tensionPos >= 1)
+        qDebug() << "demande deplacement droite";
+        if(tensionPos >= 4.5)
             etat = 2;
         arduino->write("d");
         pmesure=mesureTension();
-        if((pmax<pmesure)&& pmesure<10)
-            pmax=pmesure;
-        qDebug()<<pmax;
+        if((pmax<pmesure) && pmesure < 10)
+            pmax = pmesure;
+        qDebug() << pmax;
 //        viPrintf(osc,":AUT\n");// autoset oscillo
         sleep(1);
         break;
 
     case 2:
         qDebug()<<"demande deplacement gauche";
-        if(tensionPos <= -1)
+        if(tensionPos <= -4)
             etat = 4;
-        pmesure=0;
+        pmesure = 0;
         arduino->write("g");
         pmesure=mesureTension();
-        if(pmesure<pmin)
-            pmin=pmesure;
-                qDebug()<<pmin;
+        if(pmesure < pmin)
+            pmin = pmesure;
+                qDebug() << pmin;
 //        viPrintf(osc,":AUT\n");// autoset oscillo
         sleep(1);
         break;
     case 4:
 
         viPrintf(osc, (ViString)":OUTP1 :0\n");
-        arduino->write("s");
         timer->stop();
         break;
     }
@@ -235,10 +206,10 @@ void MainWindow::on_pushButtonGraphique_clicked()
 
 void MainWindow::on_pushButtonCoefficient_clicked()
 {
-    double n =pmax/pmin;
-    coef=pow((n-1)/(n+1),2);
-    coef=1-coef;
+    double n = pmax/pmin;
+    coef = pow((n-1)/(n+1),2);
+    coef = 1-coef;
     ui->Editcoef->setText(QString::number(coef,'f',3));
-  //  QByteArray donnees_a_afficher = [freq][coef];
-  //  arduino->write();
+    QByteArray donnees_a_afficher = (QString::number(freq) + " : " + QString::number(coef)).toUtf8();
+    arduino->write(donnees_a_afficher);
 }
