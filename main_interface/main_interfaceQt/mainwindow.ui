@@ -156,7 +156,7 @@
            <item>
             <widget class="QPushButton" name="pushButtonCoefficient">
              <property name="text">
-              <string>Coef ?</string>
+              <string>Affiche Coefficient </string>
              </property>
             </widget>
            </item>

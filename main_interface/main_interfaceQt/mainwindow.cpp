@@ -235,6 +235,8 @@ void MainWindow::on_pushButtonGraphique_clicked()
 
 void MainWindow::on_pushButtonCoefficient_clicked()
 {
-    coef=1-pow(((pmax/pmin)-1)/((pmax/pmin)-1),2);
-    ui->Editcoef->setText(QString::number(coef));
+    double n =pmax/pmin;
+    coef=pow((n-1)/(n+1),2);
+    coef=1-coef;
+    ui->Editcoef->setText(QString::number(coef,'f',3));
 }
