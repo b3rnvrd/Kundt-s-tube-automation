@@ -72,7 +72,17 @@ void MainWindow::on_BtnStart_clicked()
     if(tensionPos > -5 && tensionPos < 5)  // -5 et 5 sont les tension max et min pour la position du micro
     {
         timer->start(1);
-        etat=1;
+        etat = 1;
+
+        QByteArray recu = arduino->read();
+        qDebug() << recu << tensionPos;
+
+        if (recu == "d_ACK")
+            etat = 2;
+        else
+            if(recu == "g_ACK")
+                etat = 4;
+
         coef_par_freq.insert(freq, QString::number(coef));
     }
     else
@@ -167,7 +177,7 @@ void MainWindow::etatMachine()
     case 0:
         break;
     case 1:
-        qDebug() << "demande deplacement droite";
+        qDebug() << "demande deplacement droite" << "tensionPos : " << tensionPos;
         if(tensionPos >= 3.5)
             etat = 2;
         arduino->write("d");
@@ -180,8 +190,8 @@ void MainWindow::etatMachine()
         break;
 
     case 2:
-        qDebug()<<"demande deplacement gauche";
-        if(tensionPos <= -3.5)
+        qDebug()<<"demande deplacement gauche" << "tensionPos : " << tensionPos;
+        if(tensionPos <= -3)
             etat = 4;
         pmesure = 0;
         arduino->write("g");
@@ -192,7 +202,6 @@ void MainWindow::etatMachine()
         sleep(1);
         break;
     case 4:
-
         viPrintf(osc, (ViString)":OUTP1 :0\n");
         timer->stop();
         break;
@@ -211,6 +220,9 @@ void MainWindow::on_pushButtonCoefficient_clicked()
     coef = 1 - coef;
     qDebug() << coef;
     ui->Editcoef->setText(QString::number(coef,'f',3));
+    if(arduino->isOpen())
+        arduino->closeConnection();
+    arduino->openConnection();
     QByteArray donnees_a_afficher = (QString::number(freq) + " : " + QString::number(coef)).toUtf8();
     arduino->write(donnees_a_afficher);
 }

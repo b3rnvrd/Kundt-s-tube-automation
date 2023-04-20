@@ -33,6 +33,7 @@ void loop() {
         affichageStopManuel(true);
         break;
     }
+    arretMoteur();
   }
   while (Serial.available()) {
     donnees_a_afficher = Serial.read();
