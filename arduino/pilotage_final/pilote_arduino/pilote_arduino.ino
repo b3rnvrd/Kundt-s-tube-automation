@@ -32,6 +32,8 @@ void loop() {
         affichageTexte(true);
         break;
     }
+    
+    affichageMesures(data);
   }
-  affichageMesures()
+
 }

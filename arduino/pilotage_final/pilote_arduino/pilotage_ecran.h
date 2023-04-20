@@ -11,6 +11,6 @@
 
 void affichageMesureEnCours(bool texte_stop = false);
 void setupEcran();
-void affichageMesures();
+void affichageMesures(char data);
 
 #endif

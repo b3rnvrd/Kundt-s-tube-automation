@@ -33,10 +33,10 @@ void affichageMesureEnCours(bool texte_stop = false) {
   }
 }
 
-void affichageMesures() {
+void affichageMesures(char data) {
 
   tft.fillScreen(ILI9341_BLACK);
   tft.setTextColor(ILI9341_WHITE);
   tft.setTextSize(4);
-
+  tft.println(data);
 }
