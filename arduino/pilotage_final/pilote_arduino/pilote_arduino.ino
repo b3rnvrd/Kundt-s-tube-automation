@@ -9,7 +9,7 @@ void setup() {
 }
 
 void loop() {
-  while (Serial.available()) 
+  while (Serial.available())
   {
     data = Serial.read(); //Lecture des données sur le port série
 
@@ -17,13 +17,13 @@ void loop() {
       //Demande de déplacement à droite
       case 'd':
         avanceDroite();
-        affichageTexte();
+        affichageMesureEnCours();
         break;
-        
-      //Demande de déplacement à gauche 
+
+      //Demande de déplacement à gauche
       case 'g':
         avanceGauche();
-        affichageTexte();
+        affichageMesureEnCours();
         break;
 
       //Demande d'arrêt d'urgence
@@ -33,4 +33,5 @@ void loop() {
         break;
     }
   }
+  affichageMesures()
 }

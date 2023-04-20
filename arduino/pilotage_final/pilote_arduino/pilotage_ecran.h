@@ -9,7 +9,8 @@
 #define TFT_DC 9
 #define TFT_CS 10
 
-void affichageTexte(bool texte_stop = false);
+void affichageMesureEnCours(bool texte_stop = false);
 void setupEcran();
+void affichageMesures();
 
 #endif

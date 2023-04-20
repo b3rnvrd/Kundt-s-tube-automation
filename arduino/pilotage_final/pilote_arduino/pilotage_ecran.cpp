@@ -11,7 +11,7 @@ void setupEcran() {
   tft.fillScreen(ILI9341_BLACK);
 }
 
-void affichageTexte(bool texte_stop = false) {
+void affichageMesureEnCours(bool texte_stop = false) {
   tft.setCursor(0, 0);
 
   if (texte_stop)  //Affichage bouton urgence
@@ -21,19 +21,22 @@ void affichageTexte(bool texte_stop = false) {
     tft.setTextSize(9);
     tft.println("ARRET DU MOTEUR");
   }
-  else  //Affichage classique des mesures
+  else  //Affichage mesure en cours
   {
     tft.fillScreen(ILI9341_BLACK);
     tft.setTextColor(ILI9341_WHITE);
-    tft.setTextSize(1);
-    tft.println("Bonjour, j'arrive a piloter cet ecran");
-    tft.setTextSize(2);
-    tft.println("La j'ecris plus gros");
-    tft.setTextSize(3);
-    tft.setTextColor(ILI9341_RED);
-    tft.println("Et la en rouge");
-    tft.setTextColor(ILI9341_RED);
-    tft.println("");
-    delay(10);
+    tft.setTextSize(4);
+    tft.println("Mesure en cours");
+    tft.println("Mesure en cours.");
+    tft.println("Mesure en cours..");
+    tft.println("Mesure en cours...");
   }
+}
+
+void affichageMesures() {
+
+  tft.fillScreen(ILI9341_BLACK);
+  tft.setTextColor(ILI9341_WHITE);
+  tft.setTextSize(4);
+
 }
