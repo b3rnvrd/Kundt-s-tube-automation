@@ -233,7 +233,7 @@ void MainWindow::on_pushButtonGraphique_clicked()
     graph->show();
 }
 
-void MainWindow::on_pushButtonCoeficient_clicked()
+void MainWindow::on_pushButtonCoefficient_clicked()
 {
     coef=1-pow(((pmax/pmin)-1)/((pmax/pmin)-1),2);
     ui->Editcoef->setText(QString::number(coef));

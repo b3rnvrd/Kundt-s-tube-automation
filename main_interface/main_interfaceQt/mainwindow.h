@@ -35,7 +35,7 @@ private slots:
 
     void on_pushButtonGraphique_clicked();
 
-    void on_pushButtonCoeficient_clicked();
+    void on_pushButtonCoefficient_clicked();
 
 private:
     bool vers_la_droite = true,vers_la_gauche = false;

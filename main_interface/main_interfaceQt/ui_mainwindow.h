@@ -50,6 +50,7 @@ public:
     QGridLayout *gridLayout_2;
     QVBoxLayout *verticalLayout;
     QLineEdit *Editcoef;
+    QPushButton *pushButtonCoefficient;
     QPushButton *pushButtonGraphique;
     QMenuBar *menuBar;
     QStatusBar *statusBar;
@@ -59,7 +60,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1030, 300);
+        MainWindow->resize(1125, 448);
         actionBase_de_donnees = new QAction(MainWindow);
         actionBase_de_donnees->setObjectName(QStringLiteral("actionBase_de_donnees"));
         QIcon icon;
@@ -159,6 +160,11 @@ public:
 
         verticalLayout->addWidget(Editcoef);
 
+        pushButtonCoefficient = new QPushButton(groupBox_2);
+        pushButtonCoefficient->setObjectName(QStringLiteral("pushButtonCoefficient"));
+
+        verticalLayout->addWidget(pushButtonCoefficient);
+
         pushButtonGraphique = new QPushButton(groupBox_2);
         pushButtonGraphique->setObjectName(QStringLiteral("pushButtonGraphique"));
 
@@ -176,7 +182,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1030, 21));
+        menuBar->setGeometry(QRect(0, 0, 1125, 21));
         MainWindow->setMenuBar(menuBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
@@ -217,6 +223,7 @@ public:
         BtnStart->setText(QApplication::translate("MainWindow", "Start", nullptr));
         BtnStop->setText(QApplication::translate("MainWindow", "Stop", nullptr));
         groupBox_2->setTitle(QApplication::translate("MainWindow", "Coeficient d'absorbtion", nullptr));
+        pushButtonCoefficient->setText(QApplication::translate("MainWindow", "Coef ?", nullptr));
         pushButtonGraphique->setText(QApplication::translate("MainWindow", "Afficher Graphique", nullptr));
     } // retranslateUi
 
