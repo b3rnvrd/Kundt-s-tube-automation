@@ -2428,7 +2428,8 @@ debug/mainwindow.o: mainwindow.cpp mainwindow.h \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/QVBoxLayout \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/QProcess \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/QDebug \
-		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/QMessageBox
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/QMessageBox \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/QThread
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainwindow.o mainwindow.cpp
 
 debug/seriallink.o: seriallink.cpp seriallink.h \

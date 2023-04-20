@@ -43,8 +43,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionBase_de_donnees_triggered()
 {
-    //    QProcess::setProgram("..\..\database\databaseQt\debug\MySql.exe");
-    //    QProcess::startDetached();
+    QProcess *process = new QProcess(this);
+    QString program = "MySqlQt.exe";
+    QString folder = "C:\\Users\\etudiant\\Documents\\GitHub\\tube_de_kundt\\Apps\\BDD";
+    process->start(program, QStringList() << folder);
+    qDebug() << process->errorString();
 }
 
 void MainWindow::on_BtnStart_clicked()

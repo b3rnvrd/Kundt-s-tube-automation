@@ -31,7 +31,7 @@ void DialogLogin::on_buttonBox_accepted()
             QString user = ui->lineEditUser->text(); //lecture du lineEdit user
             QString password = ui->lineEditPassword->text(); //lecture du lineEdit password
             QSqlQuery query(db);
-            if(!query.exec("SELECT password,id_login FROM login WHERE user='"+user+"'"))
+            if(!query.exec("SELECT password,id_login FROM login WHERE user='" + user + "'"))
                 QMessageBox::critical(this,"Attention","Pb Req",QMessageBox::Ok);
             else
             { while(query.next())
