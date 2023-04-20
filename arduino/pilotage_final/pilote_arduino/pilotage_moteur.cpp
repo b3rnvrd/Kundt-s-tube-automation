@@ -82,7 +82,7 @@ void avanceDroite() {
   digitalWrite( EN_A4988, LOW );
   
   // Avance de 1 pas
-  for ( int i = 0; i < 1; i++) {
+  for ( int i = 0; i < 20; i++) {
     digitalWrite( STEP_A4988, HIGH );
     delay( 20 );
     digitalWrite( STEP_A4988, LOW );

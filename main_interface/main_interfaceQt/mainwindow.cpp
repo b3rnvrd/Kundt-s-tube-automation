@@ -201,7 +201,7 @@ void MainWindow::etatMachine()
             etat = 2;
         arduino->write("d");
         pmesure=mesureTension();
-        if(pmax<pmesure)
+        if((pmax<pmesure)&& pmesure<10)
             pmax=pmesure;
         qDebug()<<pmax;
 //        viPrintf(osc,":AUT\n");// autoset oscillo
@@ -226,7 +226,6 @@ coef=1-pow(((pmax/pmin)-1)/((pmax/pmin)-1),2);
         viPrintf(osc, (ViString)":OUTP1 :0\n");
         arduino->write("s");
         timer->stop();
-        ui->Editcoef->setText(QString::number(coef));
         break;
     }
 }
