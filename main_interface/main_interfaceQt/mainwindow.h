@@ -35,6 +35,8 @@ private slots:
 
     void on_pushButtonGraphique_clicked();
 
+    void on_pushButtonCoeficient_clicked();
+
 private:
     bool vers_la_droite = true,vers_la_gauche = false;
     Ui::MainWindow *ui;

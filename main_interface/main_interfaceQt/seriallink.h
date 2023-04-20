@@ -13,7 +13,7 @@ public:
 
     void openConnection();
     void closeConnection();
-    void write(const char* messageToWrite);
+    void write(const QByteArray &messageToWrite);
     bool isOpen();
     bool isWritable();
     QByteArray read();

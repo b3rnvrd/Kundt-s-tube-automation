@@ -85,7 +85,7 @@ void MainWindow::on_BtnStart_clicked()
         
         //coef = 1 - pow((n-1)/(n+1),2);  // formule calcul coef absorption
 //        coef = 1;
-//        ui->Editcoef->setText(QString::number(coef));
+
 
         coef_par_freq.insert(freq, QString::number(coef));
     }
@@ -195,7 +195,7 @@ void MainWindow::etatMachine()
         break;
     case 1:
         qDebug()<<"demande deplacement droite";
-        if(tensionPos >= 4.5)
+        if(tensionPos >= 1)
             etat = 2;
         arduino->write("d");
         pmesure=mesureTension();
@@ -208,7 +208,7 @@ void MainWindow::etatMachine()
 
     case 2:
         qDebug()<<"demande deplacement gauche";
-        if(tensionPos <= -4)
+        if(tensionPos <= -1)
             etat = 4;
         pmesure=0;
         arduino->write("g");
@@ -220,7 +220,7 @@ void MainWindow::etatMachine()
         sleep(1);
         break;
     case 4:
-coef=1-pow(((pmax/pmin)-1)/((pmax/pmin)-1),2);
+
         viPrintf(osc, (ViString)":OUTP1 :0\n");
         arduino->write("s");
         timer->stop();
@@ -231,4 +231,10 @@ void MainWindow::on_pushButtonGraphique_clicked()
 {
     graph = new IhmGraphique(0,coef_par_freq);
     graph->show();
+}
+
+void MainWindow::on_pushButtonCoeficient_clicked()
+{
+    coef=1-pow(((pmax/pmin)-1)/((pmax/pmin)-1),2);
+    ui->Editcoef->setText(QString::number(coef));
 }

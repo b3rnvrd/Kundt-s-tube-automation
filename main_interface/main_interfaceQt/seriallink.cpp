@@ -31,7 +31,7 @@ void seriallink::openConnection(){
     else qDebug() << "connexion ok";
 }
 
-void seriallink::write(const char *messageToWrite){
+void seriallink::write(const QByteArray &messageToWrite){
     _serial.write(messageToWrite);
 }
 
