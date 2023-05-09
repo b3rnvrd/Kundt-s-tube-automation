@@ -219,7 +219,7 @@ public:
         comboBoxFreq->setItemText(11, QApplication::translate("MainWindow", "2500", nullptr));
         comboBoxFreq->setItemText(12, QApplication::translate("MainWindow", "3150", nullptr));
 
-        LblAmplitude->setText(QApplication::translate("MainWindow", "Amplitude 0-5V", nullptr));
+        LblAmplitude->setText(QApplication::translate("MainWindow", "Amplitude 1-5V", nullptr));
         BtnStart->setText(QApplication::translate("MainWindow", "Start", nullptr));
         BtnStop->setText(QApplication::translate("MainWindow", "Stop", nullptr));
         groupBox_2->setTitle(QApplication::translate("MainWindow", "Coeficient d'absorbtion", nullptr));

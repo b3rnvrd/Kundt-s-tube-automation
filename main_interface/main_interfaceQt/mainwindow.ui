@@ -110,7 +110,7 @@
              <item>
               <widget class="QLabel" name="LblAmplitude">
                <property name="text">
-                <string>Amplitude 0-5V</string>
+                <string>Amplitude 1-5V</string>
                </property>
               </widget>
              </item>

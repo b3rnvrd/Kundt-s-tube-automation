@@ -143,7 +143,6 @@ void MainWindow::on_actionCreerTableMateriau_triggered()
     query.prepare("CREATE TABLE `kundt`." + table + " ( `id_freq` INT(50) NOT NULL AUTO_INCREMENT , `frequence` INT(50) NOT NULL , `coefficientAbsorption` DOUBLE NOT NULL , PRIMARY KEY (`id_freq`), UNIQUE `UNIQUE` (`frequence`)) ENGINE = MyISAM;");
     if(!query.exec())
         QMessageBox::critical(this,"Attention","Pb Req",QMessageBox::Ok);
-
     this->on_actionRafaichir_triggered();
 }
 

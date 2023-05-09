@@ -46,19 +46,18 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionBase_de_donnees_triggered()
 {
     QProcess *process = new QProcess(this);
-    process->start("\"C:\\Users\\etudiant\\Documents\\GitHub\\tube_de_kundt\\Apps\\BDD\\MySqlQt.exe\"");
+//    process->start("\"C:\\Users\\etudiant\\Documents\\GitHub\\tube_de_kundt\\Apps\\BDD\\MySqlQt.exe\"");          //chemin Patrick
+    process->start("\"C:\\Users\\etudiant\\Desktop\\tube_de_kundt\\Apps\\BDD\\MySqlQt.exe\"");            //chemin Eliott
     qDebug() << process->errorString();
 }
 
 void MainWindow::on_BtnStart_clicked()
 {
-    viPrintf(osc, (ViString)"*RST\n");
-    viPrintf(osc, (ViString)"*CLS\n");
     freq = ui->comboBoxFreq->currentText().toDouble();
     ampli = ui->EditAmpli->text().toDouble();
-    if(ampli > 5 || ampli < 0)
+    if(ampli > 5 || ampli < 1)
     {
-        QMessageBox::critical(this,"Attention","amplitude supérieure à 5V ou inférieure a 0V",QMessageBox::Ok);
+        QMessageBox::critical(this,"Attention","amplitude supérieure à 5V ou inférieure a 1V",QMessageBox::Ok);
         return;
     }
     viPrintf(osc,":APPLY:SIN ,%f,%f\n", freq, ampli); //on applique un signal sinusoidal de fréquence et amplitude choisies
@@ -118,56 +117,56 @@ double MainWindow::mesureTension()// mesure de la tension
     return tension_mesuree;
 }
 
-double MainWindow::movePosition(bool vers_la_droite, short limite_tension) //mouvement du micro
-{
-    const char* caractere;
-    double tension_mesuree, tension = 0;
-    vers_la_droite ? caractere = "d" : caractere = "g";
-    double pos = 0;
-    for(pos = tensionPos; vers_la_droite ? pos < limite_tension : pos > limite_tension; pos += 1)
-    {
-        while(!(arduino->isWritable()))
-        {
-            QMessageBox::critical(this,"Attention","L'écriture a échoué, tentative de reconnexion avec la carte Arduino",QMessageBox::Ok);
-            qDebug() << "Couldn't write to serial!";
-            arduino->openConnection();
-            sleep(10);
-        }
-        arduino->write(caractere); //mouvement micro vers le HP
+//double MainWindow::movePosition(bool vers_la_droite, short limite_tension) //mouvement du micro
+//{
+//    const char* caractere;
+//    double tension_mesuree, tension = 0;
+//    vers_la_droite ? caractere = "d" : caractere = "g";
+//    double pos = 0;
+//    for(pos = tensionPos; vers_la_droite ? pos < limite_tension : pos > limite_tension; pos += 1)
+//    {
+//        while(!(arduino->isWritable()))
+//        {
+//            QMessageBox::critical(this,"Attention","L'écriture a échoué, tentative de reconnexion avec la carte Arduino",QMessageBox::Ok);
+//            qDebug() << "Couldn't write to serial!";
+//            arduino->openConnection();
+//            sleep(10);
+//        }
+//        arduino->write(caractere); //mouvement micro vers le HP
         
-        tension_mesuree = 0;
+//        tension_mesuree = 0;
         
-        if(tension < tension_mesuree)
-            tension = tension_mesuree;
-        else
-            tension = tension_mesuree;
-    }
-    return tension;
+//        if(tension < tension_mesuree)
+//            tension = tension_mesuree;
+//        else
+//            tension = tension_mesuree;
+//    }
+//    return tension;
     
-}
+//}
 
-double MainWindow::checkToMovePosition(bool vers_la_droite) //verif cote mouvement voulu
-{
-    double tension_mesuree;
-    tensionPos = checkPosition();
+//double MainWindow::checkToMovePosition(bool vers_la_droite) //verif cote mouvement voulu
+//{
+//    double tension_mesuree;
+//    tensionPos = checkPosition();
     
-    short limite_tension = 0;
+//    short limite_tension = 0;
     
-    tension_mesuree = 0;
+//    tension_mesuree = 0;
     
-    if(vers_la_droite)  //côté droit
-    {
-        limite_tension = 5;
-        tension_mesuree = movePosition(vers_la_droite,limite_tension);
+//    if(vers_la_droite)  //côté droit
+//    {
+//        limite_tension = 5;
+//        tension_mesuree = movePosition(vers_la_droite,limite_tension);
         
-    }
-    else    //côté gauche
-    {
-        limite_tension = -5;
-        tension_mesuree = movePosition(vers_la_droite,limite_tension);
-    }
-    return tension_mesuree;
-}
+//    }
+//    else    //côté gauche
+//    {
+//        limite_tension = -5;
+//        tension_mesuree = movePosition(vers_la_droite,limite_tension);
+//    }
+//    return tension_mesuree;
+//}
 
 void MainWindow::etatMachine()
 {
@@ -181,7 +180,7 @@ void MainWindow::etatMachine()
         if(tensionPos >= 3.5)
             etat = 2;
         arduino->write("d");
-        pmesure=mesureTension();
+        pmesure = mesureTension();
         if((pmax<pmesure) && pmesure < 10)
             pmax = pmesure;
         qDebug() << pmax;
@@ -207,6 +206,7 @@ void MainWindow::etatMachine()
         break;
     }
 }
+
 void MainWindow::on_pushButtonGraphique_clicked()
 {
     graph = new IhmGraphique(0,coef_par_freq);

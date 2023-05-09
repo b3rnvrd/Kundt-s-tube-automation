@@ -36,7 +36,10 @@ void affichageMesures(String data) {
   tft.fillScreen(ILI9341_BLACK);
   tft.setTextColor(ILI9341_WHITE);
   tft.setTextSize(4);
-  tft.println(data);
+  tft.println("frequence : 200");
+  tft.setCursor(150,0);
+    tft.setTextSize(3);
+  tft.println("coefficient : 0.5");
 }
 
 void affichageStopManuel(bool arret_manuel) {
