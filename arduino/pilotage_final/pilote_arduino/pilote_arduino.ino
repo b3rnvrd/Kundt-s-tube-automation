@@ -10,9 +10,6 @@ void setup() {
 }
 
 void loop() {
-
-  affichageMesures(donnees_a_afficher);
-  delay(100000);
   while (Serial.available())
   {
     data = Serial.read(); //Lecture des données sur le port série

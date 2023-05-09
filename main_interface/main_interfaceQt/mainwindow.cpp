@@ -95,6 +95,7 @@ void MainWindow::on_BtnStop_clicked()//Arret d'urgence
     arduino->write("s");
     
     viPrintf(osc, (ViString)":OUTP1 :0\n");     //COUPER LE GBF DE L'OSCILLO
+    etat = 0;
     
 }
 
@@ -116,57 +117,6 @@ double MainWindow::mesureTension()// mesure de la tension
     tension_mesuree = QString(buf).toDouble();    
     return tension_mesuree;
 }
-
-//double MainWindow::movePosition(bool vers_la_droite, short limite_tension) //mouvement du micro
-//{
-//    const char* caractere;
-//    double tension_mesuree, tension = 0;
-//    vers_la_droite ? caractere = "d" : caractere = "g";
-//    double pos = 0;
-//    for(pos = tensionPos; vers_la_droite ? pos < limite_tension : pos > limite_tension; pos += 1)
-//    {
-//        while(!(arduino->isWritable()))
-//        {
-//            QMessageBox::critical(this,"Attention","L'écriture a échoué, tentative de reconnexion avec la carte Arduino",QMessageBox::Ok);
-//            qDebug() << "Couldn't write to serial!";
-//            arduino->openConnection();
-//            sleep(10);
-//        }
-//        arduino->write(caractere); //mouvement micro vers le HP
-        
-//        tension_mesuree = 0;
-        
-//        if(tension < tension_mesuree)
-//            tension = tension_mesuree;
-//        else
-//            tension = tension_mesuree;
-//    }
-//    return tension;
-    
-//}
-
-//double MainWindow::checkToMovePosition(bool vers_la_droite) //verif cote mouvement voulu
-//{
-//    double tension_mesuree;
-//    tensionPos = checkPosition();
-    
-//    short limite_tension = 0;
-    
-//    tension_mesuree = 0;
-    
-//    if(vers_la_droite)  //côté droit
-//    {
-//        limite_tension = 5;
-//        tension_mesuree = movePosition(vers_la_droite,limite_tension);
-        
-//    }
-//    else    //côté gauche
-//    {
-//        limite_tension = -5;
-//        tension_mesuree = movePosition(vers_la_droite,limite_tension);
-//    }
-//    return tension_mesuree;
-//}
 
 void MainWindow::etatMachine()
 {
