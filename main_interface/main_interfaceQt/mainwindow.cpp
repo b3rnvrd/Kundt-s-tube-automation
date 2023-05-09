@@ -168,7 +168,9 @@ void MainWindow::on_pushButtonCoefficient_clicked()
     double n = pmax / pmin;
     coef = pow((n-1)/(n+1),2);
     coef = 1 - coef;
+
     qDebug() << coef;
+
     ui->Editcoef->setText(QString::number(coef,'f',3));
     if(arduino->isOpen())
         arduino->closeConnection();
