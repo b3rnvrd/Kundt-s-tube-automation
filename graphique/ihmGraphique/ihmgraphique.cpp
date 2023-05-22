@@ -4,7 +4,7 @@ IhmGraphique::IhmGraphique(QWidget *parent)
     : QMainWindow(parent)
 {
         courbe = new QLineSeries();
-        *courbe << QPointF(200, 0.5) << QPointF(250, 0.5) << QPointF(315, 0.5) << QPointF(400, 0.5) << QPointF(500, 0.6) << QPointF(630, 0.7) << QPointF(800, 0.5) << QPointF(1000, 0.5)<< QPointF(1250, 0.5)<< QPointF(1600, 0.1)<< QPointF(2000, 0.1)<< QPointF(2500, 0.1)<< QPointF(3150, 0.1);
+        *courbe << QPointF(200, 0.0198) << QPointF(250, 0.0158) << QPointF(315, 0.0126) << QPointF(400, 0.0100) << QPointF(500, 0.0080) << QPointF(630, 0.0063) << QPointF(800, 0.0050) << QPointF(1000, 0.0040)<< QPointF(1250, 0.0032)<< QPointF(1600, 0.0025)<< QPointF(2000, 0.0020)<< QPointF(2500, 0.0016)<< QPointF(3150, 0.0013);
         QPen pen(0x059605);
         pen.setColor("orange");
         pen.setWidth(3);
@@ -44,7 +44,7 @@ IhmGraphique::IhmGraphique(QWidget *parent)
 
         // axe ordonnées
         QValueAxis *axeY = new QValueAxis;
-        axeY->setRange(0, 1);
+        axeY->setRange(0, 0.1);
         axeY->setLabelFormat("%.1f");
         axeY->setTitleText(QString::fromUtf8("Coefficient d'absorption"));
         graphe->addAxis(axeY, Qt::AlignLeft);

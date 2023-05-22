@@ -21,6 +21,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
@@ -34,6 +35,13 @@ public:
     QAction *actionBase_de_donnees;
     QWidget *centralWidget;
     QGridLayout *gridLayout_4;
+    QHBoxLayout *horizontalLayout_4;
+    QVBoxLayout *verticalLayout_3;
+    QLabel *labelPort;
+    QLabel *label_2;
+    QVBoxLayout *verticalLayout_2;
+    QSpinBox *spinBoxPort;
+    QPushButton *pushButtonPort;
     QGridLayout *gridLayout_3;
     QGroupBox *groupBox;
     QGridLayout *gridLayout;
@@ -72,6 +80,44 @@ public:
         gridLayout_4->setSpacing(6);
         gridLayout_4->setContentsMargins(11, 11, 11, 11);
         gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setSpacing(6);
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        verticalLayout_3 = new QVBoxLayout();
+        verticalLayout_3->setSpacing(6);
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        labelPort = new QLabel(centralWidget);
+        labelPort->setObjectName(QStringLiteral("labelPort"));
+
+        verticalLayout_3->addWidget(labelPort);
+
+        label_2 = new QLabel(centralWidget);
+        label_2->setObjectName(QStringLiteral("label_2"));
+
+        verticalLayout_3->addWidget(label_2);
+
+
+        horizontalLayout_4->addLayout(verticalLayout_3);
+
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        spinBoxPort = new QSpinBox(centralWidget);
+        spinBoxPort->setObjectName(QStringLiteral("spinBoxPort"));
+
+        verticalLayout_2->addWidget(spinBoxPort);
+
+        pushButtonPort = new QPushButton(centralWidget);
+        pushButtonPort->setObjectName(QStringLiteral("pushButtonPort"));
+
+        verticalLayout_2->addWidget(pushButtonPort);
+
+
+        horizontalLayout_4->addLayout(verticalLayout_2);
+
+
+        gridLayout_4->addLayout(horizontalLayout_4, 0, 0, 1, 1);
+
         gridLayout_3 = new QGridLayout();
         gridLayout_3->setSpacing(6);
         gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
@@ -177,7 +223,7 @@ public:
         gridLayout_3->addWidget(groupBox_2, 1, 0, 1, 1);
 
 
-        gridLayout_4->addLayout(gridLayout_3, 0, 0, 1, 1);
+        gridLayout_4->addLayout(gridLayout_3, 1, 0, 1, 1);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
@@ -203,6 +249,9 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
         actionBase_de_donnees->setText(QApplication::translate("MainWindow", "Base de donnees", nullptr));
+        labelPort->setText(QApplication::translate("MainWindow", "S\303\251lection du port COM :", nullptr));
+        label_2->setText(QApplication::translate("MainWindow", "( changer le port ferme la connection pr\303\251c\303\251demment ouverte )", nullptr));
+        pushButtonPort->setText(QApplication::translate("MainWindow", "S\303\251lectionner", nullptr));
         groupBox->setTitle(QApplication::translate("MainWindow", "Contr\303\264le GBF", nullptr));
         label->setText(QApplication::translate("MainWindow", "Fr\303\251quence(Hz)", nullptr));
         comboBoxFreq->setItemText(0, QApplication::translate("MainWindow", "200", nullptr));

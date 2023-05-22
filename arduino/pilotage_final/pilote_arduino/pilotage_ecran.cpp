@@ -9,6 +9,7 @@ void setupEcran() {
   tft.begin();
   tft.setRotation(3);
   tft.fillScreen(ILI9341_BLACK);
+  affichageLiaison(false);
 }
 
 void affichageMesureEnCours() {
@@ -32,14 +33,14 @@ void affichageMesureEnCours() {
 
 void affichageMesures(String data) {
   tft.setRotation(4);
-  tft.setCursor(0,0);
+  tft.setCursor(0, 0);
   tft.fillScreen(ILI9341_BLACK);
   tft.setTextColor(ILI9341_WHITE);
   tft.setTextSize(2);
-  tft.println("frequence = 200");
-  tft.setCursor(0,50);
-    tft.setTextSize(2);
-  tft.println("coefficient = 0.5");
+  tft.println(data);
+  //  tft.setCursor(0,50);
+  //  tft.setTextSize(2);
+  //  tft.println("coefficient = 0.5");
 }
 
 void affichageStopManuel(bool arret_manuel) {
@@ -51,4 +52,18 @@ void affichageStopManuel(bool arret_manuel) {
     tft.println("Arret du moteur en cours");
   else
     tft.println("Moteur a l'arret");
+}
+
+void affichageLiaison(bool is_open) {
+  String liaison;
+  if (is_open)
+    liaison = "Liaison      ouverte";
+  else
+    liaison = "Liaison      fermee";
+  tft.setRotation(1);
+  tft.fillScreen(ILI9341_BLACK);
+  tft.setCursor(0, 0);
+  tft.setTextColor(ILI9341_WHITE);
+  tft.setTextSize(4);
+  tft.println(liaison);
 }

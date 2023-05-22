@@ -13,5 +13,6 @@ void affichageMesureEnCours();
 void setupEcran();
 void affichageMesures(String data);
 void affichageStopManuel(bool arret_manuel);
+void affichageLiaison(bool is_open);
 
 #endif

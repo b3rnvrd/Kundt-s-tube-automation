@@ -15,6 +15,16 @@ void loop() {
     data = Serial.read(); //Lecture des données sur le port série
 
     switch (data) {
+      //Ouverture liaison
+      case 'o':
+        affichageLiaison(true);
+        break;
+
+      //Fermeture liaison
+      case 'f':
+        affichageLiaison(false);
+        break;
+     
       //Demande de déplacement à droite
       case 'd':
         avanceDroite();
@@ -36,9 +46,9 @@ void loop() {
     arretMoteur();
   }
   while (Serial.available()) {
-    donnees_a_afficher = Serial.read();
+    donnees_a_afficher = Serial.readString();
+    donnees_a_afficher.trim();
     affichageMesures(donnees_a_afficher);
-    affichageStopManuel(false);
-
+    //affichageStopManuel(false);
   }
 }

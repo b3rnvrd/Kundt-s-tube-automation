@@ -17,16 +17,21 @@ public:
     bool isOpen();
     bool isWritable();
     QByteArray read();
+    void setPort(QString port);
 
 private slots:
     void newData();
 
 signals:
     void gotNewData(QByteArray data);
+
 private:
     QSerialPort _serial;
 
 public slots:
+
+protected slots:
+
 };
 
 #endif // SERIALLINK_H

@@ -4,7 +4,7 @@ IhmGraphique::IhmGraphique(QWidget *parent, const QMap<double, QString > &coef_p
     : QMainWindow(parent)
 {
     courbe = new QLineSeries();
-    *courbe << QPointF(200, 0.5) << QPointF(250, 0.5) << QPointF(315, 0.5) << QPointF(400, 0.5) << QPointF(500, 0.6) << QPointF(630, 0.7) << QPointF(800, 0.5) << QPointF(1000, 0.5)<< QPointF(1250, 0.5)<< QPointF(1600, 0.1)<< QPointF(2000, 0.1)<< QPointF(2500, 0.1)<< QPointF(3150, 0.1);
+    *courbe << QPointF(200, 0.9993) << QPointF(250, 0.9651) << QPointF(315, 0.5411) << QPointF(400, 0.5100) << QPointF(500, 0.6530) << QPointF(630, 0.6274) << QPointF(800, 0.7204) << QPointF(1000, 0.6274)<< QPointF(1250, 0.5285)<< QPointF(1600, 0.4931)<< QPointF(2000, 0.6627)<< QPointF(2500, 0.5226)<< QPointF(3150, 0.4523);
 //    for(int i = 0; i < 13; i++)
 //    {
 //        double frequence = coef_par_freq.key(QString::number(i));
@@ -21,7 +21,7 @@ IhmGraphique::IhmGraphique(QWidget *parent, const QMap<double, QString > &coef_p
     graphe = new QChart();
     QString nom = "";
     graphe->addSeries(courbe);
-    graphe->setTitle("Coefficient d'absorption du " + nom + " en fonction de la fréquence");
+    graphe->setTitle("Coefficient d'absorption du liege" + nom + " en fonction de la fréquence");
     // Légende
     graphe->legend()->hide();
     graphe->legend()->setAlignment(Qt::AlignBottom);

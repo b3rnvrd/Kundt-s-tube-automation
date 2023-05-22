@@ -35,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
     
     arduino = new seriallink;
     arduino->openConnection();
-    
+    arduino->write("o");
 }
 
 MainWindow::~MainWindow()
@@ -46,8 +46,9 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionBase_de_donnees_triggered()
 {
     QProcess *process = new QProcess(this);
-//    process->start("\"C:\\Users\\etudiant\\Documents\\GitHub\\tube_de_kundt\\Apps\\BDD\\MySqlQt.exe\"");          //chemin Patrick
+    //    process->start("\"C:\\Users\\etudiant\\Documents\\GitHub\\tube_de_kundt\\Apps\\BDD\\MySqlQt.exe\"");          //chemin Patrick
     process->start("\"C:\\Users\\etudiant\\Desktop\\tube_de_kundt\\Apps\\BDD\\MySqlQt.exe\"");            //chemin Eliott
+    //    process->start("\"..\\..\\BDD\\MySqlQt.exe\"");         //chemin universel
     qDebug() << process->errorString();
 }
 
@@ -64,7 +65,7 @@ void MainWindow::on_BtnStart_clicked()
     viPrintf(osc,":AUT\n");// autoset oscillo
     viPrintf(osc, (ViString)":CHAN3:SCAL 4\n");
     tensionPos = checkPosition();
-//    double n, tension_max_mesuree = 1, tension_min_mesuree = 1;
+    //    double n, tension_max_mesuree = 1, tension_min_mesuree = 1;
 
 
 
@@ -114,7 +115,7 @@ double MainWindow::mesureTension()// mesure de la tension
     double tension_mesuree = 0;
     viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN1\n"); //tension mesurée sur le channel 1
     viScanf(osc,(ViString)"%t",&buf);       //Lecture du resultat %t récupére toute la chaine de caractere si separé par un espace
-    tension_mesuree = QString(buf).toDouble();    
+    tension_mesuree = QString(buf).toDouble();
     return tension_mesuree;
 }
 
@@ -134,7 +135,7 @@ void MainWindow::etatMachine()
         if((pmax<pmesure) && pmesure < 10)
             pmax = pmesure;
         qDebug() << pmax;
-//        viPrintf(osc,":AUT\n");// autoset oscillo
+        //        viPrintf(osc,":AUT\n");// autoset oscillo
         sleep(1);
         break;
 
@@ -147,7 +148,7 @@ void MainWindow::etatMachine()
         pmesure=mesureTension();
         if(pmesure < pmin)
             pmin = pmesure;
-                qDebug() << pmin;
+        qDebug() << pmin;
         sleep(1);
         break;
     case 4:
@@ -173,8 +174,38 @@ void MainWindow::on_pushButtonCoefficient_clicked()
 
     ui->Editcoef->setText(QString::number(coef,'f',3));
     if(arduino->isOpen())
+    {
+        arduino->write("f");
         arduino->closeConnection();
+    }
     arduino->openConnection();
-    QByteArray donnees_a_afficher = (QString::number(freq) + " : " + QString::number(coef)).toUtf8();
+    arduino->write("o");
+    QByteArray donnees_a_afficher = ("frequence : " + QByteArray::number(freq) + " ;      coef : " + QByteArray::number(coef));
     arduino->write(donnees_a_afficher);
+}
+
+
+void MainWindow::on_pushButtonPort_clicked()
+{
+    QString port = ui->spinBoxPort->text();
+    arduino->setPort(port);
+    arduino->openConnection();
+    if(!arduino->isOpen())
+        qDebug() << "Problème à l'ouverture du port sélectionné";
+    else
+        qDebug() << "connexion au nouveau port COM ok!";
+    arduino->write("o");
+
+    qDebug() <<"port demandé : " + port;
+}
+
+void MainWindow::on_spinBoxPort_valueChanged()
+{
+    arduino->write("f");
+    arduino->closeConnection();
+}
+
+void MainWindow::on_comboBoxFreq_editTextChanged(const QString &arg1)
+{
+    freq = arg1.toDouble();
 }

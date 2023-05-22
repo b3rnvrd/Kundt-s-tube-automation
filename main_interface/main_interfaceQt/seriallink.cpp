@@ -4,7 +4,7 @@
 
 seriallink::seriallink(QObject *parent) : QObject(parent)
 {
-    _serial.setPortName("COM10");// COM10 Eliott COM5 Patrick
+    _serial.setPortName("COM9");// COM10 Eliott COM5 Patrick
     _serial.setBaudRate(QSerialPort::Baud115200);
     _serial.setDataBits(QSerialPort::Data8);
     _serial.setParity(QSerialPort::NoParity);
@@ -24,11 +24,15 @@ void seriallink::closeConnection(){
 }
 
 void seriallink::openConnection(){
-    if(!_serial.open(QIODevice::ReadWrite))
-    {
-        qDebug() << "connexion avec la carte Arduino impossible";
-    }
-    else qDebug() << "connexion ok";
+    if(!_serial.isOpen())
+        if(!_serial.open(QIODevice::ReadWrite))
+        {
+            qDebug() << "connexion avec la carte Arduino impossible";
+        }
+        else
+            qDebug() << "connexion ok";
+    else
+        qDebug() << "connexion ok";
 }
 
 void seriallink::write(const QByteArray &messageToWrite){
@@ -43,11 +47,14 @@ bool seriallink::isWritable(){
     return _serial.isWritable();
 }
 
-QByteArray seriallink::read()
-{
+QByteArray seriallink::read(){
     return _serial.readAll();
 }
 
 void seriallink::newData(){
     emit gotNewData(_serial.readAll());
+}
+
+void seriallink::setPort(QString port){
+    _serial.setPortName("COM" + port);
 }

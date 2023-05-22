@@ -24,7 +24,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-void paintEvent(QPaintEvent *event);
+    void paintEvent();
 private slots:
     void on_actionRafaichir_triggered();
     void on_actionModifier_triggered();

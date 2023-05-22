@@ -37,7 +37,7 @@ MainWindow::~MainWindow()
 
 }
 
-void MainWindow::paintEvent(QPaintEvent *event)
+void MainWindow::paintEvent()
 {
     int w= ui->tableView->width()-ui->tableView->verticalHeader()->width()-ui->tableView->verticalScrollBar()->width();
     ui->tableView->setColumnWidth(0,w/4);
