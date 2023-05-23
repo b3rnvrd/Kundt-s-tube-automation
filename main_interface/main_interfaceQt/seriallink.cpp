@@ -33,6 +33,7 @@ void seriallink::openConnection(){
             qDebug() << "connexion ok";
     else
         qDebug() << "connexion ok";
+    this->clear();
 }
 
 void seriallink::write(const QByteArray &messageToWrite){
@@ -57,4 +58,9 @@ void seriallink::newData(){
 
 void seriallink::setPort(QString port){
     _serial.setPortName("COM" + port);
+}
+
+void seriallink::clear(QSerialPort::Directions directions)
+{
+    _serial.clear(directions);
 }

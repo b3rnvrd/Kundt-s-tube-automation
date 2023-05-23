@@ -1,16 +1,14 @@
 #include "ihmgraphique.h"
 
-IhmGraphique::IhmGraphique(QWidget *parent, const QMap<double, QString > &coef_par_freq)
+IhmGraphique::IhmGraphique(QWidget *parent, double frequence[13], double coef[13])
     : QMainWindow(parent)
 {
     courbe = new QLineSeries();
-    *courbe << QPointF(200, 0.9993) << QPointF(250, 0.9651) << QPointF(315, 0.5411) << QPointF(400, 0.5100) << QPointF(500, 0.6530) << QPointF(630, 0.6274) << QPointF(800, 0.7204) << QPointF(1000, 0.6274)<< QPointF(1250, 0.5285)<< QPointF(1600, 0.4931)<< QPointF(2000, 0.6627)<< QPointF(2500, 0.5226)<< QPointF(3150, 0.4523);
-//    for(int i = 0; i < 13; i++)
-//    {
-//        double frequence = coef_par_freq.key(QString::number(i));
-//        double coef = coef_par_freq.value(i).toDouble();
-//        *courbe << QPointF(frequence, coef);
-//    }
+    //*courbe << QPointF(200, 0.9993) << QPointF(250, 0.9651) << QPointF(315, 0.5411) << QPointF(400, 0.5100) << QPointF(500, 0.6530) << QPointF(630, 0.6274) << QPointF(800, 0.7204) << QPointF(1000, 0.6274)<< QPointF(1250, 0.5285)<< QPointF(1600, 0.4931)<< QPointF(2000, 0.6627)<< QPointF(2500, 0.5226)<< QPointF(3150, 0.4523);
+    for(int i = 0; i < 13; i++)
+    {
+        *courbe << QPointF(frequence[i], coef[i]);
+    }
     QPen pen(0x059605);
     pen.setColor("orange");
     pen.setWidth(3);

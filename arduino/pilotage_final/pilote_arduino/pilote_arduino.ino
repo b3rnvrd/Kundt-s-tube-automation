@@ -3,6 +3,7 @@
 
 char data;
 String donnees_a_afficher;
+int delimiteur, delimiteur_1;
 
 void setup() {
   setupSerialMoteur();
@@ -47,6 +48,9 @@ void loop() {
   }
   while (Serial.available()) {
     donnees_a_afficher = Serial.readString();
+    delimiteur = donnees_a_afficher.indexOf("$");
+    delimiteur_1 = donnees_a_afficher.indexOf("$", delimiteur + 1);
+    donnees_a_afficher = donnees_a_afficher.substring(delimiteur + 1, delimiteur_1);
     donnees_a_afficher.trim();
     affichageMesures(donnees_a_afficher);
     //affichageStopManuel(false);

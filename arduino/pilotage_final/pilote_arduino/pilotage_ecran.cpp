@@ -38,9 +38,6 @@ void affichageMesures(String data) {
   tft.setTextColor(ILI9341_WHITE);
   tft.setTextSize(2);
   tft.println(data);
-  //  tft.setCursor(0,50);
-  //  tft.setTextSize(2);
-  //  tft.println("coefficient = 0.5");
 }
 
 void affichageStopManuel(bool arret_manuel) {

@@ -18,7 +18,7 @@ public:
     bool isWritable();
     QByteArray read();
     void setPort(QString port);
-
+    void clear(QSerialPort::Directions directions = QSerialPort::AllDirections);
 private slots:
     void newData();
 

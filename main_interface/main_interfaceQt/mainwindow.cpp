@@ -82,15 +82,13 @@ void MainWindow::on_BtnStart_clicked()
         else
             if(recu == "g_ACK")
                 etat = 4;
-
-        coef_par_freq.insert(freq, QString::number(coef));
     }
     else
         QMessageBox::critical(this,"Attention","Verifiez la position du micro",QMessageBox::Ok);
 
 }
 
-void MainWindow::on_BtnStop_clicked()//Arret d'urgence
+void MainWindow::on_BtnStop_clicked()   //Arret d'urgence
 {
     while(!(arduino->isWritable()));
     arduino->write("s");
@@ -154,13 +152,16 @@ void MainWindow::etatMachine()
     case 4:
         viPrintf(osc, (ViString)":OUTP1 :0\n");
         timer->stop();
+        frequence[i] = freq;
+        coefficient[i] = coef;
+        i++;
         break;
     }
 }
 
 void MainWindow::on_pushButtonGraphique_clicked()
 {
-    graph = new IhmGraphique(0,coef_par_freq);
+    graph = new IhmGraphique(0,frequence,coefficient);
     graph->show();
 }
 
@@ -173,17 +174,17 @@ void MainWindow::on_pushButtonCoefficient_clicked()
     qDebug() << coef;
 
     ui->Editcoef->setText(QString::number(coef,'f',3));
-    if(arduino->isOpen())
-    {
-        arduino->write("f");
-        arduino->closeConnection();
-    }
-    arduino->openConnection();
-    arduino->write("o");
-    QByteArray donnees_a_afficher = ("frequence : " + QByteArray::number(freq) + " ;      coef : " + QByteArray::number(coef));
+        if(arduino->isOpen())
+        {
+            arduino->write("f");
+            arduino->closeConnection();
+        }
+        arduino->openConnection();
+        arduino->write("o");
+    arduino->clear();
+    QByteArray donnees_a_afficher = ("$frequence : " + QByteArray::number(freq) + "      coef : " + QByteArray::number(coef));
     arduino->write(donnees_a_afficher);
 }
-
 
 void MainWindow::on_pushButtonPort_clicked()
 {
@@ -205,7 +206,8 @@ void MainWindow::on_spinBoxPort_valueChanged()
     arduino->closeConnection();
 }
 
-void MainWindow::on_comboBoxFreq_editTextChanged(const QString &arg1)
+void MainWindow::on_comboBoxFreq_currentTextChanged(const QString &arg1)
 {
     freq = arg1.toDouble();
+    qDebug() << "changement de frequence : " << freq;
 }

@@ -20,7 +20,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     char buf[256] = {0};
+    int i =0;
     double freq = 200, ampli, coef, tensionPos,pmax=0,pmin=10,pmesure;
+    double frequence[13], coefficient[13];
     int etat = 0;
     QTimer *timer;
     QMap < double, QString> coef_par_freq;
@@ -41,7 +43,7 @@ private slots:
 
     void on_spinBoxPort_valueChanged();
 
-    void on_comboBoxFreq_editTextChanged(const QString &arg1);
+    void on_comboBoxFreq_currentTextChanged(const QString &arg1);
 
 private:
     bool vers_la_droite = true,vers_la_gauche = false;

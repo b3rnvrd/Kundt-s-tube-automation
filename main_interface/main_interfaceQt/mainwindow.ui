@@ -29,7 +29,7 @@
         <item>
          <widget class="QLabel" name="label_2">
           <property name="text">
-           <string>( changer le port ferme la connection précédemment ouverte )</string>
+           <string>( changer le port ferme la liaison précédemment ouverte )</string>
           </property>
          </widget>
         </item>

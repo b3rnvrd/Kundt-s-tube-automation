@@ -10,7 +10,7 @@ class IhmGraphique : public QMainWindow
     Q_OBJECT
 
 public:
-    IhmGraphique(QWidget *parent = 0, const QMap<double, QString > &coef_par_freq = ( QMap<double, QString>() ));
+    IhmGraphique(QWidget *parent, double frequence[], double coef[]);
     ~IhmGraphique();
 
 private:
