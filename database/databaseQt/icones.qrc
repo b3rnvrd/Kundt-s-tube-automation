@@ -8,5 +8,7 @@
         <file>images/retirer_ligne.png</file>
         <file>images/retirer_table.png</file>
         <file>images/ajouter_ligne.png</file>
+        <file>images/bois.png</file>
+        <file>images/mesures.png</file>
     </qresource>
 </RCC>

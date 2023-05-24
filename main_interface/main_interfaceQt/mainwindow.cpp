@@ -47,8 +47,8 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionBase_de_donnees_triggered()
 {
     QProcess *process = new QProcess(this);
-    //    process->start("\"C:\\Users\\etudiant\\Documents\\GitHub\\tube_de_kundt\\Apps\\BDD\\MySqlQt.exe\"");          //chemin Patrick
-    process->start("\"C:\\Users\\etudiant\\Desktop\\tube_de_kundt\\Apps\\BDD\\MySqlQt.exe\"");            //chemin Eliott
+    //process->start("\"C:\\Users\\etudiant\\Documents\\GitHub\\tube_de_kundt\\Apps\\BDD\\MySqlQt.exe\"");          //chemin Patrick
+    process->start("\"C:\\Users\\etudiant\\Desktop\\tube_de_kundt\\Apps\\BDD\\MySqlQt.exe\"");            //chemin Eliott et Patrick
     //    process->start("\"..\\..\\BDD\\MySqlQt.exe\"");         //chemin universel
     qDebug() << process->errorString();
 }

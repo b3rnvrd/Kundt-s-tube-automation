@@ -13,6 +13,7 @@
 #include <QtGui/QIcon>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
@@ -20,6 +21,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTableView>
 #include <QtWidgets/QToolBar>
@@ -33,25 +35,38 @@ class Ui_MainWindow
 public:
     QAction *actionRafaichir;
     QAction *actionModifier;
-    QAction *actionAfficher_l_ID;
-    QAction *actionSupprimer;
-    QAction *actionCreerTableMateriau;
-    QAction *actionSupprimerTable;
+    QAction *actionafficherMateriaux;
+    QAction *actionafficherMesures;
+    QAction *actionafficher_l_ID;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
-    QVBoxLayout *verticalLayout_2;
-    QVBoxLayout *verticalLayout;
-    QHBoxLayout *horizontalLayout_4;
+    QVBoxLayout *verticalLayout_6;
+    QVBoxLayout *verticalLayout_5;
+    QHBoxLayout *horizontalLayout_6;
+    QVBoxLayout *verticalLayout_4;
     QHBoxLayout *horizontalLayout;
     QLabel *labelNom;
     QLineEdit *lineEditNom;
+    QVBoxLayout *verticalLayout;
+    QPushButton *AjouterMateriau;
+    QPushButton *pushButtonSupprimerMateriau;
+    QVBoxLayout *verticalLayout_3;
+    QHBoxLayout *horizontalLayout_4;
     QHBoxLayout *horizontalLayout_2;
     QLabel *labelCoef;
     QLineEdit *lineEditCoef;
     QHBoxLayout *horizontalLayout_3;
     QLabel *labelFrequence;
     QLineEdit *lineEditFrequence;
-    QPushButton *Ajouter;
+    QVBoxLayout *verticalLayout_2;
+    QPushButton *pushButtonAjouterMesures;
+    QPushButton *pushButtonSupprimerMesures;
+    QHBoxLayout *horizontalLayout_5;
+    QLabel *label;
+    QSpinBox *spinBoxMateriau;
+    QHBoxLayout *horizontalLayout_7;
+    QLabel *labelTableARafraichir;
+    QComboBox *comboBoxTableARafraichir;
     QTableView *tableView;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -60,7 +75,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(788, 490);
+        MainWindow->resize(1063, 592);
         QIcon icon;
         icon.addFile(QStringLiteral(":/images/bdd.png"), QSize(), QIcon::Normal, QIcon::Off);
         MainWindow->setWindowIcon(icon);
@@ -74,38 +89,36 @@ public:
         QIcon icon2;
         icon2.addFile(QStringLiteral(":/images/modifier.jpg"), QSize(), QIcon::Normal, QIcon::Off);
         actionModifier->setIcon(icon2);
-        actionAfficher_l_ID = new QAction(MainWindow);
-        actionAfficher_l_ID->setObjectName(QStringLiteral("actionAfficher_l_ID"));
-        actionSupprimer = new QAction(MainWindow);
-        actionSupprimer->setObjectName(QStringLiteral("actionSupprimer"));
+        actionafficherMateriaux = new QAction(MainWindow);
+        actionafficherMateriaux->setObjectName(QStringLiteral("actionafficherMateriaux"));
         QIcon icon3;
-        icon3.addFile(QStringLiteral(":/images/retirer_ligne.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionSupprimer->setIcon(icon3);
-        actionCreerTableMateriau = new QAction(MainWindow);
-        actionCreerTableMateriau->setObjectName(QStringLiteral("actionCreerTableMateriau"));
+        icon3.addFile(QStringLiteral(":/images/bois.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionafficherMateriaux->setIcon(icon3);
+        actionafficherMesures = new QAction(MainWindow);
+        actionafficherMesures->setObjectName(QStringLiteral("actionafficherMesures"));
         QIcon icon4;
-        icon4.addFile(QStringLiteral(":/images/ajouter_table.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionCreerTableMateriau->setIcon(icon4);
-        actionSupprimerTable = new QAction(MainWindow);
-        actionSupprimerTable->setObjectName(QStringLiteral("actionSupprimerTable"));
-        QIcon icon5;
-        icon5.addFile(QStringLiteral(":/images/retirer_table.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionSupprimerTable->setIcon(icon5);
+        icon4.addFile(QStringLiteral(":/images/mesures.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionafficherMesures->setIcon(icon4);
+        actionafficher_l_ID = new QAction(MainWindow);
+        actionafficher_l_ID->setObjectName(QStringLiteral("actionafficher_l_ID"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        verticalLayout_2 = new QVBoxLayout();
-        verticalLayout_2->setSpacing(6);
-        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setSpacing(6);
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setSpacing(6);
-        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        verticalLayout_6 = new QVBoxLayout();
+        verticalLayout_6->setSpacing(6);
+        verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
+        verticalLayout_5 = new QVBoxLayout();
+        verticalLayout_5->setSpacing(6);
+        verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setSpacing(6);
+        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
+        verticalLayout_4 = new QVBoxLayout();
+        verticalLayout_4->setSpacing(6);
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
@@ -120,8 +133,39 @@ public:
         horizontalLayout->addWidget(lineEditNom);
 
 
-        horizontalLayout_4->addLayout(horizontalLayout);
+        verticalLayout_4->addLayout(horizontalLayout);
 
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(6);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        AjouterMateriau = new QPushButton(centralWidget);
+        AjouterMateriau->setObjectName(QStringLiteral("AjouterMateriau"));
+        QIcon icon5;
+        icon5.addFile(QStringLiteral(":/images/ajouter_ligne.png"), QSize(), QIcon::Normal, QIcon::Off);
+        AjouterMateriau->setIcon(icon5);
+
+        verticalLayout->addWidget(AjouterMateriau);
+
+        pushButtonSupprimerMateriau = new QPushButton(centralWidget);
+        pushButtonSupprimerMateriau->setObjectName(QStringLiteral("pushButtonSupprimerMateriau"));
+        QIcon icon6;
+        icon6.addFile(QStringLiteral(":/images/retirer_ligne.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButtonSupprimerMateriau->setIcon(icon6);
+
+        verticalLayout->addWidget(pushButtonSupprimerMateriau);
+
+
+        verticalLayout_4->addLayout(verticalLayout);
+
+
+        horizontalLayout_6->addLayout(verticalLayout_4);
+
+        verticalLayout_3 = new QVBoxLayout();
+        verticalLayout_3->setSpacing(6);
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setSpacing(6);
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
@@ -155,27 +199,88 @@ public:
         horizontalLayout_4->addLayout(horizontalLayout_3);
 
 
-        verticalLayout->addLayout(horizontalLayout_4);
+        verticalLayout_3->addLayout(horizontalLayout_4);
 
-        Ajouter = new QPushButton(centralWidget);
-        Ajouter->setObjectName(QStringLiteral("Ajouter"));
-        QIcon icon6;
-        icon6.addFile(QStringLiteral(":/images/ajouter_ligne.png"), QSize(), QIcon::Normal, QIcon::Off);
-        Ajouter->setIcon(icon6);
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        pushButtonAjouterMesures = new QPushButton(centralWidget);
+        pushButtonAjouterMesures->setObjectName(QStringLiteral("pushButtonAjouterMesures"));
 
-        verticalLayout->addWidget(Ajouter);
+        verticalLayout_2->addWidget(pushButtonAjouterMesures);
+
+        pushButtonSupprimerMesures = new QPushButton(centralWidget);
+        pushButtonSupprimerMesures->setObjectName(QStringLiteral("pushButtonSupprimerMesures"));
+
+        verticalLayout_2->addWidget(pushButtonSupprimerMesures);
 
 
-        verticalLayout_2->addLayout(verticalLayout);
+        verticalLayout_3->addLayout(verticalLayout_2);
+
+
+        horizontalLayout_6->addLayout(verticalLayout_3);
+
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        label = new QLabel(centralWidget);
+        label->setObjectName(QStringLiteral("label"));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
+        label->setSizePolicy(sizePolicy);
+        label->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_5->addWidget(label);
+
+        spinBoxMateriau = new QSpinBox(centralWidget);
+        spinBoxMateriau->setObjectName(QStringLiteral("spinBoxMateriau"));
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(spinBoxMateriau->sizePolicy().hasHeightForWidth());
+        spinBoxMateriau->setSizePolicy(sizePolicy1);
+        spinBoxMateriau->setMinimum(1);
+
+        horizontalLayout_5->addWidget(spinBoxMateriau);
+
+
+        horizontalLayout_6->addLayout(horizontalLayout_5);
+
+
+        verticalLayout_5->addLayout(horizontalLayout_6);
+
+        horizontalLayout_7 = new QHBoxLayout();
+        horizontalLayout_7->setSpacing(6);
+        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
+        labelTableARafraichir = new QLabel(centralWidget);
+        labelTableARafraichir->setObjectName(QStringLiteral("labelTableARafraichir"));
+        labelTableARafraichir->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_7->addWidget(labelTableARafraichir);
+
+        comboBoxTableARafraichir = new QComboBox(centralWidget);
+        comboBoxTableARafraichir->addItem(QString());
+        comboBoxTableARafraichir->addItem(QString());
+        comboBoxTableARafraichir->setObjectName(QStringLiteral("comboBoxTableARafraichir"));
+
+        horizontalLayout_7->addWidget(comboBoxTableARafraichir);
+
+
+        verticalLayout_5->addLayout(horizontalLayout_7);
+
+
+        verticalLayout_6->addLayout(verticalLayout_5);
 
         tableView = new QTableView(centralWidget);
         tableView->setObjectName(QStringLiteral("tableView"));
         tableView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-        verticalLayout_2->addWidget(tableView);
+        verticalLayout_6->addWidget(tableView);
 
 
-        gridLayout->addLayout(verticalLayout_2, 0, 0, 1, 1);
+        gridLayout->addLayout(verticalLayout_6, 0, 0, 1, 1);
 
         MainWindow->setCentralWidget(centralWidget);
         mainToolBar = new QToolBar(MainWindow);
@@ -185,18 +290,15 @@ public:
         statusBar->setObjectName(QStringLiteral("statusBar"));
         MainWindow->setStatusBar(statusBar);
 
-        mainToolBar->addAction(actionCreerTableMateriau);
-        mainToolBar->addSeparator();
-        mainToolBar->addAction(actionSupprimerTable);
-        mainToolBar->addSeparator();
         mainToolBar->addAction(actionRafaichir);
-        mainToolBar->addSeparator();
-        mainToolBar->addAction(actionAfficher_l_ID);
         mainToolBar->addSeparator();
         mainToolBar->addAction(actionModifier);
         mainToolBar->addSeparator();
-        mainToolBar->addAction(actionSupprimer);
+        mainToolBar->addAction(actionafficherMateriaux);
         mainToolBar->addSeparator();
+        mainToolBar->addAction(actionafficherMesures);
+        mainToolBar->addSeparator();
+        mainToolBar->addAction(actionafficher_l_ID);
 
         retranslateUi(MainWindow);
 
@@ -208,14 +310,24 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "BaseDeDonnees", nullptr));
         actionRafaichir->setText(QApplication::translate("MainWindow", "Rafaichir", nullptr));
         actionModifier->setText(QApplication::translate("MainWindow", "Modifier la ligne", nullptr));
-        actionAfficher_l_ID->setText(QApplication::translate("MainWindow", "Afficher l'ID", nullptr));
-        actionSupprimer->setText(QApplication::translate("MainWindow", "Supprimer la ligne", nullptr));
-        actionCreerTableMateriau->setText(QApplication::translate("MainWindow", "Cr\303\251er la table", nullptr));
-        actionSupprimerTable->setText(QApplication::translate("MainWindow", "Supprimer la table", nullptr));
+        actionafficherMateriaux->setText(QApplication::translate("MainWindow", "afficherMateriaux", nullptr));
+        actionafficherMesures->setText(QApplication::translate("MainWindow", "afficherMesures", nullptr));
+        actionafficher_l_ID->setText(QApplication::translate("MainWindow", "Afficher l'ID", nullptr));
+#ifndef QT_NO_TOOLTIP
+        actionafficher_l_ID->setToolTip(QApplication::translate("MainWindow", "afficher_l_ID", nullptr));
+#endif // QT_NO_TOOLTIP
         labelNom->setText(QApplication::translate("MainWindow", "Nom du mat\303\251riau", nullptr));
+        AjouterMateriau->setText(QApplication::translate("MainWindow", "Ajouter le mat\303\251riau", nullptr));
+        pushButtonSupprimerMateriau->setText(QApplication::translate("MainWindow", "Supprimer le mat\303\251riau", nullptr));
         labelCoef->setText(QApplication::translate("MainWindow", "Coefficient d'absorption", nullptr));
         labelFrequence->setText(QApplication::translate("MainWindow", "Fr\303\251quence", nullptr));
-        Ajouter->setText(QApplication::translate("MainWindow", "Ajouter", nullptr));
+        pushButtonAjouterMesures->setText(QApplication::translate("MainWindow", "Ajouter les mesures", nullptr));
+        pushButtonSupprimerMesures->setText(QApplication::translate("MainWindow", "Supprimer les mesures", nullptr));
+        label->setText(QApplication::translate("MainWindow", "Id du mat\303\251riau", nullptr));
+        labelTableARafraichir->setText(QApplication::translate("MainWindow", "Table \303\240 rafraichir :", nullptr));
+        comboBoxTableARafraichir->setItemText(0, QApplication::translate("MainWindow", "Materiau", nullptr));
+        comboBoxTableARafraichir->setItemText(1, QApplication::translate("MainWindow", "Enregistrement", nullptr));
+
     } // retranslateUi
 
 };

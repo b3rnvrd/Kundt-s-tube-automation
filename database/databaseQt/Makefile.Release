@@ -106,10 +106,12 @@ compiler_rcc_clean:
 release/qrc_icones.cpp: icones.qrc \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/bin/rcc.exe \
 		images/corbeille.png \
+		images/bois.png \
 		images/rafraichir.png \
 		images/bdd.png \
 		images/retirer_ligne.png \
 		images/ajouter_ligne.png \
+		images/mesures.png \
 		images/modifier.jpg \
 		images/retirer_table.png \
 		images/ajouter_table.png
@@ -654,6 +656,18 @@ release/mainwindow.o: mainwindow.cpp mainwindow.h \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qdesktopwidget.h \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qguiapplication.h \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qinputmethod.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/QComboBox \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qcombobox.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qabstractitemdelegate.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qstyleoption.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qabstractspinbox.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qvalidator.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/qregularexpression.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qslider.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qabstractslider.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qstyle.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qtabbar.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qrubberband.h \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/QGridLayout \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qgridlayout.h \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qlayout.h \
@@ -665,21 +679,13 @@ release/mainwindow.o: mainwindow.cpp mainwindow.h \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qabstractitemview.h \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qabstractscrollarea.h \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/qitemselectionmodel.h \
-		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qabstractitemdelegate.h \
-		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qstyleoption.h \
-		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qabstractspinbox.h \
-		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtGui/qvalidator.h \
-		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtCore/qregularexpression.h \
-		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qslider.h \
-		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qabstractslider.h \
-		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qstyle.h \
-		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qtabbar.h \
-		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qrubberband.h \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/QLabel \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qlabel.h \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/QPushButton \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qpushbutton.h \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qabstractbutton.h \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/QSpinBox \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qspinbox.h \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/QStatusBar \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/qstatusbar.h \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/QTableView \

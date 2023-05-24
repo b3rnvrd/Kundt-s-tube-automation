@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>788</width>
-    <height>490</height>
+    <width>1063</width>
+    <height>592</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,65 +20,171 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <layout class="QVBoxLayout" name="verticalLayout_2">
+     <layout class="QVBoxLayout" name="verticalLayout_6">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout">
+       <layout class="QVBoxLayout" name="verticalLayout_5">
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout">
+           <layout class="QVBoxLayout" name="verticalLayout_4">
             <item>
-             <widget class="QLabel" name="labelNom">
-              <property name="text">
-               <string>Nom du matériau</string>
-              </property>
-             </widget>
+             <layout class="QHBoxLayout" name="horizontalLayout">
+              <item>
+               <widget class="QLabel" name="labelNom">
+                <property name="text">
+                 <string>Nom du matériau</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEditNom"/>
+              </item>
+             </layout>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEditNom"/>
+             <layout class="QVBoxLayout" name="verticalLayout">
+              <item>
+               <widget class="QPushButton" name="AjouterMateriau">
+                <property name="text">
+                 <string>Ajouter le matériau</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="icones.qrc">
+                  <normaloff>:/images/ajouter_ligne.png</normaloff>:/images/ajouter_ligne.png</iconset>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButtonSupprimerMateriau">
+                <property name="text">
+                 <string>Supprimer le matériau</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="icones.qrc">
+                  <normaloff>:/images/retirer_ligne.png</normaloff>:/images/retirer_ligne.png</iconset>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <layout class="QVBoxLayout" name="verticalLayout_3">
             <item>
-             <widget class="QLabel" name="labelCoef">
-              <property name="text">
-               <string>Coefficient d'absorption</string>
-              </property>
-             </widget>
+             <layout class="QHBoxLayout" name="horizontalLayout_4">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_2">
+                <item>
+                 <widget class="QLabel" name="labelCoef">
+                  <property name="text">
+                   <string>Coefficient d'absorption</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="lineEditCoef"/>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_3">
+                <item>
+                 <widget class="QLabel" name="labelFrequence">
+                  <property name="text">
+                   <string>Fréquence</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="lineEditFrequence"/>
+                </item>
+               </layout>
+              </item>
+             </layout>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEditCoef"/>
+             <layout class="QVBoxLayout" name="verticalLayout_2">
+              <item>
+               <widget class="QPushButton" name="pushButtonAjouterMesures">
+                <property name="text">
+                 <string>Ajouter les mesures</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButtonSupprimerMesures">
+                <property name="text">
+                 <string>Supprimer les mesures</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
             <item>
-             <widget class="QLabel" name="labelFrequence">
+             <widget class="QLabel" name="label">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
-               <string>Fréquence</string>
+               <string>Id du matériau</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEditFrequence"/>
+             <widget class="QSpinBox" name="spinBoxMateriau">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
          </layout>
         </item>
         <item>
-         <widget class="QPushButton" name="Ajouter">
-          <property name="text">
-           <string>Ajouter</string>
-          </property>
-          <property name="icon">
-           <iconset resource="icones.qrc">
-            <normaloff>:/images/ajouter_ligne.png</normaloff>:/images/ajouter_ligne.png</iconset>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <widget class="QLabel" name="labelTableARafraichir">
+            <property name="text">
+             <string>Table à rafraichir :</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBoxTableARafraichir">
+            <item>
+             <property name="text">
+              <string>Materiau</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Enregistrement</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </item>
@@ -100,18 +206,15 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionCreerTableMateriau"/>
-   <addaction name="separator"/>
-   <addaction name="actionSupprimerTable"/>
-   <addaction name="separator"/>
    <addaction name="actionRafaichir"/>
-   <addaction name="separator"/>
-   <addaction name="actionAfficher_l_ID"/>
    <addaction name="separator"/>
    <addaction name="actionModifier"/>
    <addaction name="separator"/>
-   <addaction name="actionSupprimer"/>
+   <addaction name="actionafficherMateriaux"/>
    <addaction name="separator"/>
+   <addaction name="actionafficherMesures"/>
+   <addaction name="separator"/>
+   <addaction name="actionafficher_l_ID"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionRafaichir">
@@ -132,36 +235,30 @@
     <string>Modifier la ligne</string>
    </property>
   </action>
-  <action name="actionAfficher_l_ID">
+  <action name="actionafficherMateriaux">
+   <property name="icon">
+    <iconset resource="icones.qrc">
+     <normaloff>:/images/bois.png</normaloff>:/images/bois.png</iconset>
+   </property>
+   <property name="text">
+    <string>afficherMateriaux</string>
+   </property>
+  </action>
+  <action name="actionafficherMesures">
+   <property name="icon">
+    <iconset resource="icones.qrc">
+     <normaloff>:/images/mesures.png</normaloff>:/images/mesures.png</iconset>
+   </property>
+   <property name="text">
+    <string>afficherMesures</string>
+   </property>
+  </action>
+  <action name="actionafficher_l_ID">
    <property name="text">
     <string>Afficher l'ID</string>
    </property>
-  </action>
-  <action name="actionSupprimer">
-   <property name="icon">
-    <iconset resource="icones.qrc">
-     <normaloff>:/images/retirer_ligne.png</normaloff>:/images/retirer_ligne.png</iconset>
-   </property>
-   <property name="text">
-    <string>Supprimer la ligne</string>
-   </property>
-  </action>
-  <action name="actionCreerTableMateriau">
-   <property name="icon">
-    <iconset resource="icones.qrc">
-     <normaloff>:/images/ajouter_table.png</normaloff>:/images/ajouter_table.png</iconset>
-   </property>
-   <property name="text">
-    <string>Créer la table</string>
-   </property>
-  </action>
-  <action name="actionSupprimerTable">
-   <property name="icon">
-    <iconset resource="icones.qrc">
-     <normaloff>:/images/retirer_table.png</normaloff>:/images/retirer_table.png</iconset>
-   </property>
-   <property name="text">
-    <string>Supprimer la table</string>
+   <property name="toolTip">
+    <string>afficher_l_ID</string>
    </property>
   </action>
  </widget>

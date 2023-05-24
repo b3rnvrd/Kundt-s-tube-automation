@@ -8,7 +8,8 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     DialogLogin dlg; // Création de la boite de dialogue
     if(dlg.exec()) // affichage
-    { MainWindow w; // Création de la fenêtre principale
+    {
+        MainWindow w; // Création de la fenêtre principale
         w.show(); // Affichage
         return a.exec();// exécution de l'application
     }

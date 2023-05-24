@@ -17,6 +17,7 @@ class MainWindow : public QMainWindow
     QSqlTableModel *tableModel;
     QSqlQueryModel *queryModel;
     QLineEdit selNom;
+    QString id_materiau = "1", table_selectionnee = "materiau";
 
     unsigned int id_freq = 1;
 
@@ -28,13 +29,15 @@ public:
 private slots:
     void on_actionRafaichir_triggered();
     void on_actionModifier_triggered();
-    void on_Ajouter_clicked();
-    void on_actionAfficher_l_ID_triggered();
-    void on_actionSupprimer_triggered();
-
-    void on_actionCreerTableMateriau_triggered();
-
-    void on_actionSupprimerTable_triggered();
+    void on_AjouterMateriau_clicked();
+    void on_spinBoxMateriau_valueChanged(const QString &arg1);
+    void on_actionafficherMateriaux_triggered();
+    void on_actionafficherMesures_triggered();
+    void on_pushButtonSupprimerMateriau_clicked();
+    void on_comboBoxTableARafraichir_currentTextChanged(const QString &arg1);
+    void on_actionafficher_l_ID_triggered();
+    void on_pushButtonAjouterMesures_clicked();
+    void on_pushButtonSupprimerMesures_clicked();
 
 private:
     Ui::MainWindow *ui;

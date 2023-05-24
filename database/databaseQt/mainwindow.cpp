@@ -26,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
         QMessageBox::critical(this,"Attention","Pb d'accès 1",QMessageBox::Ok);
     else
         qDebug()<<"MaBase ouverte";
+
+    this->on_actionRafaichir_triggered();
 }
 
 MainWindow::~MainWindow()
@@ -52,18 +54,136 @@ void MainWindow::on_actionRafaichir_triggered()
         if(tableModel)
             delete tableModel;
         tableModel= new QSqlTableModel(this,db);
-        QString nom = ui->lineEditNom->text();
-        tableModel->setTable(nom);
+        tableModel->setTable(table_selectionnee);
         tableModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
         ui->tableView->hideColumn(0);
-        //tableModel->setHeaderData(1, Qt::Horizontal, "Nom");
         if(tableModel->select())
         {
             ui->tableView->setModel(tableModel);
         }
     }
-    else{
+    else
+    {
+        if(queryModel)
+            delete queryModel;
+        queryModel= new QSqlQueryModel(this);
+        queryModel->setQuery("SELECT * FROM login WHERE user LIKE '"+selNom.text()+"%'",db);
+        ui->tableView->setModel(queryModel);
+    }
+    ui->lineEditCoef->clear();
+    ui->lineEditFrequence->clear();
+}
 
+
+void MainWindow::on_actionModifier_triggered()
+{
+    int ligne = ui->tableView->currentIndex().row();
+    if(ligne < 0) return;
+    QSqlRecord sqlRecord = tableModel->record(ligne);
+    QString id = sqlRecord.field("id_enregistrement").value().toString();
+    QString coef_abs = sqlRecord.field("coefficientAbsorption").value().toString();
+    QString frequence = sqlRecord.field("frequence").value().toString();
+
+    QSqlQuery query(db);
+    query.prepare(
+                    "UPDATE enregistrement SET frequence = " + frequence + " ,absorption = " + coef_abs
+                    + " ,id_materiau = " + id_materiau +  " WHERE id_enregistrement = " + id
+                 );
+    if(!query.exec())
+        QMessageBox::critical(this,"Attention","Pb Req",QMessageBox::Ok);
+    qDebug() << id;
+    qDebug() << query.lastError();
+}
+
+void MainWindow::on_AjouterMateriau_clicked()
+{
+    QString table = ui->lineEditNom->text();
+    double coef_abs = ui->lineEditCoef->text().toDouble();
+    int frequence = ui->lineEditFrequence->text().toInt();
+
+    QSqlQuery query(db);
+    query.prepare("INSERT INTO " + table + " (coefficientAbsorption, frequence) VALUES (:coef_abs, :frequence)");
+    query.bindValue(":table", table_selectionnee);
+    query.bindValue(":coef_abs", coef_abs);
+    query.bindValue(":frequence", frequence);
+    if(!query.exec())
+        QMessageBox::critical(this,"Attention","Pb Req",QMessageBox::Ok);
+    qDebug() << query.lastError();
+    id_freq++;
+
+    this->on_actionRafaichir_triggered();
+}
+
+//void MainWindow::on_actionCreerTableMateriau_triggered()
+//{
+//    QString table = ui->lineEditNom->text();
+
+//    QSqlQuery query(db);
+//    query.prepare("CREATE TABLE `kundt`." + table + " ( `id_freq` INT(50) NOT NULL AUTO_INCREMENT , `frequence` INT(50) NOT NULL , `coefficientAbsorption` DOUBLE NOT NULL , PRIMARY KEY (`id_freq`), UNIQUE `UNIQUE` (`frequence`)) ENGINE = MyISAM;");
+//    if(!query.exec())
+//        QMessageBox::critical(this,"Attention","Pb Req",QMessageBox::Ok);
+//    this->on_actionRafaichir_triggered();
+//}
+
+//void MainWindow::on_actionSupprimerTable_triggered()
+//{
+//    QString table = ui->lineEditNom->text();
+
+//    QSqlQuery query(db);
+//    query.prepare("DROP TABLE " + table);
+//            if(!query.exec())
+//            QMessageBox::critical(this,"Attention","Pb Req",QMessageBox::Ok);
+
+//    this->on_actionRafaichir_triggered();
+//}
+
+void MainWindow::on_spinBoxMateriau_valueChanged(const QString &arg1)
+{
+    id_materiau = arg1;
+}
+
+void MainWindow::on_actionafficherMateriaux_triggered()
+{
+    if(selNom.text().isEmpty()){
+        if(tableModel)
+            delete tableModel;
+        tableModel= new QSqlTableModel(this,db);
+        tableModel->setTable("materiau");
+        tableModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+        ui->tableView->hideColumn(0);
+        if(tableModel->select())
+        {
+            ui->tableView->setModel(tableModel);
+        }
+    }
+    else
+    {
+        if(queryModel)
+            delete queryModel;
+        queryModel= new QSqlQueryModel(this);
+        queryModel->setQuery("SELECT * FROM login WHERE user LIKE '"+selNom.text()+"%'",db);
+        ui->tableView->setModel(queryModel);
+    }
+    ui->lineEditCoef->clear();
+    ui->lineEditFrequence->clear();
+}
+
+void MainWindow::on_actionafficherMesures_triggered()
+{
+    if(selNom.text().isEmpty()){
+        if(tableModel)
+            delete tableModel;
+        tableModel= new QSqlTableModel(this,db);
+        tableModel->setTable("enregistrement");
+        tableModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+        ui->tableView->hideColumn(0);
+        if(tableModel->select())
+        {
+            ui->tableView->setModel(tableModel);
+        }
+    }
+    else
+    {
         if(queryModel)
             delete queryModel;
         queryModel= new QSqlQueryModel(this);
@@ -75,85 +195,58 @@ void MainWindow::on_actionRafaichir_triggered()
 
 }
 
-
-void MainWindow::on_actionModifier_triggered()
+void MainWindow::on_comboBoxTableARafraichir_currentTextChanged(const QString &arg1)
 {
-    int ligne = ui->tableView->currentIndex().row();
-    if(ligne < 0) return;
-    QSqlRecord sqlRecord = tableModel->record(ligne);
-    int id = sqlRecord.field("id_freq").value().toInt();
-    double coef_abs = sqlRecord.field("coefficientAbsorption").value().toDouble();
-    int frequence = sqlRecord.field("frequence").value().toInt();
-    QString table = ui->lineEditNom->text();
-
-    QSqlQuery query(db);
-    query.prepare("UPDATE " + table + " SET frequence=" + QString::number(frequence) +" ,coefficientAbsorption=" + QString::number(coef_abs) +  " WHERE id_freq=" + QString::number(id));
-    if(!query.exec())
-        QMessageBox::critical(this,"Attention","Pb Req",QMessageBox::Ok);
-    qDebug() << id;
-    qDebug() << query.lastError();
-}
-
-void MainWindow::on_Ajouter_clicked()
-{
-
-    QString table = ui->lineEditNom->text();
-    double coef_abs = ui->lineEditCoef->text().toDouble();
-    int frequence = ui->lineEditFrequence->text().toInt();
-
-    QSqlQuery query(db);
-    query.prepare("INSERT INTO "+table+" (coefficientAbsorption, frequence) VALUES (:coef_abs, :frequence)");
-    //query.prepare("CREATE TABLE `kundt`.`:table` ( `coef_abs` DOUBLE NOT NULL , `frequence` INT(50) NOT NULL ) ENGINE = MyISAM;");
-    //query.bindValue(":table", table);
-    query.bindValue(":coef_abs", coef_abs);
-    query.bindValue(":frequence", frequence);
-    if(!query.exec())
-        QMessageBox::critical(this,"Attention","Pb Req",QMessageBox::Ok);
-    qDebug() << query.lastError();
-    id_freq++;
-
+    table_selectionnee = arg1.toLower();
     this->on_actionRafaichir_triggered();
 }
 
-void MainWindow::on_actionAfficher_l_ID_triggered()
-{
-    ui->tableView->showColumn(0);
-}
-
-void MainWindow::on_actionSupprimer_triggered()
+void MainWindow::on_pushButtonSupprimerMateriau_clicked()
 {
     QSqlQuery query(db);
-    QString table = ui->lineEditNom->text();
     int ligne = ui->tableView->currentIndex().row();
     if(ligne < 0) return;
     QSqlRecord sqlRecord= tableModel->record(ligne);
-    int id = sqlRecord.field("id_freq").value().toInt();
+    int id = sqlRecord.field("id_enregistrement").value().toInt();
 
-    query.prepare("DELETE FROM " + table + " WHERE " + table + ".id_freq = " + QString::number(id));
+    query.prepare("DELETE FROM " + table_selectionnee + " WHERE " + table_selectionnee + ".id_enregistrement = " + QString::number(id));
     query.exec();
 
     this->on_actionRafaichir_triggered();
 }
 
-void MainWindow::on_actionCreerTableMateriau_triggered()
+void MainWindow::on_actionafficher_l_ID_triggered()
 {
-    QString table = ui->lineEditNom->text();
+    ui->tableView->showColumn(0);
+}
+
+void MainWindow::on_pushButtonAjouterMesures_clicked()
+{
+    double coef_abs = ui->lineEditCoef->text().toDouble();
+    int frequence = ui->lineEditFrequence->text().toInt();
 
     QSqlQuery query(db);
-    query.prepare("CREATE TABLE `kundt`." + table + " ( `id_freq` INT(50) NOT NULL AUTO_INCREMENT , `frequence` INT(50) NOT NULL , `coefficientAbsorption` DOUBLE NOT NULL , PRIMARY KEY (`id_freq`), UNIQUE `UNIQUE` (`frequence`)) ENGINE = MyISAM;");
+    query.prepare("INSERT INTO enregistrement (absorption, frequence, id_materiau) VALUES (:coef_abs, :frequence, :id_materiau)");
+    query.bindValue(":id_materiau", id_materiau);
+    query.bindValue(":coef_abs", coef_abs);
+    query.bindValue(":frequence", frequence);
     if(!query.exec())
         QMessageBox::critical(this,"Attention","Pb Req",QMessageBox::Ok);
+    qDebug() << query.lastError();
+
     this->on_actionRafaichir_triggered();
 }
 
-void MainWindow::on_actionSupprimerTable_triggered()
+void MainWindow::on_pushButtonSupprimerMesures_clicked()
 {
-    QString table = ui->lineEditNom->text();
-
     QSqlQuery query(db);
-    query.prepare("DROP TABLE " + table);
-            if(!query.exec())
-            QMessageBox::critical(this,"Attention","Pb Req",QMessageBox::Ok);
+    int ligne = ui->tableView->currentIndex().row();
+    if(ligne < 0) return;
+    QSqlRecord sqlRecord= tableModel->record(ligne);
+    QString id = sqlRecord.field("id_enregistrement").value().toString();
+
+    query.prepare("DELETE FROM enregistrement WHERE enregistrement.id_enregistrement = " + id);
+    query.exec();
 
     this->on_actionRafaichir_triggered();
 }
