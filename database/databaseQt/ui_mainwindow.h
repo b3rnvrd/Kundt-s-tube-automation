@@ -57,7 +57,7 @@ public:
     QLineEdit *lineEditCoef;
     QHBoxLayout *horizontalLayout_3;
     QLabel *labelFrequence;
-    QLineEdit *lineEditFrequence;
+    QComboBox *comboBoxFrequence;
     QVBoxLayout *verticalLayout_2;
     QPushButton *pushButtonAjouterMesures;
     QPushButton *pushButtonSupprimerMesures;
@@ -190,10 +190,23 @@ public:
 
         horizontalLayout_3->addWidget(labelFrequence);
 
-        lineEditFrequence = new QLineEdit(centralWidget);
-        lineEditFrequence->setObjectName(QStringLiteral("lineEditFrequence"));
+        comboBoxFrequence = new QComboBox(centralWidget);
+        comboBoxFrequence->addItem(QString());
+        comboBoxFrequence->addItem(QString());
+        comboBoxFrequence->addItem(QString());
+        comboBoxFrequence->addItem(QString());
+        comboBoxFrequence->addItem(QString());
+        comboBoxFrequence->addItem(QString());
+        comboBoxFrequence->addItem(QString());
+        comboBoxFrequence->addItem(QString());
+        comboBoxFrequence->addItem(QString());
+        comboBoxFrequence->addItem(QString());
+        comboBoxFrequence->addItem(QString());
+        comboBoxFrequence->addItem(QString());
+        comboBoxFrequence->addItem(QString());
+        comboBoxFrequence->setObjectName(QStringLiteral("comboBoxFrequence"));
 
-        horizontalLayout_3->addWidget(lineEditFrequence);
+        horizontalLayout_3->addWidget(comboBoxFrequence);
 
 
         horizontalLayout_4->addLayout(horizontalLayout_3);
@@ -321,6 +334,20 @@ public:
         pushButtonSupprimerMateriau->setText(QApplication::translate("MainWindow", "Supprimer le mat\303\251riau", nullptr));
         labelCoef->setText(QApplication::translate("MainWindow", "Coefficient d'absorption", nullptr));
         labelFrequence->setText(QApplication::translate("MainWindow", "Fr\303\251quence", nullptr));
+        comboBoxFrequence->setItemText(0, QApplication::translate("MainWindow", "200", nullptr));
+        comboBoxFrequence->setItemText(1, QApplication::translate("MainWindow", "250", nullptr));
+        comboBoxFrequence->setItemText(2, QApplication::translate("MainWindow", "315", nullptr));
+        comboBoxFrequence->setItemText(3, QApplication::translate("MainWindow", "400", nullptr));
+        comboBoxFrequence->setItemText(4, QApplication::translate("MainWindow", "500", nullptr));
+        comboBoxFrequence->setItemText(5, QApplication::translate("MainWindow", "630", nullptr));
+        comboBoxFrequence->setItemText(6, QApplication::translate("MainWindow", "800", nullptr));
+        comboBoxFrequence->setItemText(7, QApplication::translate("MainWindow", "1000", nullptr));
+        comboBoxFrequence->setItemText(8, QApplication::translate("MainWindow", "1250", nullptr));
+        comboBoxFrequence->setItemText(9, QApplication::translate("MainWindow", "1600", nullptr));
+        comboBoxFrequence->setItemText(10, QApplication::translate("MainWindow", "2000", nullptr));
+        comboBoxFrequence->setItemText(11, QApplication::translate("MainWindow", "2500", nullptr));
+        comboBoxFrequence->setItemText(12, QApplication::translate("MainWindow", "3150", nullptr));
+
         pushButtonAjouterMesures->setText(QApplication::translate("MainWindow", "Ajouter les mesures", nullptr));
         pushButtonSupprimerMesures->setText(QApplication::translate("MainWindow", "Supprimer les mesures", nullptr));
         label->setText(QApplication::translate("MainWindow", "Id du mat\303\251riau", nullptr));

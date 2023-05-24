@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[9];
-    char stringdata0[222];
+    QByteArrayData data[15];
+    char stringdata0[438];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,19 +35,31 @@ QT_MOC_LITERAL(0, 0, 10), // "MainWindow"
 QT_MOC_LITERAL(1, 11, 28), // "on_actionRafaichir_triggered"
 QT_MOC_LITERAL(2, 40, 0), // ""
 QT_MOC_LITERAL(3, 41, 27), // "on_actionModifier_triggered"
-QT_MOC_LITERAL(4, 69, 18), // "on_Ajouter_clicked"
-QT_MOC_LITERAL(5, 88, 32), // "on_actionAfficher_l_ID_triggered"
-QT_MOC_LITERAL(6, 121, 28), // "on_actionSupprimer_triggered"
-QT_MOC_LITERAL(7, 150, 37), // "on_actionCreerTableMateriau_t..."
-QT_MOC_LITERAL(8, 188, 33) // "on_actionSupprimerTable_trigg..."
+QT_MOC_LITERAL(4, 69, 26), // "on_AjouterMateriau_clicked"
+QT_MOC_LITERAL(5, 96, 31), // "on_spinBoxMateriau_valueChanged"
+QT_MOC_LITERAL(6, 128, 4), // "arg1"
+QT_MOC_LITERAL(7, 133, 36), // "on_actionafficherMateriaux_tr..."
+QT_MOC_LITERAL(8, 170, 34), // "on_actionafficherMesures_trig..."
+QT_MOC_LITERAL(9, 205, 38), // "on_pushButtonSupprimerMateria..."
+QT_MOC_LITERAL(10, 244, 46), // "on_comboBoxTableARafraichir_c..."
+QT_MOC_LITERAL(11, 291, 32), // "on_actionafficher_l_ID_triggered"
+QT_MOC_LITERAL(12, 324, 35), // "on_pushButtonAjouterMesures_c..."
+QT_MOC_LITERAL(13, 360, 37), // "on_pushButtonSupprimerMesures..."
+QT_MOC_LITERAL(14, 398, 39) // "on_comboBoxFrequence_currentT..."
 
     },
     "MainWindow\0on_actionRafaichir_triggered\0"
     "\0on_actionModifier_triggered\0"
-    "on_Ajouter_clicked\0on_actionAfficher_l_ID_triggered\0"
-    "on_actionSupprimer_triggered\0"
-    "on_actionCreerTableMateriau_triggered\0"
-    "on_actionSupprimerTable_triggered"
+    "on_AjouterMateriau_clicked\0"
+    "on_spinBoxMateriau_valueChanged\0arg1\0"
+    "on_actionafficherMateriaux_triggered\0"
+    "on_actionafficherMesures_triggered\0"
+    "on_pushButtonSupprimerMateriau_clicked\0"
+    "on_comboBoxTableARafraichir_currentTextChanged\0"
+    "on_actionafficher_l_ID_triggered\0"
+    "on_pushButtonAjouterMesures_clicked\0"
+    "on_pushButtonSupprimerMesures_clicked\0"
+    "on_comboBoxFrequence_currentTextChanged"
 };
 #undef QT_MOC_LITERAL
 
@@ -57,7 +69,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+      12,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -65,22 +77,32 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   49,    2, 0x08 /* Private */,
-       3,    0,   50,    2, 0x08 /* Private */,
-       4,    0,   51,    2, 0x08 /* Private */,
-       5,    0,   52,    2, 0x08 /* Private */,
-       6,    0,   53,    2, 0x08 /* Private */,
-       7,    0,   54,    2, 0x08 /* Private */,
-       8,    0,   55,    2, 0x08 /* Private */,
+       1,    0,   74,    2, 0x08 /* Private */,
+       3,    0,   75,    2, 0x08 /* Private */,
+       4,    0,   76,    2, 0x08 /* Private */,
+       5,    1,   77,    2, 0x08 /* Private */,
+       7,    0,   80,    2, 0x08 /* Private */,
+       8,    0,   81,    2, 0x08 /* Private */,
+       9,    0,   82,    2, 0x08 /* Private */,
+      10,    1,   83,    2, 0x08 /* Private */,
+      11,    0,   86,    2, 0x08 /* Private */,
+      12,    0,   87,    2, 0x08 /* Private */,
+      13,    0,   88,    2, 0x08 /* Private */,
+      14,    1,   89,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    6,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    6,
     QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    6,
 
        0        // eod
 };
@@ -93,15 +115,19 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         switch (_id) {
         case 0: _t->on_actionRafaichir_triggered(); break;
         case 1: _t->on_actionModifier_triggered(); break;
-        case 2: _t->on_Ajouter_clicked(); break;
-        case 3: _t->on_actionAfficher_l_ID_triggered(); break;
-        case 4: _t->on_actionSupprimer_triggered(); break;
-        case 5: _t->on_actionCreerTableMateriau_triggered(); break;
-        case 6: _t->on_actionSupprimerTable_triggered(); break;
+        case 2: _t->on_AjouterMateriau_clicked(); break;
+        case 3: _t->on_spinBoxMateriau_valueChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 4: _t->on_actionafficherMateriaux_triggered(); break;
+        case 5: _t->on_actionafficherMesures_triggered(); break;
+        case 6: _t->on_pushButtonSupprimerMateriau_clicked(); break;
+        case 7: _t->on_comboBoxTableARafraichir_currentTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 8: _t->on_actionafficher_l_ID_triggered(); break;
+        case 9: _t->on_pushButtonAjouterMesures_clicked(); break;
+        case 10: _t->on_pushButtonSupprimerMesures_clicked(); break;
+        case 11: _t->on_comboBoxFrequence_currentTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 QT_INIT_METAOBJECT const QMetaObject MainWindow::staticMetaObject = {
@@ -129,13 +155,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 12)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 12;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 12)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 7;
+        _id -= 12;
     }
     return _id;
 }

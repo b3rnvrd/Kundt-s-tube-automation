@@ -71,7 +71,6 @@ void MainWindow::on_actionRafaichir_triggered()
         ui->tableView->setModel(queryModel);
     }
     ui->lineEditCoef->clear();
-    ui->lineEditFrequence->clear();
 }
 
 
@@ -81,14 +80,15 @@ void MainWindow::on_actionModifier_triggered()
     if(ligne < 0) return;
     QSqlRecord sqlRecord = tableModel->record(ligne);
     QString id = sqlRecord.field("id_enregistrement").value().toString();
-    QString coef_abs = sqlRecord.field("coefficientAbsorption").value().toString();
+    QString coef_abs = sqlRecord.field("absorption").value().toString();
     QString frequence = sqlRecord.field("frequence").value().toString();
+    id_materiau = sqlRecord.field("id_materiau").value().toString();
 
     QSqlQuery query(db);
     query.prepare(
-                    "UPDATE enregistrement SET frequence = " + frequence + " ,absorption = " + coef_abs
-                    + " ,id_materiau = " + id_materiau +  " WHERE id_enregistrement = " + id
-                 );
+                "UPDATE enregistrement SET frequence = " + frequence + " , absorption = " + coef_abs
+                + " , id_materiau = " + id_materiau +  " WHERE id_enregistrement = " + id
+                );
     if(!query.exec())
         QMessageBox::critical(this,"Attention","Pb Req",QMessageBox::Ok);
     qDebug() << id;
@@ -97,15 +97,11 @@ void MainWindow::on_actionModifier_triggered()
 
 void MainWindow::on_AjouterMateriau_clicked()
 {
-    QString table = ui->lineEditNom->text();
-    double coef_abs = ui->lineEditCoef->text().toDouble();
-    int frequence = ui->lineEditFrequence->text().toInt();
+    QString materiau = ui->lineEditNom->text();
 
     QSqlQuery query(db);
-    query.prepare("INSERT INTO " + table + " (coefficientAbsorption, frequence) VALUES (:coef_abs, :frequence)");
-    query.bindValue(":table", table_selectionnee);
-    query.bindValue(":coef_abs", coef_abs);
-    query.bindValue(":frequence", frequence);
+    query.prepare("INSERT INTO materiau (nom) VALUES (:materiau)");
+    query.bindValue(":materiau", materiau);
     if(!query.exec())
         QMessageBox::critical(this,"Attention","Pb Req",QMessageBox::Ok);
     qDebug() << query.lastError();
@@ -165,7 +161,6 @@ void MainWindow::on_actionafficherMateriaux_triggered()
         ui->tableView->setModel(queryModel);
     }
     ui->lineEditCoef->clear();
-    ui->lineEditFrequence->clear();
 }
 
 void MainWindow::on_actionafficherMesures_triggered()
@@ -191,7 +186,6 @@ void MainWindow::on_actionafficherMesures_triggered()
         ui->tableView->setModel(queryModel);
     }
     ui->lineEditCoef->clear();
-    ui->lineEditFrequence->clear();
 
 }
 
@@ -223,18 +217,22 @@ void MainWindow::on_actionafficher_l_ID_triggered()
 void MainWindow::on_pushButtonAjouterMesures_clicked()
 {
     double coef_abs = ui->lineEditCoef->text().toDouble();
-    int frequence = ui->lineEditFrequence->text().toInt();
+    if((0 >= coef_abs) || (1 <= coef_abs) )
+        QMessageBox::critical(this,"Attention","Le coefficient doit être compris entre 0 et 1",QMessageBox::Ok);
+    else
+    {
+        QSqlQuery query(db);
+        query.prepare("INSERT INTO enregistrement (absorption, frequence, id_materiau) VALUES (:coef_abs, :frequence, :id_materiau)");
+        query.bindValue(":id_materiau", id_materiau);
+        query.bindValue(":coef_abs", coef_abs);
+        query.bindValue(":frequence", frequence);
+        if(!query.exec())
+            QMessageBox::critical(this,"Attention","Pb Req",QMessageBox::Ok);
+        qDebug() << query.lastError();
 
-    QSqlQuery query(db);
-    query.prepare("INSERT INTO enregistrement (absorption, frequence, id_materiau) VALUES (:coef_abs, :frequence, :id_materiau)");
-    query.bindValue(":id_materiau", id_materiau);
-    query.bindValue(":coef_abs", coef_abs);
-    query.bindValue(":frequence", frequence);
-    if(!query.exec())
-        QMessageBox::critical(this,"Attention","Pb Req",QMessageBox::Ok);
-    qDebug() << query.lastError();
+        this->on_actionRafaichir_triggered();
+    }
 
-    this->on_actionRafaichir_triggered();
 }
 
 void MainWindow::on_pushButtonSupprimerMesures_clicked()
@@ -249,4 +247,9 @@ void MainWindow::on_pushButtonSupprimerMesures_clicked()
     query.exec();
 
     this->on_actionRafaichir_triggered();
+}
+
+void MainWindow::on_comboBoxFrequence_currentTextChanged(const QString &arg1)
+{
+    frequence = arg1;
 }

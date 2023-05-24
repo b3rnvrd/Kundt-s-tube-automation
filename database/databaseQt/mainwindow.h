@@ -17,8 +17,7 @@ class MainWindow : public QMainWindow
     QSqlTableModel *tableModel;
     QSqlQueryModel *queryModel;
     QLineEdit selNom;
-    QString id_materiau = "1", table_selectionnee = "materiau";
-
+    QString id_materiau = "1", table_selectionnee = "materiau", frequence = "200";
     unsigned int id_freq = 1;
 
 
@@ -38,6 +37,8 @@ private slots:
     void on_actionafficher_l_ID_triggered();
     void on_pushButtonAjouterMesures_clicked();
     void on_pushButtonSupprimerMesures_clicked();
+
+    void on_comboBoxFrequence_currentTextChanged(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;
