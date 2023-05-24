@@ -51,7 +51,7 @@ void avanceGauche() {
 
   // Avance de 30 pas = 1 cm
 
-  for (int i = 0; i < 30; i++) {
+  for (int i = 0; i < 10; i++) {
     digitalWrite( STEP_A4988, HIGH );
     delay( 20 );
     digitalWrite( STEP_A4988, LOW );
@@ -78,7 +78,7 @@ void avanceDroite() {
   digitalWrite( EN_A4988, LOW );
 
   // Avance de 30 pas = 1 cm
-  for ( int i = 0; i < 30; i++) {
+  for ( int i = 0; i < 10; i++) {
     digitalWrite( STEP_A4988, HIGH );
     delay( 20 );
     digitalWrite( STEP_A4988, LOW );

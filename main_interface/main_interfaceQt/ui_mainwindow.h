@@ -250,7 +250,7 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
         actionBase_de_donnees->setText(QApplication::translate("MainWindow", "Base de donnees", nullptr));
         labelPort->setText(QApplication::translate("MainWindow", "S\303\251lection du port COM :", nullptr));
-        label_2->setText(QApplication::translate("MainWindow", "( changer le port ferme la connection pr\303\251c\303\251demment ouverte )", nullptr));
+        label_2->setText(QApplication::translate("MainWindow", "( changer le port ferme la liaison pr\303\251c\303\251demment ouverte )", nullptr));
         pushButtonPort->setText(QApplication::translate("MainWindow", "S\303\251lectionner", nullptr));
         groupBox->setTitle(QApplication::translate("MainWindow", "Contr\303\264le GBF", nullptr));
         label->setText(QApplication::translate("MainWindow", "Fr\303\251quence(Hz)", nullptr));

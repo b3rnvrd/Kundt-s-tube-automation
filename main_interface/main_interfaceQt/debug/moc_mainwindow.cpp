@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
     QByteArrayData data[11];
-    char stringdata0[241];
+    char stringdata0[244];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -40,8 +40,8 @@ QT_MOC_LITERAL(5, 86, 30), // "on_pushButtonGraphique_clicked"
 QT_MOC_LITERAL(6, 117, 32), // "on_pushButtonCoefficient_clicked"
 QT_MOC_LITERAL(7, 150, 25), // "on_pushButtonPort_clicked"
 QT_MOC_LITERAL(8, 176, 27), // "on_spinBoxPort_valueChanged"
-QT_MOC_LITERAL(9, 204, 31), // "on_comboBoxFreq_editTextChanged"
-QT_MOC_LITERAL(10, 236, 4) // "arg1"
+QT_MOC_LITERAL(9, 204, 34), // "on_comboBoxFreq_currentTextCh..."
+QT_MOC_LITERAL(10, 239, 4) // "arg1"
 
     },
     "MainWindow\0on_actionBase_de_donnees_triggered\0"
@@ -50,7 +50,8 @@ QT_MOC_LITERAL(10, 236, 4) // "arg1"
     "on_pushButtonCoefficient_clicked\0"
     "on_pushButtonPort_clicked\0"
     "on_spinBoxPort_valueChanged\0"
-    "on_comboBoxFreq_editTextChanged\0arg1"
+    "on_comboBoxFreq_currentTextChanged\0"
+    "arg1"
 };
 #undef QT_MOC_LITERAL
 
@@ -103,7 +104,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 4: _t->on_pushButtonCoefficient_clicked(); break;
         case 5: _t->on_pushButtonPort_clicked(); break;
         case 6: _t->on_spinBoxPort_valueChanged(); break;
-        case 7: _t->on_comboBoxFreq_editTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 7: _t->on_comboBoxFreq_currentTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         default: ;
         }
     }

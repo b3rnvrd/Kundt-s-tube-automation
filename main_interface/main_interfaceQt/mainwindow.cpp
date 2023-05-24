@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
     if (stat < VI_SUCCESS)
     {
         QMessageBox::critical(this,"Attention","Echec connexion oscilloscope",QMessageBox::Ok);
-        //  exit(0);//fermeture de la fenetre mainwindow
+        exit(0);//fermeture de la fenetre mainwindow
         qDebug() << "Echec connexion oscilloscope";
         
     }
@@ -36,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
     arduino = new seriallink;
     arduino->openConnection();
     arduino->write("o");
+
 }
 
 MainWindow::~MainWindow()
@@ -70,9 +71,12 @@ void MainWindow::on_BtnStart_clicked()
 
 
     if(tensionPos > -5 && tensionPos < 5)  // -5 et 5 sont les tension max et min pour la position du micro
+
     {
-        timer->start(1);
+
         etat = 1;
+        timer->start(1);
+
 
         QByteArray recu = arduino->read();
         qDebug() << recu << tensionPos;
@@ -126,7 +130,7 @@ void MainWindow::etatMachine()
         break;
     case 1:
         qDebug() << "demande deplacement droite" << "tensionPos : " << tensionPos;
-        if(tensionPos >= 3.5)
+        if(tensionPos >= 3)
             etat = 2;
         arduino->write("d");
         pmesure = mesureTension();
@@ -198,6 +202,9 @@ void MainWindow::on_pushButtonPort_clicked()
     arduino->write("o");
 
     qDebug() <<"port demandé : " + port;
+    tensionPos=checkPosition();
+    while(tensionPos>0)
+        arduino->write("g");
 }
 
 void MainWindow::on_spinBoxPort_valueChanged()
