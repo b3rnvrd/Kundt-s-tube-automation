@@ -233,7 +233,7 @@ void MainWindow::on_pushButtonAjouterMesures_clicked()
         query.bindValue(":coef_abs", coef_abs);
         query.bindValue(":frequence", frequence);
         if(!query.exec())
-            QMessageBox::critical(this,"Attention","Pb Req",QMessageBox::Ok);
+            QMessageBox::critical(this,"Attention","ERREUR : " + query.lastError().text(),QMessageBox::Ok);
         qDebug() << query.lastError();
 
         this->on_actionRafaichir_triggered();

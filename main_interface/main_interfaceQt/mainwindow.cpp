@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
         
     }
     ui->setupUi(this);
-    
+    viPrintf(osc, (ViString)":CHAN3:SCAL 4\n");
     arduino = new seriallink;
     arduino->openConnection();
     arduino->write("o");
@@ -67,7 +67,8 @@ void MainWindow::on_BtnStart_clicked()
     }
     viPrintf(osc,":APPLY:SIN ,%f,%f\n", freq, ampli); //on applique un signal sinusoidal de fréquence et amplitude choisies
     viPrintf(osc,":AUT\n");// autoset oscillo
-    viPrintf(osc, (ViString)":CHAN3:SCAL 4\n");
+    viPrintf(osc, (ViString)":CHAN3:SCAL 10\n");
+    viPrintf(osc, (ViString)":CHAN3:SCAL 10\n");
     tensionPos = checkPosition();
     //    double n, tension_max_mesuree = 1, tension_min_mesuree = 1;
 
@@ -140,8 +141,7 @@ void MainWindow::etatMachine()
         if((pmax<pmesure) && pmesure < 10)
             pmax = pmesure;
         qDebug() << pmax;
-        viPrintf(osc,":AUT\n");// autoset oscillo
-        sleep(3);
+        sleep(1);
         break;
 
     case 2:
