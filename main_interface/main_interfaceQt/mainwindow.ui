@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Tube de Kundt (mesures)</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_4">
@@ -232,6 +232,7 @@
    </attribute>
    <addaction name="actionBase_de_donnees"/>
    <addaction name="separator"/>
+   <addaction name="actionRelancerConnexionOscillo"/>
   </widget>
   <action name="actionBase_de_donnees">
    <property name="icon">
@@ -240,6 +241,15 @@
    </property>
    <property name="text">
     <string>Base de donnees</string>
+   </property>
+  </action>
+  <action name="actionRelancerConnexionOscillo">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/images/oscillo.png</normaloff>:/images/oscillo.png</iconset>
+   </property>
+   <property name="text">
+    <string>Relancer la connexion avec l'oscilloscope</string>
    </property>
   </action>
  </widget>

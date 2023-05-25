@@ -18,7 +18,6 @@ class MainWindow : public QMainWindow
     QSqlQueryModel *queryModel;
     QLineEdit selNom;
     QString id_materiau = "1", table_selectionnee = "materiau", frequence = "200";
-    unsigned int id_freq = 1;
 
 
 public:

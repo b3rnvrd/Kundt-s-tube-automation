@@ -103,10 +103,12 @@ void MainWindow::on_AjouterMateriau_clicked()
     query.prepare("INSERT INTO materiau (nom) VALUES (:materiau)");
     query.bindValue(":materiau", materiau);
     if(!query.exec())
-        QMessageBox::critical(this,"Attention","Pb Req",QMessageBox::Ok);
+    {
+        QString error = query.lastError().text();
+        QMessageBox::critical(this,"Attention","Impossible d'ajouter le matériau. ERREUR : " + error,QMessageBox::Ok);
+    }
     qDebug() << query.lastError();
-    id_freq++;
-
+    ui->lineEditNom->clear();
     this->on_actionRafaichir_triggered();
 }
 
@@ -201,10 +203,14 @@ void MainWindow::on_pushButtonSupprimerMateriau_clicked()
     int ligne = ui->tableView->currentIndex().row();
     if(ligne < 0) return;
     QSqlRecord sqlRecord= tableModel->record(ligne);
-    int id = sqlRecord.field("id_enregistrement").value().toInt();
+    QString id = sqlRecord.field("id_materiau").value().toString();
 
-    query.prepare("DELETE FROM " + table_selectionnee + " WHERE " + table_selectionnee + ".id_enregistrement = " + QString::number(id));
-    query.exec();
+    query.prepare("DELETE FROM materiau WHERE materiau.id_materiau = " + id);
+    if(!query.exec())
+    {
+        QString error = query.lastError().text();
+        QMessageBox::critical(this,"Attention","Impossible d'effacer le matériau. ERREUR : " + error,QMessageBox::Ok);
+    }
 
     this->on_actionRafaichir_triggered();
 }

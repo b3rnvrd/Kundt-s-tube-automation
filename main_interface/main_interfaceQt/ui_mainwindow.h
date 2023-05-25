@@ -33,6 +33,7 @@ class Ui_MainWindow
 {
 public:
     QAction *actionBase_de_donnees;
+    QAction *actionRelancerConnexionOscillo;
     QWidget *centralWidget;
     QGridLayout *gridLayout_4;
     QHBoxLayout *horizontalLayout_4;
@@ -74,6 +75,11 @@ public:
         QIcon icon;
         icon.addFile(QStringLiteral(":/images/bdd.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionBase_de_donnees->setIcon(icon);
+        actionRelancerConnexionOscillo = new QAction(MainWindow);
+        actionRelancerConnexionOscillo->setObjectName(QStringLiteral("actionRelancerConnexionOscillo"));
+        QIcon icon1;
+        icon1.addFile(QStringLiteral(":/images/oscillo.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionRelancerConnexionOscillo->setIcon(icon1);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout_4 = new QGridLayout(centralWidget);
@@ -239,6 +245,7 @@ public:
 
         mainToolBar->addAction(actionBase_de_donnees);
         mainToolBar->addSeparator();
+        mainToolBar->addAction(actionRelancerConnexionOscillo);
 
         retranslateUi(MainWindow);
 
@@ -247,8 +254,9 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Tube de Kundt (mesures)", nullptr));
         actionBase_de_donnees->setText(QApplication::translate("MainWindow", "Base de donnees", nullptr));
+        actionRelancerConnexionOscillo->setText(QApplication::translate("MainWindow", "Relancer la connexion avec l'oscilloscope", nullptr));
         labelPort->setText(QApplication::translate("MainWindow", "S\303\251lection du port COM :", nullptr));
         label_2->setText(QApplication::translate("MainWindow", "( changer le port ferme la liaison pr\303\251c\303\251demment ouverte )", nullptr));
         pushButtonPort->setText(QApplication::translate("MainWindow", "S\303\251lectionner", nullptr));

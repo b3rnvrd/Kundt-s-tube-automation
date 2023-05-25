@@ -10,8 +10,11 @@ class IhmGraphique : public QMainWindow
     Q_OBJECT
 
 public:
-    IhmGraphique(QWidget *parent, double frequence[], double coef[]);
+    IhmGraphique(QWidget *parent);
     ~IhmGraphique();
+
+public slots:
+    void dessinerGraphique(double frequences[], double coefs[]);
 
 private:
     QChartView *graphique; // un widget pour afficher un graphe
@@ -21,5 +24,3 @@ private:
 };
 
 #endif // IHMGRAPHIQUE_H
-
-// = ( QMap<double, QString>() )

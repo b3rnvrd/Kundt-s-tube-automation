@@ -111,7 +111,8 @@ compiler_rcc_clean:
 	-$(DEL_FILE) release\qrc_ressources.cpp
 release/qrc_ressources.cpp: ressources.qrc \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/bin/rcc.exe \
-		../images/bdd.png
+		../images/bdd.png \
+		../images/oscillo.png
 	C:\Qt\Qt5.11.1\5.11.1\mingw53_32\bin\rcc.exe -name ressources ressources.qrc -o release\qrc_ressources.cpp
 
 compiler_moc_predefs_make_all: release/moc_predefs.h
@@ -2423,6 +2424,7 @@ release/mainwindow.o: mainwindow.cpp mainwindow.h \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/QLineEdit \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/QMenuBar \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/QPushButton \
+		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/QSpinBox \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/QStatusBar \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/QToolBar \
 		C:/Qt/Qt5.11.1/5.11.1/mingw53_32/include/QtWidgets/QVBoxLayout \

@@ -229,7 +229,7 @@
           <item>
            <widget class="QLabel" name="labelTableARafraichir">
             <property name="text">
-             <string>Table à rafraichir :</string>
+             <string>Table sélectionnée :</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -289,7 +289,7 @@
      <normaloff>:/images/rafraichir.png</normaloff>:/images/rafraichir.png</iconset>
    </property>
    <property name="text">
-    <string>Rafaichir</string>
+    <string>Rafaichir la table</string>
    </property>
   </action>
   <action name="actionModifier">
@@ -298,7 +298,7 @@
      <normaloff>:/images/modifier.jpg</normaloff>:/images/modifier.jpg</iconset>
    </property>
    <property name="text">
-    <string>Modifier la ligne</string>
+    <string>Modifier les mesures</string>
    </property>
   </action>
   <action name="actionafficherMateriaux">
@@ -307,7 +307,7 @@
      <normaloff>:/images/bois.png</normaloff>:/images/bois.png</iconset>
    </property>
    <property name="text">
-    <string>afficherMateriaux</string>
+    <string>Afficher la table des matériaux</string>
    </property>
   </action>
   <action name="actionafficherMesures">
@@ -316,7 +316,7 @@
      <normaloff>:/images/mesures.png</normaloff>:/images/mesures.png</iconset>
    </property>
    <property name="text">
-    <string>afficherMesures</string>
+    <string>Afficher la table des mesures</string>
    </property>
   </action>
   <action name="actionafficher_l_ID">

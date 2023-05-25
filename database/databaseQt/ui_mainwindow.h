@@ -321,10 +321,10 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "BaseDeDonnees", nullptr));
-        actionRafaichir->setText(QApplication::translate("MainWindow", "Rafaichir", nullptr));
-        actionModifier->setText(QApplication::translate("MainWindow", "Modifier la ligne", nullptr));
-        actionafficherMateriaux->setText(QApplication::translate("MainWindow", "afficherMateriaux", nullptr));
-        actionafficherMesures->setText(QApplication::translate("MainWindow", "afficherMesures", nullptr));
+        actionRafaichir->setText(QApplication::translate("MainWindow", "Rafaichir la table", nullptr));
+        actionModifier->setText(QApplication::translate("MainWindow", "Modifier les mesures", nullptr));
+        actionafficherMateriaux->setText(QApplication::translate("MainWindow", "Afficher la table des mat\303\251riaux", nullptr));
+        actionafficherMesures->setText(QApplication::translate("MainWindow", "Afficher la table des mesures", nullptr));
         actionafficher_l_ID->setText(QApplication::translate("MainWindow", "Afficher l'ID", nullptr));
 #ifndef QT_NO_TOOLTIP
         actionafficher_l_ID->setToolTip(QApplication::translate("MainWindow", "afficher_l_ID", nullptr));
@@ -351,7 +351,7 @@ public:
         pushButtonAjouterMesures->setText(QApplication::translate("MainWindow", "Ajouter les mesures", nullptr));
         pushButtonSupprimerMesures->setText(QApplication::translate("MainWindow", "Supprimer les mesures", nullptr));
         label->setText(QApplication::translate("MainWindow", "Id du mat\303\251riau", nullptr));
-        labelTableARafraichir->setText(QApplication::translate("MainWindow", "Table \303\240 rafraichir :", nullptr));
+        labelTableARafraichir->setText(QApplication::translate("MainWindow", "Table s\303\251lectionn\303\251e :", nullptr));
         comboBoxTableARafraichir->setItemText(0, QApplication::translate("MainWindow", "Materiau", nullptr));
         comboBoxTableARafraichir->setItemText(1, QApplication::translate("MainWindow", "Enregistrement", nullptr));
 

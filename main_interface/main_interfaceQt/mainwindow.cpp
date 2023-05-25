@@ -27,7 +27,6 @@ MainWindow::MainWindow(QWidget *parent) :
     if (stat < VI_SUCCESS)
     {
         QMessageBox::critical(this,"Attention","Echec connexion oscilloscope",QMessageBox::Ok);
-        exit(0);//fermeture de la fenetre mainwindow
         qDebug() << "Echec connexion oscilloscope";
         
     }
@@ -36,6 +35,12 @@ MainWindow::MainWindow(QWidget *parent) :
     arduino = new seriallink;
     arduino->openConnection();
     arduino->write("o");
+
+    for(int i = 0; i < 13; i++)
+    {
+        frequences[i] = i*500;
+        coefficients[i] = {0.01};
+    }
 
 }
 
@@ -47,9 +52,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionBase_de_donnees_triggered()
 {
     QProcess *process = new QProcess(this);
-    //process->start("\"C:\\Users\\etudiant\\Documents\\GitHub\\tube_de_kundt\\Apps\\BDD\\MySqlQt.exe\"");          //chemin Patrick
     process->start("\"C:\\Users\\etudiant\\Desktop\\tube_de_kundt\\Apps\\BDD\\MySqlQt.exe\"");            //chemin Eliott et Patrick
-    //    process->start("\"..\\..\\BDD\\MySqlQt.exe\"");         //chemin universel
     qDebug() << process->errorString();
 }
 
@@ -104,7 +107,7 @@ void MainWindow::on_BtnStop_clicked()   //Arret d'urgence
 
 double MainWindow::checkPosition()//retourne la tension qui donne la position du micro
 {
-    for(int i =0; i<256; i++)
+    for(int i = 0; i < 256; i++)
         buf[i] = 0;
     viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN3\n"); //tension mesurée sur le channel 3
     viScanf(osc,(ViString)"%t",&buf);
@@ -137,14 +140,14 @@ void MainWindow::etatMachine()
         if((pmax<pmesure) && pmesure < 10)
             pmax = pmesure;
         qDebug() << pmax;
-        //        viPrintf(osc,":AUT\n");// autoset oscillo
-        sleep(1);
+        viPrintf(osc,":AUT\n");// autoset oscillo
+        sleep(3);
         break;
 
     case 2:
         qDebug()<<"demande deplacement gauche" << "tensionPos : " << tensionPos;
         if(tensionPos <= -3)
-            etat = 4;
+            etat = 3;
         pmesure = 0;
         arduino->write("g");
         pmesure=mesureTension();
@@ -153,11 +156,11 @@ void MainWindow::etatMachine()
         qDebug() << pmin;
         sleep(1);
         break;
-    case 4:
+    case 3:
         viPrintf(osc, (ViString)":OUTP1 :0\n");
         timer->stop();
-        frequence[i] = freq;
-        coefficient[i] = coef;
+        frequences[i] = freq;
+        coefficients[i] = coef;
         i++;
         break;
     }
@@ -165,7 +168,8 @@ void MainWindow::etatMachine()
 
 void MainWindow::on_pushButtonGraphique_clicked()
 {
-    graph = new IhmGraphique(0,frequence,coefficient);
+    graph = new IhmGraphique(0);
+    graph->dessinerGraphique(frequences,coefficients);
     graph->show();
 }
 
@@ -178,13 +182,13 @@ void MainWindow::on_pushButtonCoefficient_clicked()
     qDebug() << coef;
 
     ui->Editcoef->setText(QString::number(coef,'f',3));
-        if(arduino->isOpen())
-        {
-            arduino->write("f");
-            arduino->closeConnection();
-        }
-        arduino->openConnection();
-        arduino->write("o");
+    if(arduino->isOpen())
+    {
+        arduino->write("f");
+        arduino->closeConnection();
+    }
+    arduino->openConnection();
+    arduino->write("o");
     arduino->clear();
     QByteArray donnees_a_afficher = ("$frequence : " + QByteArray::number(freq) + "      coef : " + QByteArray::number(coef));
     arduino->write(donnees_a_afficher);
@@ -217,4 +221,25 @@ void MainWindow::on_comboBoxFreq_currentTextChanged(const QString &arg1)
 {
     freq = arg1.toDouble();
     qDebug() << "changement de frequence : " << freq;
+}
+
+void MainWindow::on_actionRelancerConnexionOscillo_triggered()
+{
+    // ouverture de la session ressource manager
+    ViSession rscmng;
+    ViStatus stat = viOpenDefaultRM(&rscmng);
+
+    // Recherche de l'oscilloscope
+    ViChar viFound[VI_FIND_BUFLEN];
+    ViUInt32 nFound;
+    ViFindList listOfFound;
+    stat = viFindRsrc(rscmng, (ViString)"USB?*", &listOfFound, &nFound, viFound);
+
+    stat = viOpen(rscmng, viFound, VI_NULL, VI_NULL, &osc);
+    if (stat < VI_SUCCESS)
+    {
+        QMessageBox::critical(this,"Attention","Echec connexion oscilloscope",QMessageBox::Ok);
+        qDebug() << "Echec connexion oscilloscope";
+
+    }
 }
