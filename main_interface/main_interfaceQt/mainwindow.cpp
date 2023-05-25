@@ -38,10 +38,22 @@ MainWindow::MainWindow(QWidget *parent) :
 
     for(int i = 0; i < 13; i++)
     {
-        frequences[i] = i*500;
+
         coefficients[i] = {0.01};
     }
-
+    frequences[0] = {200};
+    frequences[1] = {250};
+    frequences[2] = {315};
+    frequences[3] = {400};
+    frequences[4] = {500};
+    frequences[5] = {630};
+    frequences[6] = {800};
+    frequences[7] = {1000};
+    frequences[8] = {1250};
+    frequences[9] = {1600};
+    frequences[10] = {2000};
+    frequences[11] = {2500};
+    frequences[12] = {3150};
 }
 
 MainWindow::~MainWindow()

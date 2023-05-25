@@ -100,8 +100,7 @@ void MainWindow::on_AjouterMateriau_clicked()
     QString materiau = ui->lineEditNom->text();
 
     QSqlQuery query(db);
-    query.prepare("INSERT INTO materiau (nom) VALUES (:materiau)");
-    query.bindValue(":materiau", materiau);
+    query.prepare("INSERT INTO materiau (nom) VALUES " + materiau);
     if(!query.exec())
     {
         QString error = query.lastError().text();
@@ -228,10 +227,7 @@ void MainWindow::on_pushButtonAjouterMesures_clicked()
     else
     {
         QSqlQuery query(db);
-        query.prepare("INSERT INTO enregistrement (absorption, frequence, id_materiau) VALUES (:coef_abs, :frequence, :id_materiau)");
-        query.bindValue(":id_materiau", id_materiau);
-        query.bindValue(":coef_abs", coef_abs);
-        query.bindValue(":frequence", frequence);
+        query.prepare("INSERT INTO enregistrement (absorption, frequence, id_materiau) VALUES (" + QString::number(coef_abs) + ", " + frequence + ", " + id_materiau + ")");
         if(!query.exec())
             QMessageBox::critical(this,"Attention","ERREUR : " + query.lastError().text(),QMessageBox::Ok);
         qDebug() << query.lastError();
