@@ -180,6 +180,10 @@ void MainWindow::etatMachine()
 
 void MainWindow::on_pushButtonGraphique_clicked()
 {
+    coefficients[0] = 0.74851;
+    coefficients[1] = 0.51234;
+    coefficients[2] = 0.39541;
+    coefficients[3] = 0.28743;
     graph = new IhmGraphique(0);
     graph->dessinerGraphique(frequences,coefficients);
     graph->show();

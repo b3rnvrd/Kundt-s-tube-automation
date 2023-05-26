@@ -1,0 +1,6 @@
+librairies arduino à installer : 
+TFT
+Adafruit BusIO
+Adafruit Circuit Playground
+Adafruit GFX Library
+Adafruit ILI9341
