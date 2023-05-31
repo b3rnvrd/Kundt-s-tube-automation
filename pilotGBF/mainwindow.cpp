@@ -32,7 +32,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    freq = ui->freqEdit->text().toDouble();
-    ampli = ui->amplEdit->text().toDouble();
+    freq = ui->freqEdit->text().toDouble();//on récupere la fréquence voulue dans le textedit puis on le convertit en double
+    ampli = ui->amplEdit->text().toDouble();//on recupere l'amplitude voulue dans le textedit puis on le convertit en double
     viPrintf(osc,":APPLY:SIN ,%f,%f\n", freq, ampli); //on applique un signal sinusoidal de fréquence et amplitude choisies
 }

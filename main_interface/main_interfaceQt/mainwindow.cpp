@@ -64,7 +64,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionBase_de_donnees_triggered()
 {
     QProcess *process = new QProcess(this);
-    process->start("\"C:\\Users\\etudiant\\Desktop\\tube_de_kundt\\Apps\\BDD\\MySqlQt.exe\"");            //chemin Eliott et Patrick
+    process->start("\"C:\\Users\\etudiant\\Desktop\\tube_de_kundt\\Apps\\BDD\\MySqlQt.exe\"");       //chemin Eliott et Patrick
     qDebug() << process->errorString();
 }
 
@@ -79,8 +79,8 @@ void MainWindow::on_BtnStart_clicked()
     }
     viPrintf(osc,":APPLY:SIN ,%f,%f\n", freq, ampli); //on applique un signal sinusoidal de fréquence et amplitude choisies
     viPrintf(osc,":AUT\n");// autoset oscillo
-    viPrintf(osc, (ViString)":CHAN3:SCAL 10\n");
-    viPrintf(osc, (ViString)":CHAN3:SCAL 10\n");
+    viPrintf(osc, (ViString)":CHAN1:SCAL 10\n"); // echelle verticale voie 1 a 10V
+    viPrintf(osc, (ViString)":CHAN3:SCAL 10\n");//echelle verticale voie 3 a 10V
     tensionPos = checkPosition();
     //    double n, tension_max_mesuree = 1, tension_min_mesuree = 1;
 
@@ -111,7 +111,7 @@ void MainWindow::on_BtnStart_clicked()
 void MainWindow::on_BtnStop_clicked()   //Arret d'urgence
 {
     while(!(arduino->isWritable()));
-    arduino->write("s");
+    arduino->write("s"); //envoi d'un "s" sur la liaison serie pour arreter le moteur
     
     viPrintf(osc, (ViString)":OUTP1 :0\n");     //COUPER LE GBF DE L'OSCILLO
     etat = 0;
@@ -121,7 +121,7 @@ void MainWindow::on_BtnStop_clicked()   //Arret d'urgence
 double MainWindow::checkPosition()//retourne la tension qui donne la position du micro
 {
     for(int i = 0; i < 256; i++)
-        buf[i] = 0;
+        buf[i] = 0; //on vide le buffer
     viPrintf(osc, (ViString)":MEAS:ITEM? VMAX,CHAN3\n"); //tension mesurée sur le channel 3
     viScanf(osc,(ViString)"%t",&buf);
     tensionPos = QString(buf).toDouble();
@@ -146,11 +146,11 @@ void MainWindow::etatMachine()
         break;
     case 1:
         qDebug() << "demande deplacement droite" << "tensionPos : " << tensionPos;
-        if(tensionPos >= 3)
+        if(tensionPos >= 3) //on garde de la marge car les instructions s'accumulent
             etat = 2;
-        arduino->write("d");
+        arduino->write("d"); //envoi d'un "d" sur la liaison serie pour indiquer au moteur qu'il doit aller a droite
         pmesure = mesureTension();
-        if((pmax<pmesure) && pmesure < 10)
+        if((pmax<pmesure) && pmesure < 10) //pmax prend la valeur de pmesure si elle est superieure a pmax et si pmesure est > 10 il y a probablement eu du bruit lors de la mesure
             pmax = pmesure;
         qDebug() << pmax;
         sleep(1);
@@ -158,19 +158,19 @@ void MainWindow::etatMachine()
 
     case 2:
         qDebug()<<"demande deplacement gauche" << "tensionPos : " << tensionPos;
-        if(tensionPos <= -3)
+        if(tensionPos <= -3)//on garde de la marge car les instructions s'accumulent
             etat = 3;
         pmesure = 0;
-        arduino->write("g");
+        arduino->write("g");// envoi d'un "g" sur la liasion serie pour indiquer au moteur qu'il doit aller a gauche
         pmesure=mesureTension();
-        if(pmesure < pmin)
+        if(pmesure < pmin)  // pmin prends la valeur de pmesure si elle est inferieure a pmin
             pmin = pmesure;
         qDebug() << pmin;
         sleep(1);
         break;
     case 3:
-        viPrintf(osc, (ViString)":OUTP1 :0\n");
-        timer->stop();
+        viPrintf(osc, (ViString)":OUTP1 :0\n");// arret du GBF de l'oscilloscope
+        timer->stop();//arret de qtimer
         frequences[i] = freq;
         coefficients[i] = coef;
         i++;
@@ -200,7 +200,7 @@ void MainWindow::on_pushButtonCoefficient_clicked()
     ui->Editcoef->setText(QString::number(coef,'f',3));
     if(arduino->isOpen())
     {
-        arduino->write("f");
+        arduino->write("f"); //affichage sur l'ecran adafruit liaison fermee
         arduino->closeConnection();
     }
     arduino->openConnection();
@@ -229,7 +229,7 @@ void MainWindow::on_pushButtonPort_clicked()
 
 void MainWindow::on_spinBoxPort_valueChanged()
 {
-    arduino->write("f");
+    arduino->write("f");//affichage sur l'ecran adafruit liaison fermee
     arduino->closeConnection();
 }
 
