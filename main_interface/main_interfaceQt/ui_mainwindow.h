@@ -35,7 +35,8 @@ public:
     QAction *actionBase_de_donnees;
     QAction *actionRelancerConnexionOscillo;
     QWidget *centralWidget;
-    QGridLayout *gridLayout_4;
+    QGridLayout *gridLayout_2;
+    QVBoxLayout *verticalLayout_5;
     QHBoxLayout *horizontalLayout_4;
     QVBoxLayout *verticalLayout_3;
     QLabel *labelPort;
@@ -43,7 +44,6 @@ public:
     QVBoxLayout *verticalLayout_2;
     QSpinBox *spinBoxPort;
     QPushButton *pushButtonPort;
-    QGridLayout *gridLayout_3;
     QGroupBox *groupBox;
     QGridLayout *gridLayout;
     QHBoxLayout *horizontalLayout_3;
@@ -56,11 +56,15 @@ public:
     QPushButton *BtnStart;
     QPushButton *BtnStop;
     QGroupBox *groupBox_2;
-    QGridLayout *gridLayout_2;
-    QVBoxLayout *verticalLayout;
+    QGridLayout *gridLayout_3;
     QLineEdit *Editcoef;
     QPushButton *pushButtonCoefficient;
+    QHBoxLayout *horizontalLayout_5;
     QPushButton *pushButtonGraphique;
+    QPushButton *pushButtonResetGraphique;
+    QHBoxLayout *horizontalLayout_6;
+    QPushButton *pushButton;
+    QLineEdit *lineEditDernierCoef;
     QMenuBar *menuBar;
     QStatusBar *statusBar;
     QToolBar *mainToolBar;
@@ -69,7 +73,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1125, 448);
+        MainWindow->resize(1265, 582);
         actionBase_de_donnees = new QAction(MainWindow);
         actionBase_de_donnees->setObjectName(QStringLiteral("actionBase_de_donnees"));
         QIcon icon;
@@ -82,10 +86,13 @@ public:
         actionRelancerConnexionOscillo->setIcon(icon1);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        gridLayout_4 = new QGridLayout(centralWidget);
-        gridLayout_4->setSpacing(6);
-        gridLayout_4->setContentsMargins(11, 11, 11, 11);
-        gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
+        gridLayout_2 = new QGridLayout(centralWidget);
+        gridLayout_2->setSpacing(6);
+        gridLayout_2->setContentsMargins(11, 11, 11, 11);
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        verticalLayout_5 = new QVBoxLayout();
+        verticalLayout_5->setSpacing(6);
+        verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setSpacing(6);
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
@@ -122,11 +129,8 @@ public:
         horizontalLayout_4->addLayout(verticalLayout_2);
 
 
-        gridLayout_4->addLayout(horizontalLayout_4, 0, 0, 1, 1);
+        verticalLayout_5->addLayout(horizontalLayout_4);
 
-        gridLayout_3 = new QGridLayout();
-        gridLayout_3->setSpacing(6);
-        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
         groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QStringLiteral("groupBox"));
         gridLayout = new QGridLayout(groupBox);
@@ -195,46 +199,68 @@ public:
         gridLayout->addWidget(BtnStop, 2, 0, 1, 1);
 
 
-        gridLayout_3->addWidget(groupBox, 0, 0, 1, 1);
+        verticalLayout_5->addWidget(groupBox);
 
         groupBox_2 = new QGroupBox(centralWidget);
         groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
-        gridLayout_2 = new QGridLayout(groupBox_2);
-        gridLayout_2->setSpacing(6);
-        gridLayout_2->setContentsMargins(11, 11, 11, 11);
-        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setSpacing(6);
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        gridLayout_3 = new QGridLayout(groupBox_2);
+        gridLayout_3->setSpacing(6);
+        gridLayout_3->setContentsMargins(11, 11, 11, 11);
+        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
         Editcoef = new QLineEdit(groupBox_2);
         Editcoef->setObjectName(QStringLiteral("Editcoef"));
         Editcoef->setEnabled(false);
 
-        verticalLayout->addWidget(Editcoef);
+        gridLayout_3->addWidget(Editcoef, 0, 0, 1, 1);
 
         pushButtonCoefficient = new QPushButton(groupBox_2);
         pushButtonCoefficient->setObjectName(QStringLiteral("pushButtonCoefficient"));
 
-        verticalLayout->addWidget(pushButtonCoefficient);
+        gridLayout_3->addWidget(pushButtonCoefficient, 1, 0, 1, 1);
 
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         pushButtonGraphique = new QPushButton(groupBox_2);
         pushButtonGraphique->setObjectName(QStringLiteral("pushButtonGraphique"));
 
-        verticalLayout->addWidget(pushButtonGraphique);
+        horizontalLayout_5->addWidget(pushButtonGraphique);
+
+        pushButtonResetGraphique = new QPushButton(groupBox_2);
+        pushButtonResetGraphique->setObjectName(QStringLiteral("pushButtonResetGraphique"));
+
+        horizontalLayout_5->addWidget(pushButtonResetGraphique);
 
 
-        gridLayout_2->addLayout(verticalLayout, 0, 0, 1, 1);
+        gridLayout_3->addLayout(horizontalLayout_5, 2, 0, 1, 1);
+
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setSpacing(6);
+        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
+        pushButton = new QPushButton(groupBox_2);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+
+        horizontalLayout_6->addWidget(pushButton);
+
+        lineEditDernierCoef = new QLineEdit(groupBox_2);
+        lineEditDernierCoef->setObjectName(QStringLiteral("lineEditDernierCoef"));
+        lineEditDernierCoef->setEnabled(false);
+
+        horizontalLayout_6->addWidget(lineEditDernierCoef);
 
 
-        gridLayout_3->addWidget(groupBox_2, 1, 0, 1, 1);
+        gridLayout_3->addLayout(horizontalLayout_6, 3, 0, 1, 1);
 
 
-        gridLayout_4->addLayout(gridLayout_3, 1, 0, 1, 1);
+        verticalLayout_5->addWidget(groupBox_2);
+
+
+        gridLayout_2->addLayout(verticalLayout_5, 0, 0, 1, 1);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1125, 21));
+        menuBar->setGeometry(QRect(0, 0, 1265, 21));
         MainWindow->setMenuBar(menuBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
@@ -257,7 +283,7 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Tube de Kundt (mesures)", nullptr));
         actionBase_de_donnees->setText(QApplication::translate("MainWindow", "Base de donnees", nullptr));
         actionRelancerConnexionOscillo->setText(QApplication::translate("MainWindow", "Relancer la connexion avec l'oscilloscope", nullptr));
-        labelPort->setText(QApplication::translate("MainWindow", "S\303\251lection du port COM :", nullptr));
+        labelPort->setText(QApplication::translate("MainWindow", "S\303\251lection du port COM : (5 par d\303\251faut)", nullptr));
         label_2->setText(QApplication::translate("MainWindow", "( changer le port ferme la liaison pr\303\251c\303\251demment ouverte )", nullptr));
         pushButtonPort->setText(QApplication::translate("MainWindow", "S\303\251lectionner", nullptr));
         groupBox->setTitle(QApplication::translate("MainWindow", "Contr\303\264le GBF", nullptr));
@@ -282,6 +308,8 @@ public:
         groupBox_2->setTitle(QApplication::translate("MainWindow", "Coeficient d'absorbtion", nullptr));
         pushButtonCoefficient->setText(QApplication::translate("MainWindow", "Afficher le coefficient d'absorption", nullptr));
         pushButtonGraphique->setText(QApplication::translate("MainWindow", "Afficher le graphique", nullptr));
+        pushButtonResetGraphique->setText(QApplication::translate("MainWindow", "Reset le graphique", nullptr));
+        pushButton->setText(QApplication::translate("MainWindow", "Dernier coefficient en m\303\251moire :", nullptr));
     } // retranslateUi
 
 };

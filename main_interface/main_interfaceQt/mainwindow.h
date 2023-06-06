@@ -20,8 +20,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     char buf[256] = {0};
-    double freq = 200, ampli, coef, tensionPos, pmax = 0, pmin = 10, pmesure, frequences[13], coefficients[13];
-    int etat = 0, i = 0;
+    double freq = 200, ampli, coef, tensionPos, pmax = 0, pmin = 10, pmesure, frequences[13], coefficients[13], previousCoef = 0;
+    int etat = 0, incrementGraph = 0;
     QTimer *timer;
     QMap < double, QString> coef_par_freq;
 
@@ -44,6 +44,10 @@ private slots:
     void on_comboBoxFreq_currentTextChanged(const QString &arg1);
 
     void on_actionRelancerConnexionOscillo_triggered();
+
+    void on_pushButtonResetGraphique_clicked();
+
+    void on_pushButton_clicked();
 
 private:
     bool vers_la_droite = true,vers_la_gauche = false;

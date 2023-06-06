@@ -19,29 +19,34 @@ void loop() {
       //Ouverture liaison
       case 'o':
         affichageLiaison(true);
+        Serial.flush();
         break;
 
       //Fermeture liaison
       case 'f':
         affichageLiaison(false);
+        Serial.flush();
         break;
      
       //Demande de déplacement à droite
       case 'd':
         avanceDroite();
         affichageMesureEnCours();
+        Serial.flush();
         break;
 
       //Demande de déplacement à gauche
       case 'g':
         avanceGauche();
         affichageMesureEnCours();
+        Serial.flush();
         break;
 
       //Demande d'arrêt d'urgence
       case 's':
         arretMoteur();
         affichageStopManuel(true);
+        Serial.flush();
         break;
     }
     arretMoteur();

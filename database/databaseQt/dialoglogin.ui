@@ -11,7 +11,12 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Connexion à la BDD</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normalon>:/images/connexion.png</normalon>
+   </iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="2" column="0">

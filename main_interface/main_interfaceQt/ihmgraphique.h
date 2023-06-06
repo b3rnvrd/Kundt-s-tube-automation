@@ -15,6 +15,7 @@ public:
 
 public slots:
     void dessinerGraphique(double frequences[], double coefs[]);
+    void clearGraph(double frequences[]);
 
 private:
     QChartView *graphique; // un widget pour afficher un graphe

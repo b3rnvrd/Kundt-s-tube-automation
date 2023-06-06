@@ -10,6 +10,7 @@
 #define UI_DIALOGLOGIN_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
@@ -42,6 +43,9 @@ public:
         if (DialogLogin->objectName().isEmpty())
             DialogLogin->setObjectName(QStringLiteral("DialogLogin"));
         DialogLogin->resize(316, 138);
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/images/connexion.png"), QSize(), QIcon::Normal, QIcon::On);
+        DialogLogin->setWindowIcon(icon);
         gridLayout = new QGridLayout(DialogLogin);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         buttonBox = new QDialogButtonBox(DialogLogin);
@@ -105,7 +109,7 @@ public:
 
     void retranslateUi(QDialog *DialogLogin)
     {
-        DialogLogin->setWindowTitle(QApplication::translate("DialogLogin", "Dialog", nullptr));
+        DialogLogin->setWindowTitle(QApplication::translate("DialogLogin", "Connexion \303\240 la BDD", nullptr));
         label->setText(QApplication::translate("DialogLogin", "Nom de login", nullptr));
         label_2->setText(QApplication::translate("DialogLogin", "Mot de passe", nullptr));
     } // retranslateUi

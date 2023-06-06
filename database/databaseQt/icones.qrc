@@ -10,5 +10,6 @@
         <file>images/ajouter_ligne.png</file>
         <file>images/bois.png</file>
         <file>images/mesures.png</file>
+        <file>images/connexion.png</file>
     </qresource>
 </RCC>

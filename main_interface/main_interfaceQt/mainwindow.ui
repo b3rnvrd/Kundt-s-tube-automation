@@ -6,54 +6,54 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1125</width>
-    <height>448</height>
+    <width>1265</width>
+    <height>582</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Tube de Kundt (mesures)</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QGridLayout" name="gridLayout_4">
+   <layout class="QGridLayout" name="gridLayout_2">
     <item row="0" column="0">
-     <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <layout class="QVBoxLayout" name="verticalLayout_5">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_3">
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
-         <widget class="QLabel" name="labelPort">
-          <property name="text">
-           <string>Sélection du port COM :</string>
-          </property>
-         </widget>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QLabel" name="labelPort">
+            <property name="text">
+             <string>Sélection du port COM : (5 par défaut)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>( changer le port ferme la liaison précédemment ouverte )</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string>( changer le port ferme la liaison précédemment ouverte )</string>
-          </property>
-         </widget>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QSpinBox" name="spinBoxPort"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonPort">
+            <property name="text">
+             <string>Sélectionner</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
-        <item>
-         <widget class="QSpinBox" name="spinBoxPort"/>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButtonPort">
-          <property name="text">
-           <string>Sélectionner</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </item>
-    <item row="1" column="0">
-     <layout class="QGridLayout" name="gridLayout_3">
-      <item row="0" column="0">
        <widget class="QGroupBox" name="groupBox">
         <property name="title">
          <string>Contrôle GBF</string>
@@ -174,32 +174,57 @@
         </layout>
        </widget>
       </item>
-      <item row="1" column="0">
+      <item>
        <widget class="QGroupBox" name="groupBox_2">
         <property name="title">
          <string>Coeficient d'absorbtion</string>
         </property>
-        <layout class="QGridLayout" name="gridLayout_2">
+        <layout class="QGridLayout" name="gridLayout_3">
          <item row="0" column="0">
-          <layout class="QVBoxLayout" name="verticalLayout">
-           <item>
-            <widget class="QLineEdit" name="Editcoef">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pushButtonCoefficient">
-             <property name="text">
-              <string>Afficher le coefficient d'absorption</string>
-             </property>
-            </widget>
-           </item>
+          <widget class="QLineEdit" name="Editcoef">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QPushButton" name="pushButtonCoefficient">
+           <property name="text">
+            <string>Afficher le coefficient d'absorption</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
            <item>
             <widget class="QPushButton" name="pushButtonGraphique">
              <property name="text">
               <string>Afficher le graphique</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButtonResetGraphique">
+             <property name="text">
+              <string>Reset le graphique</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="3" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <item>
+            <widget class="QPushButton" name="pushButton">
+             <property name="text">
+              <string>Dernier coefficient en mémoire :</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineEditDernierCoef">
+             <property name="enabled">
+              <bool>false</bool>
              </property>
             </widget>
            </item>
@@ -217,7 +242,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1125</width>
+     <width>1265</width>
      <height>21</height>
     </rect>
    </property>

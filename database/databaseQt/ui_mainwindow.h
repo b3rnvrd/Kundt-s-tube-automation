@@ -320,7 +320,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "BaseDeDonnees", nullptr));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Base de donnees", nullptr));
         actionRafaichir->setText(QApplication::translate("MainWindow", "Rafaichir la table", nullptr));
         actionModifier->setText(QApplication::translate("MainWindow", "Modifier les mesures", nullptr));
         actionafficherMateriaux->setText(QApplication::translate("MainWindow", "Afficher la table des mat\303\251riaux", nullptr));

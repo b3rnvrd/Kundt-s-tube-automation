@@ -36,10 +36,12 @@ MainWindow::MainWindow(QWidget *parent) :
     arduino->openConnection();
     arduino->write("o");
 
+
+    graph = new IhmGraphique(0);
     for(int i = 0; i < 13; i++)
     {
 
-        coefficients[i] = {0.01};
+        coefficients[i] = {0};
     }
     frequences[0] = {200};
     frequences[1] = {250};
@@ -111,8 +113,8 @@ void MainWindow::on_BtnStart_clicked()
 void MainWindow::on_BtnStop_clicked()   //Arret d'urgence
 {
     while(!(arduino->isWritable()));
+    arduino->clear();
     arduino->write("s"); //envoi d'un "s" sur la liaison serie pour arreter le moteur
-    
     viPrintf(osc, (ViString)":OUTP1 :0\n");     //COUPER LE GBF DE L'OSCILLO
     etat = 0;
     
@@ -145,20 +147,22 @@ void MainWindow::etatMachine()
     case 0:
         break;
     case 1:
+        arduino->clear();
         qDebug() << "demande deplacement droite" << "tensionPos : " << tensionPos;
-        if(tensionPos >= 3) //on garde de la marge car les instructions s'accumulent
+        if(tensionPos >= 4.5) //on garde de la marge car les instructions s'accumulent
             etat = 2;
         arduino->write("d"); //envoi d'un "d" sur la liaison serie pour indiquer au moteur qu'il doit aller a droite
         pmesure = mesureTension();
         if((pmax<pmesure) && pmesure < 10) //pmax prend la valeur de pmesure si elle est superieure a pmax et si pmesure est > 10 il y a probablement eu du bruit lors de la mesure
             pmax = pmesure;
         qDebug() << pmax;
-        sleep(1);
+        sleep(3);
         break;
 
     case 2:
+        arduino->clear();
         qDebug()<<"demande deplacement gauche" << "tensionPos : " << tensionPos;
-        if(tensionPos <= -3)//on garde de la marge car les instructions s'accumulent
+        if(tensionPos <= -2.9)//on garde de la marge car les instructions s'accumulent
             etat = 3;
         pmesure = 0;
         arduino->write("g");// envoi d'un "g" sur la liasion serie pour indiquer au moteur qu'il doit aller a gauche
@@ -166,25 +170,28 @@ void MainWindow::etatMachine()
         if(pmesure < pmin)  // pmin prends la valeur de pmesure si elle est inferieure a pmin
             pmin = pmesure;
         qDebug() << pmin;
-        sleep(1);
+        sleep(3);
         break;
     case 3:
+        arduino->clear();
         viPrintf(osc, (ViString)":OUTP1 :0\n");// arret du GBF de l'oscilloscope
         timer->stop();//arret de qtimer
-        frequences[i] = freq;
-        coefficients[i] = coef;
-        i++;
+        frequences[incrementGraph] = freq;
+        coefficients[incrementGraph] = coef;
+        incrementGraph++;
         break;
     }
 }
 
 void MainWindow::on_pushButtonGraphique_clicked()
 {
-    coefficients[0] = 0.74851;
-    coefficients[1] = 0.51234;
-    coefficients[2] = 0.39541;
-    coefficients[3] = 0.28743;
-    graph = new IhmGraphique(0);
+    //    coefficients[0] = 0.74851;
+    //    coefficients[1] = 0.51234;
+    //    coefficients[2] = 0.39541;
+    //    coefficients[3] = 0.28743;
+
+
+
     graph->dessinerGraphique(frequences,coefficients);
     graph->show();
 }
@@ -197,6 +204,8 @@ void MainWindow::on_pushButtonCoefficient_clicked()
 
     qDebug() << coef;
 
+    previousCoef = coef;
+
     ui->Editcoef->setText(QString::number(coef,'f',3));
     if(arduino->isOpen())
     {
@@ -208,6 +217,11 @@ void MainWindow::on_pushButtonCoefficient_clicked()
     arduino->clear();
     QByteArray donnees_a_afficher = ("$frequence : " + QByteArray::number(freq) + "      coef : " + QByteArray::number(coef));
     arduino->write(donnees_a_afficher);
+
+    frequences[0] = 2350;
+    coefficients[0] = 0.74851;
+    frequences[2] = 230;
+    coefficients[2] = 0.39541;
 }
 
 void MainWindow::on_pushButtonPort_clicked()
@@ -258,4 +272,19 @@ void MainWindow::on_actionRelancerConnexionOscillo_triggered()
         qDebug() << "Echec connexion oscilloscope";
 
     }
+    else
+        QMessageBox::critical(this,"Attention","Connexion oscilloscope déjà ouverte",QMessageBox::Ok);
+}
+
+void MainWindow::on_pushButtonResetGraphique_clicked()
+{
+    delete graph;
+    graph = new IhmGraphique(0);
+    for (int i = 0; i < 13; i++)
+        coefficients[i] = 0;
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    ui->lineEditDernierCoef->setText(QString::number(previousCoef));
 }

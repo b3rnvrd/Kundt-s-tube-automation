@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>BaseDeDonnees</string>
+   <string>Base de donnees</string>
   </property>
   <property name="windowIcon">
    <iconset resource="icones.qrc">
