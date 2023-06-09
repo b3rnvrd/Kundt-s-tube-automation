@@ -1,0 +1,13 @@
+
+accumulation des instructions (d / g)
+
+LISTE:
+synchro = création d'une machine d'état
+fils déssoudés = soudure à 3-4 reprises
+un prof qui se trompe de trou dans l'alim = flingue le driver
+moi qui débranche la masse = flingue un driver
+court circuit dans l'USB = flingue un PC une demi journée
+bruit pendant les mesures
+
+taux d'ondes stationnaires = amplitude des ventres / noeuds
+
