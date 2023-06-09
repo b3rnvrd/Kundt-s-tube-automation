@@ -175,7 +175,7 @@ void MainWindow::etatMachine()
     case 3:
         arduino->clear();
         viPrintf(osc, (ViString)":OUTP1 :0\n");// arret du GBF de l'oscilloscope
-        timer->stop();//arret de qtimer
+        timer->stop();  //arret de qtimer
         frequences[incrementGraph] = freq;
         coefficients[incrementGraph] = coef;
         incrementGraph++;
@@ -198,7 +198,7 @@ void MainWindow::on_pushButtonGraphique_clicked()
 
 void MainWindow::on_pushButtonCoefficient_clicked()
 {
-    double n = pmax / pmin;
+    double n = pmax / pmin;     //taux d'ondes stationnaires
     coef = pow((n-1)/(n+1),2);
     coef = 1 - coef;
 
